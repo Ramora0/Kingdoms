@@ -1,0 +1,46 @@
+{
+  "recipes": {
+    "combinations": {
+      "transforms": [
+        {
+          "catalyst": {
+            "name": "whetstone",
+            "tags": ["wet"]
+          },
+          "ingredient": {
+            "name": "rock"
+          },
+          "output": {
+            "name": "celt"
+          }
+        }
+      ]
+    },
+    "interactions": {
+      "destructions": [
+        {
+          "object": {
+            "tags": ["sapling"]
+          },
+          "tool": {
+            "tags": ["can_chop"]
+          },
+          "drops": [
+            {
+              "name": "rod",
+              "count": 5
+            },
+            {
+              "name": "leaf",
+              "count": 100
+            },
+            {
+              "name": "stick",
+              "count": 10
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
