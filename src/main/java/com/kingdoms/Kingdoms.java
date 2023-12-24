@@ -28,7 +28,6 @@ public class Kingdoms extends PApplet {
     textAlign(CENTER, CENTER);
     // translate(600, 400);
     UI.display(canvas);
-    System.out.println(frameRate);
   }
 
   public void mousePressed() {

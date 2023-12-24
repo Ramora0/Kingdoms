@@ -20,10 +20,17 @@ public class ServerScene extends Scene {
     elements.add(new UIText("IP: " + server.getIP(), 600, 300, 40));
   }
 
+  boolean once = false;
+
   @Override
   public void display(PApplet canvas) {
     super.display(canvas);
-    server.waitForClient(); // Make so this runs only once
-    UI.changeScene(new StartScene());
+    if (!once) {
+      server.waitForClient(); // Make so this runs only once
+      UI.changeScene(new StartScene());
+      once = true;
+      return;
+    }
+    throw new RuntimeException("This should never happen");
   }
 }

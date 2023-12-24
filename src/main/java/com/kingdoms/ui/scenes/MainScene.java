@@ -18,5 +18,6 @@ public class MainScene extends Scene {
   public void display(PApplet canvas) {
     super.display(canvas);
     World.display(canvas);
+    System.out.println(canvas.frameRate);
   }
 }

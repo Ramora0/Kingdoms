@@ -16,11 +16,18 @@ public class ClientScene extends Scene {
     elements.add(new UIText("Connecting to server...", 600, 300, 40));
   }
 
+  boolean once = false;
+
   @Override
   public void display(PApplet canvas) {
     super.display(canvas);
-    this.client = new Client("192.168.1.176");
-    Network.setNetwork(client);
-    UI.changeScene(new StartScene());
+    if (!once) {
+      this.client = new Client("192.168.1.176");
+      Network.setNetwork(client);
+      UI.changeScene(new StartScene());
+      once = true;
+      return;
+    }
+    throw new RuntimeException("This should never happen");
   }
 }
