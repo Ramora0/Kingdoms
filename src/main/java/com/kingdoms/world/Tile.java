@@ -16,6 +16,10 @@ public class Tile implements JSONSerializable {
     this.isWater = isWater;
   }
 
+  public Tile(JSONObject json) {
+    fromJSON(json);
+  }
+
   public void display(PApplet canvas) {
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     canvas.rect(x * 10, y * 10, 10, 10);
