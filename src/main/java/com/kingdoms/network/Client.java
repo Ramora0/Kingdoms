@@ -6,26 +6,38 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import com.kingdoms.ui.UI;
+import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.world.World;
+
+import processing.data.JSONObject;
+
 public class Client extends Network {
   private BufferedReader in;
   private PrintWriter out;
 
   public Client(String ip) {
     try {
-      Socket socket = new Socket(ip, Network.port); // Connect to the server
+      Socket socket = new Socket(ip, Network.port);
 
-      // Input and output streams for communication
       this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       this.out = new PrintWriter(socket.getOutputStream(), true);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-      // Send a message to the server
-      out.println("Hello from the client!");
-
-      // Read the server's response
+  @Override
+  public void initializeWorld() {
+    try {
       String response = in.readLine();
-      System.out.println("Server response: " + response);
-
-      // Don't close the streams or socket here
+      if (response.equals("world data")) {
+        System.out.println("Received world data!");
+        String worldData = in.readLine();
+        World.fromJSON(JSONObject.parse(worldData));
+        out.println("we good");
+        UI.changeScene(new MainScene());
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -33,7 +45,6 @@ public class Client extends Network {
 
   @Override
   public void sendMessages() {
-    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'sendMessages'");
   }
 }
