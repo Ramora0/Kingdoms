@@ -42,6 +42,7 @@ public class World {
   public static void fromJSON(JSONObject json) {
     WORLD_SIZE = json.getInt("WORLD_SIZE");
     JSONObject tilesJSON = json.getJSONObject("tiles");
+    tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
         tiles[x][y].fromJSON(tilesJSON.getJSONObject("tile:" + x + "," + y));
