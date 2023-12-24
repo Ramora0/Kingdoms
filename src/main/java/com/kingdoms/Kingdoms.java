@@ -28,7 +28,6 @@ public class Kingdoms extends PApplet {
 
   public void mousePressed() {
     EventBus.notify("mousePressed", canvas);
-
   }
 
   public static void main(String[] passedArgs) {
