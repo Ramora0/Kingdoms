@@ -5,7 +5,7 @@ import com.kingdoms.ui.scenes.OpeningScene;
 import processing.core.PApplet;
 
 public class UI {
-  static Scene currentScene;
+  public static Scene currentScene;
 
   public static void init() {
     currentScene = new OpeningScene();

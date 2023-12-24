@@ -37,6 +37,9 @@ public class Client extends Network {
         World.fromJSON(JSONObject.parse(worldData));
         out.println("we good");
         UI.changeScene(new MainScene());
+
+        System.out.println("Set menu to main scene");
+        System.out.println(UI.currentScene.getClass().getName());
       }
     } catch (IOException e) {
       e.printStackTrace();

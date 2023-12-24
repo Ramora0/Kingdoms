@@ -38,6 +38,9 @@ public class Server extends Network {
       if (response.equals("we good")) {
         System.out.println("Client is ready!");
         UI.changeScene(new MainScene());
+
+        System.out.println("Set menu to main scene");
+        System.out.println(UI.currentScene.getClass().getName());
       }
     } catch (IOException e) {
       e.printStackTrace();
