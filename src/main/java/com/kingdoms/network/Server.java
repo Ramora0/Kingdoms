@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.kingdoms.helpers.JSON;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.MainScene;
 import com.kingdoms.world.World;
@@ -31,7 +32,7 @@ public class Server extends Network {
   public void initializeWorld() {
     World.generateWorld(100);
     out.println("world data");
-    out.println(World.toJSON().toString());
+    out.println(JSON.stringify(World.toJSON()));
     try {
       String response = in.readLine();
       if (response.equals("we good")) {
