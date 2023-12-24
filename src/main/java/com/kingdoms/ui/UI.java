@@ -14,10 +14,10 @@ public class UI {
   public static void changeScene(Scene scene) {
     currentScene.kill();
     currentScene = scene;
+    System.out.println("Scene changed to: " + currentScene.getClass().getName());
   }
 
   public static void display(PApplet canvas) {
     currentScene.display(canvas);
-    System.out.println(currentScene.getClass().getName());
   }
 }
