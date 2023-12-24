@@ -35,11 +35,8 @@ public class Client extends Network {
         System.out.println("Received world data!");
         String worldData = in.readLine();
         World.fromJSON(JSONObject.parse(worldData));
-        out.println("we good");
+        out.println("we good"); // Confirm with server that data was received error-free
         UI.changeScene(new MainScene());
-
-        System.out.println("Set menu to main scene");
-        System.out.println(UI.currentScene.getClass().getName());
       }
     } catch (IOException e) {
       e.printStackTrace();

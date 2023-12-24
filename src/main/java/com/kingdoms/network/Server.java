@@ -35,12 +35,9 @@ public class Server extends Network {
     out.println(JSON.stringify(World.toJSON()));
     try {
       String response = in.readLine();
-      if (response.equals("we good")) {
+      if (response.equals("we good")) { // Confirm with client that data was received error-free
         System.out.println("Client is ready!");
         UI.changeScene(new MainScene());
-
-        System.out.println("Set menu to main scene");
-        System.out.println(UI.currentScene.getClass().getName());
       }
     } catch (IOException e) {
       e.printStackTrace();
