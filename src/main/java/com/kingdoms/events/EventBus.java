@@ -41,7 +41,9 @@ public class EventBus {
   public static void notify(String eventType, Object data) {
     Map<String, EventListener> eventListeners = events.get(eventType);
     if (eventListeners != null) {
-      for (EventListener listener : eventListeners.values()) {
+      Object[] listeners = eventListeners.values().toArray();
+      for (int i = 0; i < listeners.length; i++) {
+        EventListener listener = (EventListener) listeners[i];
         listener.update(data);
       }
     } else {
