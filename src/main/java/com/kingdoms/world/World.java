@@ -6,7 +6,7 @@ import processing.data.JSONObject;
 
 public class World {
   public static int WORLD_SIZE;
-  static Tile[][] tiles;
+  public static Tile[][] tiles;
 
   public static void generateWorld(int size) {
     WORLD_SIZE = size;

@@ -22,7 +22,7 @@ public class Tile implements JSONSerializable {
 
   public void display(PApplet canvas) {
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    canvas.rect(x * 10, y * 10, 10, 10);
+    canvas.square(x * 10, y * 10, 10);
   }
 
   public JSONObject toJSON() {

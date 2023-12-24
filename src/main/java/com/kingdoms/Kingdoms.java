@@ -17,6 +17,10 @@ public class Kingdoms extends PApplet {
     Kingdoms.canvas = this;
 
     UI.init();
+
+    // Test
+    // World.generateWorld(100);
+    // UI.changeScene(new MainScene());
   }
 
   public void draw() {
