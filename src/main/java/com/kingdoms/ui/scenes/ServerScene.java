@@ -3,7 +3,6 @@ package com.kingdoms.ui.scenes;
 import com.kingdoms.network.Network;
 import com.kingdoms.network.Server;
 import com.kingdoms.ui.Scene;
-import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIText;
 
 import processing.core.PApplet;
@@ -26,8 +25,8 @@ public class ServerScene extends Scene {
   public void display(PApplet canvas) {
     super.display(canvas);
     if (!once) {
-      server.waitForClient(); // Make so this runs only once
-      UI.changeScene(new StartScene());
+      server.waitForClient();
+      Network.network.initializeWorld();
       once = true;
       return;
     }
