@@ -9,38 +9,27 @@ public class UIButton extends UIElement {
     void onClick();
   }
 
-  private int x;
-  private int y;
   private int size;
   private String text;
   private UIButtonListener listener;
 
-  public UIButton(String text, int x, int y, int size, UIButtonListener listener) {
+  public UIButton(String text, int size, UIButtonListener listener) {
     super();
-    this.x = x;
-    this.y = y;
     this.text = text;
     this.size = size;
     this.listener = listener;
+
+    setDimensions(text, size);
   }
 
   public void display(PApplet canvas) {
     canvas.textSize(size);
 
-    float padding = 10; // padding around the text
-    float textWidth = canvas.textWidth(text) + padding;
-    float textHeight = canvas.textAscent() + canvas.textDescent() + padding;
-
-    float textX = x;
-    float textY = y;
-
-    // Draw the rectangle around the text
     canvas.fill(255);
-    canvas.rect(x - textWidth / 2, y - textHeight / 2, textWidth, textHeight);
+    canvas.rect(x, y, width, height);
 
-    // Draw the text
     canvas.fill(0);
-    canvas.text(text, textX, textY);
+    canvas.text(text, x, y);
   }
 
   @Subscribe

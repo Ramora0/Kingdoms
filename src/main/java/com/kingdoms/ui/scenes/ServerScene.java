@@ -14,12 +14,12 @@ public class ServerScene extends Scene {
     super();
     this.server = new Server();
     Network.setNetwork(server);
-    elements.add(new UIText("Waiting for client...", 600, 300, 40));
+    elements.add(new UIText("Waiting for client...", 40).setCenter(600, 300));
 
     String ip = server.getIP();
     if (ip == null)
       ip = "localhost";
-    elements.add(new UIText("IP: " + ip, 600, 400, 40));
+    elements.add(new UIText("IP: " + ip, 40).setCenter(600, 400));
   }
 
   boolean once = false;

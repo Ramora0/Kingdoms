@@ -12,7 +12,7 @@ public class ClientScene extends Scene {
 
   public ClientScene() {
     super();
-    elements.add(new UIText("Connecting to server...", 600, 300, 40));
+    elements.add(new UIText("Connecting to server...", 40).setCenter(600, 400));
   }
 
   boolean once = false;

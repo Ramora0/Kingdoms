@@ -5,15 +5,15 @@ import processing.core.PApplet;
 public abstract class UILabel extends UIElement {
   private int x;
   private int y;
-  private int size;
+  protected float size;
 
   public abstract String getText();
 
-  public UILabel(int x, int y, int size) {
+  public UILabel(float size) {
     super();
-    this.x = x;
-    this.y = y;
     this.size = size;
+
+    setDimensions(getText(), size);
   }
 
   public void display(PApplet canvas) {

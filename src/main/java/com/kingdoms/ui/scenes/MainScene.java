@@ -11,7 +11,7 @@ import processing.core.PApplet;
 public class MainScene extends Scene {
   public MainScene() {
     super();
-    elements.add(new UIButton("Next Turn", 100, 50, 40, () -> Network.network.nextTurn()));
+    elements.add(new UIButton("Next Turn", 40, () -> Network.network.nextTurn()).setTopLeft(10, 10));
   }
 
   @Override

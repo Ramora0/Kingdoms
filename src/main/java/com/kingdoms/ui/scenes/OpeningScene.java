@@ -8,8 +8,8 @@ import com.kingdoms.ui.elements.UIText;
 public class OpeningScene extends Scene {
   public OpeningScene() {
     super();
-    elements.add(new UIText("Choose host or join", 600, 100, 40));
-    elements.add(new UIButton("Host", 600, 300, 40, () -> UI.changeScene(new ServerScene())));
-    elements.add(new UIButton("Join", 600, 400, 40, () -> UI.changeScene(new ClientScene())));
+    elements.add(new UIText("Choose host or join", 40).setCenter(600, 100));
+    elements.add(new UIButton("Host", 40, () -> UI.changeScene(new ServerScene())).setCenter(600, 300));
+    elements.add(new UIButton("Join", 40, () -> UI.changeScene(new ClientScene())).setCenter(600, 400));
   }
 }
