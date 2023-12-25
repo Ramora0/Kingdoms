@@ -100,6 +100,10 @@ public abstract class UIElement {
     setDimensions(textWidth, textHeight);
   }
 
+  public boolean isInBounds(float x, float y) {
+    return x >= getX() && x <= getX() + width && y >= getY() && y <= getY() + height;
+  }
+
   public abstract void display(PApplet canvas);
 
   public void kill() {

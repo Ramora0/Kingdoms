@@ -31,18 +31,8 @@ public class UIButton extends UIElement {
   }
 
   @Subscribe
-  public void mousePressed(PApplet canvas) { // TODO: Re-write this to use the UIElement's inBounds method
-    float padding = 10;
-    float textWidth = canvas.textWidth(text) + padding;
-    float textHeight = canvas.textAscent() + canvas.textDescent() + padding;
-    float x = getX(), y = getY();
-
-    float left = x - textWidth / 2;
-    float right = x + textWidth / 2;
-    float top = y - textHeight / 2;
-    float bottom = y + textHeight / 2;
-
-    if (canvas.mouseX >= left && canvas.mouseX <= right && canvas.mouseY >= top && canvas.mouseY <= bottom) {
+  public void mousePressed(PApplet canvas) {
+    if (isInBounds(canvas.mouseX, canvas.mouseY)) {
       listener.run();
     }
   }

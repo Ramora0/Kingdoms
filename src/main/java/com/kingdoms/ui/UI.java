@@ -14,6 +14,7 @@ public class UI {
   public static void changeScene(Scene scene) { // Perhaps subscribe / unsubscribe WorldDisplayScene events here?
     currentScene.kill();
     currentScene = scene;
+    System.out.println("Changed scene to " + scene.getClass().getName());
   }
 
   public static void display(PApplet canvas) {
