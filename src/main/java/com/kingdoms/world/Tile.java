@@ -52,6 +52,10 @@ public class Tile implements JSONSerializable {
   public void display(PApplet canvas) {
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     WorldDisplayScene.square(canvas, x, y);
+
+    if (hasBuilding()) {
+      building.display(canvas);
+    }
   }
 
   public JSONObject toJSON() {

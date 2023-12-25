@@ -3,7 +3,9 @@ package com.kingdoms.ui.scenes.building;
 import com.kingdoms.events.EventBus.Subscribe;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.BuildOption;
+import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIText;
+import com.kingdoms.ui.scenes.MainScene;
 import com.kingdoms.ui.scenes.WorldDisplayScene;
 import com.kingdoms.world.World;
 
@@ -40,6 +42,7 @@ public class BuildScene extends WorldDisplayScene {
     int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
     if (option.canBuildAt(x, y)) {
       World.receiveInstruction(new BuildInstruction(option, World.me, x, y));
+      UI.changeScene(new MainScene());
     }
   }
 }

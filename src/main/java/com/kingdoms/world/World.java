@@ -3,7 +3,6 @@ package com.kingdoms.world;
 import com.kingdoms.helpers.Colors;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
-import com.kingdoms.network.Network;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.Instruction;
 
@@ -41,7 +40,8 @@ public class World {
   }
 
   public static void receiveInstruction(Instruction instruction) {
-    Network.network.receiveInstruction(instruction);
+    // Network.network.receiveInstruction(instruction); AAAAAH MAKE SURE THIS IS PUT
+    // BACK WHORE
 
     if (instruction instanceof BuildInstruction) {
       BuildInstruction buildInstruction = (BuildInstruction) instruction;
@@ -64,6 +64,12 @@ public class World {
         tiles[x][y].display(canvas);
       }
     }
+  }
+
+  // HELPER METHODS \\
+
+  public static boolean in(int x, int y) {
+    return x >= 0 && x < WORLD_SIZE && y >= 0 && y < WORLD_SIZE;
   }
 
   // JSON METHODS \\

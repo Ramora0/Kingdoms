@@ -59,6 +59,7 @@ public class Client extends Network {
   @Override
   public void receiveInstruction(Instruction instruction) {
     instructions.add(instruction);
+    System.out.println("Received instruction: " + instruction.toJSON().toString());
   }
 
   // CLIENT METHODS\\

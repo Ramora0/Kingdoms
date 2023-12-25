@@ -10,6 +10,8 @@ public enum BuildOption {
   CITY {
     @Override
     public boolean canBuildAt(int x, int y) {
+      if (!World.in(x, y))
+        return false;
       Tile tile = World.tiles[x][y];
       return !tile.hasBuilding() && tile.isLand();
     }

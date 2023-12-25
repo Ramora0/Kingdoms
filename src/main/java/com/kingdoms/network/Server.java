@@ -66,6 +66,7 @@ public class Server extends Network {
 
   @Override
   public void receiveInstruction(Instruction instruction) {
+    System.out.println("Received instruction: " + instruction.toJSON().toString());
   }
 
   // SERVER METHODS\\
