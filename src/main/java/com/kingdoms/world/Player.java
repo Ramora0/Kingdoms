@@ -15,6 +15,9 @@ public class Player implements JSONSerializable {
     resources = (int) (500 * Math.random());
   }
 
+  public Player() {
+  }
+
   public int getColor() {
     return color;
   }
