@@ -21,19 +21,19 @@ public class Vector {
     return this;
   }
 
-  public Vector multiply(double scalar) {
+  public Vector mult(double scalar) {
     this.x *= scalar;
     this.y *= scalar;
     return this;
   }
 
-  public Vector divide(double scalar) {
+  public Vector div(double scalar) {
     if (scalar != 0) {
       this.x /= scalar;
       this.y /= scalar;
       return this;
     } else {
-      throw new IllegalArgumentException("Cannot divide by zero");
+      throw new IllegalArgumentException("Cannot div by zero");
     }
   }
 
@@ -46,7 +46,7 @@ public class Vector {
     return new Vector(v1.x - v2.x, v1.y - v2.y);
   }
 
-  public static Vector multiply(Vector v, double scalar) {
+  public static Vector mult(Vector v, double scalar) {
     return new Vector(v.x * scalar, v.y * scalar);
   }
 

@@ -23,7 +23,7 @@ public abstract class WorldDisplayScene extends Scene {
     }
 
     PApplet canvas = (PApplet) data;
-    offset.add(new Vector(canvas.mouseX - canvas.pmouseX, canvas.mouseY - canvas.pmouseY));
+    offset.add(new Vector(canvas.mouseX - canvas.pmouseX, canvas.mouseY - canvas.pmouseY).div(scale));
   }
 
   public static void mouseWheel(Object data) {
@@ -37,7 +37,7 @@ public abstract class WorldDisplayScene extends Scene {
   public static void displayWorld(PApplet canvas) {
     canvas.pushMatrix();
     canvas.translate(600, 400);
-    canvas.translate((float) offset.x, (float) offset.y);
+    canvas.translate((float) offset.x * scale, (float) offset.y * scale);
 
     World.display(canvas);
     canvas.popMatrix();
