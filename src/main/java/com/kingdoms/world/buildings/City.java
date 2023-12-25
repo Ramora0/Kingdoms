@@ -9,7 +9,7 @@ import processing.data.JSONObject;
 
 public class City extends Building {
   public City(Tile tile, Player player) {
-    super(tile, player);
+    super(BuildingType.CITY, tile, player);
   }
 
   @Override

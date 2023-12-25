@@ -22,7 +22,8 @@ public abstract class Building implements JSONSerializable {
     this.tile = tile;
   }
 
-  public Building(Tile tile, Player player) {
+  public Building(BuildingType type, Tile tile, Player player) {
+    this.type = type;
     this.tile = tile;
     this.player = player;
   }
