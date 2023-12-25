@@ -41,4 +41,18 @@ public abstract class WorldDisplayScene extends Scene {
   public static float displayY(double y) {
     return (float) (scale * y + offset.y * scale + 400);
   }
+
+  /** Takes a canvas x coordinate and converts it to a world x coordinate */
+  public static double coordX(float x) {
+    return (x - offset.x * scale - 600) / scale;
+  }
+
+  /** Takes a canvas y coordinate and converts it to a world y coordinate */
+  public static double coordY(float y) {
+    return (y - offset.y * scale - 400) / scale;
+  }
+
+  public static void square(PApplet canvas, double x, double y) {
+    canvas.square(displayX(x), displayY(y), (float) scale);
+  }
 }

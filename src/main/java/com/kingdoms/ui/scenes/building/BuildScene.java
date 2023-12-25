@@ -22,12 +22,22 @@ public class BuildScene extends WorldDisplayScene {
 
   public void display(PApplet canvas) {
     super.display(canvas);
+
+    int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
+    int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
+
+    if (option.canBuildAt(x, y))
+      canvas.fill(World.me.getColor(), 100);
+    else
+      canvas.fill(100, 100);
+
+    WorldDisplayScene.square(canvas, x, y);
   }
 
   @Subscribe
   public void mousePressed(PApplet canvas) {
-    int x = WorldDisplayScene.getXTileCoord(canvas.mouseX);
-    int y = WorldDisplayScene.getYTileCoord(canvas.mouseY);
+    int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
+    int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
     if (option.canBuildAt(x, y)) {
       World.receiveInstruction(new BuildInstruction(option, World.me, x, y));
     }
