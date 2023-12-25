@@ -13,8 +13,8 @@ public class Player implements JSONSerializable {
     resources = 500;
   }
 
-  public Player(JSONObject json) {
-    fromJSON(json);
+  public int getResources() {
+    return resources;
   }
 
   public JSONObject toJSON() {

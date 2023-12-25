@@ -58,7 +58,8 @@ public class World {
     }
     json.setJSONObject("tiles", tilesJSON);
 
-    json.setJSONObject("me", me.toJSON());
+    json.setJSONObject("me", me.toJSON()); // Maybe have this depend on Server/Client? But probs also works if we jsut
+                                           // switch it when loading
     json.setJSONObject("other", other.toJSON());
     return json;
   }
@@ -74,7 +75,7 @@ public class World {
       }
     }
 
-    me = new Player(json.getJSONObject("me"));
-    other = new Player(json.getJSONObject("other"));
+    me = JSONSerializable.createFromJSON(json.getJSONObject("me"), Player.class);
+    other = JSONSerializable.createFromJSON(json.getJSONObject("other"), Player.class);
   }
 }

@@ -4,6 +4,7 @@ import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.network.Network;
 import com.kingdoms.ui.Scene;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.elements.UIDynamicText;
 import com.kingdoms.world.World;
 
 import processing.core.PApplet;
@@ -12,6 +13,9 @@ public class MainScene extends Scene {
   public MainScene() {
     super();
     elements.add(new UIButton("Next Turn", 40, () -> Network.network.nextTurn()).setTopLeft(10, 10));
+
+    elements.add(new UIDynamicText(() -> "Me: " + World.me.getResources(), 30).setRight(1150).setTop(10));
+    elements.add(new UIDynamicText(() -> "Other: " + World.other.getResources(), 30).setRight(1150).setTop(50));
   }
 
   @Override

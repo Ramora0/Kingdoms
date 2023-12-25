@@ -13,19 +13,19 @@ public abstract class UIElement {
     EventBus.register(this);
   }
 
-  public UIElement setLeftX(float x) {
+  public UIElement setLeft(float x) {
     this.x = x;
     return this;
   }
 
-  public UIElement setTopY(float y) {
+  public UIElement setTop(float y) {
     this.y = y;
     return this;
   }
 
   public UIElement setTopLeft(float x, float y) {
-    setLeftX(x);
-    setTopY(y);
+    setLeft(x);
+    setTop(y);
     return this;
   }
 
@@ -45,19 +45,19 @@ public abstract class UIElement {
     return this;
   }
 
-  public UIElement setRightX(float x) {
+  public UIElement setRight(float x) {
     this.x = x - width;
     return this;
   }
 
-  public UIElement setBottomY(float y) {
+  public UIElement setBottom(float y) {
     this.y = y - height;
     return this;
   }
 
   public UIElement setBottomRight(float x, float y) {
-    setRightX(x);
-    setBottomY(y);
+    setRight(x);
+    setBottom(y);
     return this;
   }
 

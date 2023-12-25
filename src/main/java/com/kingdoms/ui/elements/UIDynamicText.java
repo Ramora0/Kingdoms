@@ -3,7 +3,7 @@ package com.kingdoms.ui.elements;
 import processing.core.PApplet;
 
 public class UIDynamicText extends UILabel {
-  private interface GetText {
+  public interface GetText {
     String text();
   }
 
