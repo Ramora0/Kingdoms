@@ -21,8 +21,6 @@ public class Server extends Network {
   private ServerSocket serverSocket;
 
   private Socket socket;
-  private BufferedReader in;
-  private PrintWriter out;
 
   public Server() {
     try {
@@ -104,8 +102,8 @@ public class Server extends Network {
     try {
       socket = serverSocket.accept();
       System.out.println("Client has connected!\n");
-      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      out = new PrintWriter(socket.getOutputStream(), true);
+      this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      this.out = new PrintWriter(socket.getOutputStream(), true);
     } catch (IOException e) {
       e.printStackTrace();
     }
