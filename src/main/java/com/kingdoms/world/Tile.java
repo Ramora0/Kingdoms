@@ -17,6 +17,12 @@ public class Tile implements JSONSerializable {
     this.isWater = isWater;
   }
 
+  /**
+   * @deprecated This constructor should only be used by JSONSerializer.
+   */
+  public Tile() {
+  }
+
   public void display(PApplet canvas) {
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     float scale = MainScene.scale;
