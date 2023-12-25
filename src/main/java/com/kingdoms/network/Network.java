@@ -2,8 +2,10 @@ package com.kingdoms.network;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 public abstract class Network {
+  protected Socket socket;
   protected BufferedReader in;
   protected PrintWriter out;
 

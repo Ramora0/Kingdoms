@@ -19,7 +19,7 @@ public class Client extends Network {
 
   public Client(String ip) {
     try {
-      Socket socket = new Socket(ip, Network.port);
+      socket = new Socket(ip, Network.port);
 
       this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       this.out = new PrintWriter(socket.getOutputStream(), true);
@@ -40,8 +40,10 @@ public class Client extends Network {
   public void nextTurn() {
     out.println(NetworkMessages.NEXT_TURN);
 
+    System.out.println("Waiting for next turn...");
     waitForText(NetworkMessages.NEXT_TURN);
 
+    System.out.println("Sending instructions...");
     out.println(instructions.size());
     for (Instruction instruction : instructions) {
       out.println(JSON.stringify(instruction));
@@ -61,6 +63,7 @@ public class Client extends Network {
   // CLIENT METHODS\\
 
   public void readWorldData() {
+    System.out.println("Waiting for world data...");
     waitForText(NetworkMessages.SENDING_WORLD_DATA);
 
     try {
@@ -75,5 +78,6 @@ public class Client extends Network {
     World.other = temp;
 
     out.println(NetworkMessages.WORLD_DATA_RECEIVED);
+    System.out.println("World data processed!");
   }
 }

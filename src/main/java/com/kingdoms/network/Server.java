@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
@@ -19,8 +18,6 @@ import com.kingdoms.world.World;
 
 public class Server extends Network {
   private ServerSocket serverSocket;
-
-  private Socket socket;
 
   public Server() {
     try {
@@ -45,6 +42,7 @@ public class Server extends Network {
   public void nextTurn() {
     out.println(NetworkMessages.NEXT_TURN);
 
+    System.out.println("Waiting for next turn...");
     waitForText(NetworkMessages.NEXT_TURN);
 
     try {
@@ -56,6 +54,7 @@ public class Server extends Network {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    System.out.println("Received instructions!");
 
     World.nextTurn();
 
@@ -70,10 +69,12 @@ public class Server extends Network {
 
   // SERVER METHODS\\
   private void sendWorldData() {
+    System.out.println("Sending world data...");
     out.println(NetworkMessages.SENDING_WORLD_DATA);
     out.println(JSON.stringify(World.toJSON()));
 
     waitForText(NetworkMessages.WORLD_DATA_RECEIVED); // Confirm with client that data was received error-free
+    System.out.println("World data sent!");
   }
 
   public String getIP() {
