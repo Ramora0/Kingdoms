@@ -3,6 +3,7 @@ package com.kingdoms.world;
 import com.kingdoms.helpers.Colors;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
+import com.kingdoms.network.Network;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.Instruction;
 
@@ -40,8 +41,7 @@ public class World {
   }
 
   public static void receiveInstruction(Instruction instruction) {
-    // Network.network.receiveInstruction(instruction); AAAAAH MAKE SURE THIS IS PUT
-    // BACK WHORE
+    Network.network.receiveInstruction(instruction);
 
     if (instruction instanceof BuildInstruction) {
       BuildInstruction buildInstruction = (BuildInstruction) instruction;
