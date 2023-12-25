@@ -3,12 +3,34 @@ package com.kingdoms.world;
 import com.kingdoms.helpers.Colors;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.world.buildings.Building;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public class Tile implements JSONSerializable {
+  Building building;
+
+  public boolean hasBuilding() {
+    return building != null;
+  }
+
+  public void build(Building building) {
+    if (hasBuilding())
+      throw new RuntimeException("Tile (" + x + ", " + y + ") already has a building!");
+    this.building = building;
+  }
+
   int x, y;
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
   boolean isWater;
 
   public Tile(int x, int y, boolean isWater) {
@@ -21,6 +43,10 @@ public class Tile implements JSONSerializable {
    * @deprecated This constructor should only be used by JSONSerializer.
    */
   public Tile() {
+  }
+
+  public boolean isLand() {
+    return !isWater;
   }
 
   public void display(PApplet canvas) {

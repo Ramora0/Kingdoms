@@ -3,8 +3,9 @@ package com.kingdoms.world;
 import com.kingdoms.helpers.Colors;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
-import com.kingdoms.network.Instruction;
 import com.kingdoms.network.Network;
+import com.kingdoms.network.instructions.BuildInstruction;
+import com.kingdoms.network.instructions.Instruction;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -16,6 +17,16 @@ public class World {
   public static Player me;
   public static Player other;
 
+  public static Player getPlayer(String id) {
+    if (me.getID().equals(id)) {
+      return me;
+    } else if (other.getID().equals(id)) {
+      return other;
+    } else {
+      throw new IllegalArgumentException("No player with id \"" + id + "\" exists");
+    }
+  }
+
   public static void generateWorld(int size) {
     WORLD_SIZE = size;
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
@@ -25,14 +36,22 @@ public class World {
       }
     }
 
-    me = new Player(Colors.color(0, 0, 255));
-    other = new Player(Colors.color(255, 0, 0));
+    me = new Player("serverPlayer", Colors.color(0, 0, 255));
+    other = new Player("clientPlayer", Colors.color(255, 0, 0));
   }
 
   public static void receiveInstruction(Instruction instruction) {
     Network.network.receiveInstruction(instruction);
 
-    // TODO: Implement instruction handling
+    if (instruction instanceof BuildInstruction) {
+      BuildInstruction buildInstruction = (BuildInstruction) instruction;
+
+      if (buildInstruction.canBuild()) {
+        buildInstruction.build();
+      } else {
+        throw new IllegalArgumentException("Cannot build instruction: " + buildInstruction.toJSON().toString());
+      }
+    }
   }
 
   public static void nextTurn() {

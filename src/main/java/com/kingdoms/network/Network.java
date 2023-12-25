@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import com.kingdoms.network.instructions.Instruction;
+
 public abstract class Network {
   protected Socket socket;
   protected BufferedReader in;

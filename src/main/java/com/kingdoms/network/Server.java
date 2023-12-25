@@ -12,6 +12,7 @@ import java.util.Enumeration;
 
 import com.kingdoms.helpers.json.JSON;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.MainScene;
 import com.kingdoms.world.World;

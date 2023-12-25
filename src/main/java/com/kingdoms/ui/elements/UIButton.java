@@ -5,15 +5,11 @@ import com.kingdoms.events.EventBus.Subscribe;
 import processing.core.PApplet;
 
 public class UIButton extends UIElement {
-  public interface UIButtonListener {
-    void onClick();
-  }
-
   private int size;
   private String text;
-  private UIButtonListener listener;
+  private Runnable listener;
 
-  public UIButton(String text, float x, float y, int size, UIButtonListener listener) {
+  public UIButton(String text, float x, float y, int size, Runnable listener) {
     super(x, y);
     this.text = text;
     this.size = size;
@@ -47,7 +43,7 @@ public class UIButton extends UIElement {
     float bottom = y + textHeight / 2;
 
     if (canvas.mouseX >= left && canvas.mouseX <= right && canvas.mouseY >= top && canvas.mouseY <= bottom) {
-      listener.onClick();
+      listener.run();
     }
   }
 }

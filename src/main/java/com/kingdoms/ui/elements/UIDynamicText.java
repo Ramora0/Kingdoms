@@ -1,22 +1,20 @@
 package com.kingdoms.ui.elements;
 
+import java.util.function.Supplier;
+
 import processing.core.PApplet;
 
 public class UIDynamicText extends UILabel {
-  public interface GetText {
-    String text();
-  }
+  private Supplier<String> text;
 
-  private GetText getText;
-
-  public UIDynamicText(GetText getText, float x, float y, int size) {
-    super(getText.text(), x, y, size);
-    this.getText = getText;
+  public UIDynamicText(Supplier<String> text, float x, float y, int size) {
+    super(text.get(), x, y, size);
+    this.text = text;
   }
 
   @Override
   public String getText() {
-    return getText.text();
+    return text.get();
   }
 
   @Override
