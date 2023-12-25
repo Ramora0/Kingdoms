@@ -8,12 +8,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.ui.scenes.WorldDisplayScene;
 
 public class EventBus {
   public static void subscribeStaticMethods() {
-    subscribe("mouseDragged", "MainScene", (canvas) -> MainScene.mouseDragged(canvas));
-    subscribe("mouseWheel", "MainScene", (count) -> MainScene.mouseWheel(count));
+    subscribe("mouseDragged", "MainScene", (canvas) -> WorldDisplayScene.mouseDragged(canvas));
+    subscribe("mouseWheel", "MainScene", (count) -> WorldDisplayScene.mouseWheel(count));
   }
 
   public interface EventListener {

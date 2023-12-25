@@ -1,49 +1,18 @@
 package com.kingdoms.ui.scenes;
 
-import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.network.Network;
-import com.kingdoms.ui.Scene;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIDynamicText;
 import com.kingdoms.world.World;
 
-import processing.core.PApplet;
-
-public class MainScene extends Scene {
+public class MainScene extends WorldDisplayScene {
   public MainScene() {
     super();
     elements.add(new UIButton("Next Turn", 10, 10, 40, () -> Network.network.nextTurn()).setTopLeft());
+    // elements.add(new UIButton("Build", 10, 60, 40, () ->
+    // UI.change).setTopLeft());
 
     elements.add(new UIDynamicText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
     elements.add(new UIDynamicText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
-  }
-
-  @Override
-  public void display(PApplet canvas) {
-    displayWorld(canvas);
-    super.display(canvas);
-  }
-
-  // Static world display
-  static Vector offset = new Vector(0, 0);
-
-  public static float scale = 1;
-
-  public static void mouseDragged(Object data) {
-    PApplet canvas = (PApplet) data;
-    offset.add(new Vector(canvas.mouseX - canvas.pmouseX, canvas.mouseY - canvas.pmouseY));
-  }
-
-  public static void mouseWheel(Object data) {
-    scale *= Math.pow(2, ((Integer) data) / 100.0);
-  }
-
-  public static void displayWorld(PApplet canvas) {
-    canvas.pushMatrix();
-    canvas.translate(600, 400);
-    canvas.translate((float) offset.x, (float) offset.y);
-
-    World.display(canvas);
-    canvas.popMatrix();
   }
 }

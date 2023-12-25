@@ -6,6 +6,7 @@ import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.network.Instruction;
 import com.kingdoms.network.Network;
 
+import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public class World {
@@ -28,14 +29,6 @@ public class World {
     other = new Player(Colors.color(255, 0, 0));
   }
 
-  public static void display(processing.core.PApplet canvas) {
-    for (int x = 0; x < WORLD_SIZE; x++) {
-      for (int y = 0; y < WORLD_SIZE; y++) {
-        tiles[x][y].display(canvas);
-      }
-    }
-  }
-
   public static void receiveInstruction(Instruction instruction) {
     Network.network.receiveInstruction(instruction);
 
@@ -45,6 +38,16 @@ public class World {
   public static void nextTurn() {
     // TODO: Implement next turn logic
   }
+
+  public static void display(PApplet canvas) {
+    for (int x = 0; x < WORLD_SIZE; x++) {
+      for (int y = 0; y < WORLD_SIZE; y++) {
+        tiles[x][y].display(canvas);
+      }
+    }
+  }
+
+  // JSON METHODS \\
 
   public static JSONObject toJSON() {
     JSONObject json = new JSONObject();

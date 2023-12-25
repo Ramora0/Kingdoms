@@ -11,13 +11,9 @@ public class UI {
     currentScene = new OpeningScene();
   }
 
-  public static void changeScene(Scene scene) {
+  public static void changeScene(Scene scene) { // Perhaps subscribe / unsubscribe WorldDisplayScene events here?
     currentScene.kill();
     currentScene = scene;
-    System.out.println("Scene changed to: " + currentScene.getClass().getName());
-    if (currentScene.getClass().getName().equals("com.kingdoms.ui.scenes.StartScene")) {
-      new Exception().printStackTrace();
-    }
   }
 
   public static void display(PApplet canvas) {
