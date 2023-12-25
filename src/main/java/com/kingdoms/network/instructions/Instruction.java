@@ -15,6 +15,9 @@ public abstract class Instruction implements JSONSerializable {
     this.type = type;
   }
 
+  public Instruction() {
+  }
+
   public JSONObject mainToJSON() {
     JSONObject json = new JSONObject();
     json.setString("type", type.toString());
@@ -23,5 +26,15 @@ public abstract class Instruction implements JSONSerializable {
 
   public void mainFromJSON(JSONObject json) {
     type = InstructionType.valueOf(json.getString("type"));
+  }
+
+  public static Instruction createFromJSON(JSONObject json) {
+    InstructionType type = InstructionType.valueOf(json.getString("type"));
+    switch (type) {
+      case BUILD:
+        return JSONSerializable.createFromJSON(json, BuildInstruction.class);
+      default:
+        throw new IllegalArgumentException("Instruction type \"" + type + "\" is not supported");
+    }
   }
 }

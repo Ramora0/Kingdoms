@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import processing.data.JSONObject;
 
 public interface JSONSerializable {
+  // TODO: Unit tests to make sure classes extending JSONSerializable have no
+  // argument constructors
+
   public JSONObject toJSON();
 
   public void fromJSON(JSONObject json);

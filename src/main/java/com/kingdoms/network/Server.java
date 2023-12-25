@@ -11,7 +11,6 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import com.kingdoms.helpers.json.JSON;
-import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.MainScene;
@@ -49,7 +48,7 @@ public class Server extends Network {
     try {
       int instructionCount = Integer.parseInt(in.readLine());
       for (int i = 0; i < instructionCount; i++) {
-        Instruction instruction = JSONSerializable.createFromJSON(JSON.parse(in.readLine()), Instruction.class);
+        Instruction instruction = Instruction.createFromJSON(JSON.parse(in.readLine()));
         World.receiveInstruction(instruction);
       }
     } catch (IOException e) {

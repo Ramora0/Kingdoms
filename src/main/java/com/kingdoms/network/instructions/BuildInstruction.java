@@ -23,6 +23,9 @@ public class BuildInstruction extends Instruction {
     this.y = y;
   }
 
+  public BuildInstruction() {
+  }
+
   public boolean canBuild() {
     return option.canBuildAt(x, y);
   }
