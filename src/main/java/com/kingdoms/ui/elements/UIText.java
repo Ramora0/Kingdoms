@@ -1,24 +1,15 @@
 package com.kingdoms.ui.elements;
 
-import processing.core.PApplet;
-
-public class UIText extends UIElement {
-  private int x;
-  private int y;
-  private int size;
+public class UIText extends UILabel {
   private String text;
 
   public UIText(String text, int x, int y, int size) {
-    super();
-    this.x = x;
-    this.y = y;
+    super(x, y, size);
     this.text = text;
-    this.size = size;
   }
 
-  public void display(PApplet canvas) {
-    canvas.textSize(size);
-    canvas.fill(0);
-    canvas.text(text, x, y);
+  @Override
+  public String getText() {
+    return text;
   }
 }
