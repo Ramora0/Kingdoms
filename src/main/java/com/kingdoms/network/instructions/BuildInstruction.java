@@ -9,7 +9,6 @@ import processing.data.JSONObject;
  * BuildInstruction represents an instruction sent to World to build a building
  */
 public class BuildInstruction extends Instruction {
-
   BuildOption option;
 
   public Player player;

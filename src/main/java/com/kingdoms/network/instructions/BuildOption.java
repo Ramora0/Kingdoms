@@ -15,7 +15,7 @@ public enum BuildOption {
     }
 
     @Override
-    public void buildAt(Player player, int x, int y) {
+    protected void buildAt(Player player, int x, int y) {
       Tile tile = World.tiles[x][y];
       tile.build(new City(tile, World.me));
     }
@@ -23,5 +23,5 @@ public enum BuildOption {
 
   public abstract boolean canBuildAt(int x, int y);
 
-  public abstract void buildAt(Player player, int x, int y);
+  protected abstract void buildAt(Player player, int x, int y);
 };

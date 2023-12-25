@@ -14,19 +14,6 @@ public class World {
   public static int WORLD_SIZE;
   public static Tile[][] tiles;
 
-  public static Player me;
-  public static Player other;
-
-  public static Player getPlayer(String id) {
-    if (me.getID().equals(id)) {
-      return me;
-    } else if (other.getID().equals(id)) {
-      return other;
-    } else {
-      throw new IllegalArgumentException("No player with id \"" + id + "\" exists");
-    }
-  }
-
   public static void generateWorld(int size) {
     WORLD_SIZE = size;
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
@@ -38,6 +25,19 @@ public class World {
 
     me = new Player("serverPlayer", Colors.color(0, 0, 255));
     other = new Player("clientPlayer", Colors.color(255, 0, 0));
+  }
+
+  public static Player me;
+  public static Player other;
+
+  public static Player getPlayer(String id) {
+    if (me.getID().equals(id)) {
+      return me;
+    } else if (other.getID().equals(id)) {
+      return other;
+    } else {
+      throw new IllegalArgumentException("No player with id \"" + id + "\" exists");
+    }
   }
 
   public static void receiveInstruction(Instruction instruction) {

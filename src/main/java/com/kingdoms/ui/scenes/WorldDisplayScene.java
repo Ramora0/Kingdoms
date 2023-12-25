@@ -9,13 +9,13 @@ import processing.core.PApplet;
 
 public abstract class WorldDisplayScene extends Scene {
   public void display(PApplet canvas) {
-    displayWorld(canvas);
+    World.display(canvas);
     super.display(canvas);
   }
 
   static Vector offset = new Vector(0, 0);
 
-  public static float scale = 1;
+  public static float scale = 50;
 
   public static void mouseDragged(Object data) {
     if (!(UI.currentScene instanceof WorldDisplayScene)) {
@@ -34,12 +34,11 @@ public abstract class WorldDisplayScene extends Scene {
     scale *= Math.pow(2, ((Integer) data) / 100.0);
   }
 
-  public static void displayWorld(PApplet canvas) {
-    canvas.pushMatrix();
-    canvas.translate(600, 400);
-    canvas.translate((float) offset.x * scale, (float) offset.y * scale);
+  public static float displayX(double x) {
+    return (float) (scale * x + offset.x * scale + 600);
+  }
 
-    World.display(canvas);
-    canvas.popMatrix();
+  public static float displayY(double y) {
+    return (float) (scale * y + offset.y * scale + 400);
   }
 }
