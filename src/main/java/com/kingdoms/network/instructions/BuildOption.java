@@ -19,7 +19,7 @@ public enum BuildOption {
     @Override
     protected void buildAt(Player player, int x, int y) {
       Tile tile = World.tiles[x][y];
-      tile.build(new City(tile, World.me));
+      tile.build(new City(tile, player));
     }
   };
 

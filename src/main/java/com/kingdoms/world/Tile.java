@@ -63,6 +63,9 @@ public class Tile implements JSONSerializable {
     json.setInt("x", x);
     json.setInt("y", y);
     json.setBoolean("isWater", isWater);
+    if (hasBuilding()) {
+      json.setJSONObject("building", building.toJSON());
+    }
     return json;
   }
 
@@ -70,5 +73,9 @@ public class Tile implements JSONSerializable {
     x = json.getInt("x");
     y = json.getInt("y");
     isWater = json.getBoolean("isWater");
+    if (json.hasKey("building")) {
+      building = Building.createFromJSON(json.getJSONObject("building"));
+      building.setTile(this);
+    }
   }
 }
