@@ -9,8 +9,8 @@ public class UIDynamicText extends UILabel {
 
   private GetText getText;
 
-  public UIDynamicText(GetText getText, int size) {
-    super(size);
+  public UIDynamicText(GetText getText, float x, float y, int size) {
+    super(getText.text(), x, y, size);
     this.getText = getText;
   }
 

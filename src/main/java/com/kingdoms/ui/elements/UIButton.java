@@ -13,8 +13,8 @@ public class UIButton extends UIElement {
   private String text;
   private UIButtonListener listener;
 
-  public UIButton(String text, int size, UIButtonListener listener) {
-    super();
+  public UIButton(String text, float x, float y, int size, UIButtonListener listener) {
+    super(x, y);
     this.text = text;
     this.size = size;
     this.listener = listener;
@@ -25,6 +25,8 @@ public class UIButton extends UIElement {
   public void display(PApplet canvas) {
     canvas.textSize(size);
 
+    float x = getX(), y = getY();
+
     canvas.fill(255);
     canvas.rect(x, y, width, height);
 
@@ -33,10 +35,11 @@ public class UIButton extends UIElement {
   }
 
   @Subscribe
-  public void mousePressed(PApplet canvas) {
+  public void mousePressed(PApplet canvas) { // TODO: Re-write this to use the UIElement's inBounds method
     float padding = 10;
     float textWidth = canvas.textWidth(text) + padding;
     float textHeight = canvas.textAscent() + canvas.textDescent() + padding;
+    float x = getX(), y = getY();
 
     float left = x - textWidth / 2;
     float right = x + textWidth / 2;

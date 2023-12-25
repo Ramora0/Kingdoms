@@ -6,58 +6,80 @@ import com.kingdoms.events.EventBus;
 import processing.core.PApplet;
 
 public abstract class UIElement {
-  float x, y;
+  public enum XAlignment {
+    LEFT, CENTER, RIGHT
+  };
+
+  XAlignment xAlignment = XAlignment.CENTER;
+
+  enum YAlignment {
+    TOP, CENTER, BOTTOM
+  }
+
+  YAlignment yAlignment = YAlignment.CENTER;
+
+  private float x, y;
   float width, height;
 
-  public UIElement() {
+  public float getX() {
+    switch (xAlignment) {
+      case LEFT:
+        return x;
+      case CENTER:
+        return x - width / 2;
+      case RIGHT:
+        return x - width;
+    }
+    return 0;
+  }
+
+  public float getY() {
+    switch (yAlignment) {
+      case TOP:
+        return y;
+      case CENTER:
+        return y - height / 2;
+      case BOTTOM:
+        return y - height;
+    }
+    return 0;
+  }
+
+  public UIElement(float x, float y) {
+    this.x = x;
+    this.y = y;
     EventBus.register(this);
   }
 
-  public UIElement setLeft(float x) {
-    this.x = x;
+  public UIElement setLeft() {
+    xAlignment = XAlignment.LEFT;
     return this;
   }
 
-  public UIElement setTop(float y) {
-    this.y = y;
+  public UIElement setTop() {
+    yAlignment = YAlignment.TOP;
     return this;
   }
 
-  public UIElement setTopLeft(float x, float y) {
-    setLeft(x);
-    setTop(y);
+  public UIElement setTopLeft() {
+    setLeft();
+    setTop();
     return this;
   }
 
-  public UIElement setCenterX(float x) {
-    this.x = x - width / 2;
+  public UIElement setRight() {
+    xAlignment = XAlignment.RIGHT;
     return this;
   }
 
-  public UIElement setCenterY(float y) {
-    this.y = y - height / 2;
+  public UIElement setBottom() {
+    yAlignment = YAlignment.BOTTOM;
     return this;
   }
 
-  public UIElement setCenter(float x, float y) {
-    setCenterX(x);
-    setCenterY(y);
-    return this;
-  }
-
-  public UIElement setRight(float x) {
-    this.x = x - width;
-    return this;
-  }
-
-  public UIElement setBottom(float y) {
-    this.y = y - height;
-    return this;
-  }
-
-  public UIElement setBottomRight(float x, float y) {
-    setRight(x);
-    setBottom(y);
+  public UIElement setBottomRight() {
+    setRight();
+    setBottom();
     return this;
   }
 

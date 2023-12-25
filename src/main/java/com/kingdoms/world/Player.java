@@ -10,7 +10,7 @@ public class Player implements JSONSerializable {
 
   public Player(int color) {
     this.color = color;
-    resources = 500;
+    resources = (int) (500 * Math.random());
   }
 
   public int getResources() {

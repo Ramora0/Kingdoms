@@ -12,10 +12,10 @@ import processing.core.PApplet;
 public class MainScene extends Scene {
   public MainScene() {
     super();
-    elements.add(new UIButton("Next Turn", 40, () -> Network.network.nextTurn()).setTopLeft(10, 10));
+    elements.add(new UIButton("Next Turn", 10, 10, 40, () -> Network.network.nextTurn()).setTopLeft());
 
-    elements.add(new UIDynamicText(() -> "Me: " + World.me.getResources(), 30).setRight(1150).setTop(10));
-    elements.add(new UIDynamicText(() -> "Other: " + World.other.getResources(), 30).setRight(1150).setTop(50));
+    elements.add(new UIDynamicText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
+    elements.add(new UIDynamicText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
   }
 
   @Override
