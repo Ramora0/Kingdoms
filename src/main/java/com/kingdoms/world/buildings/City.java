@@ -12,6 +12,10 @@ public class City extends Building {
     super(BuildingType.CITY, tile, player);
   }
 
+  public City() {
+
+  }
+
   @Override
   public void display(PApplet canvas) {
     canvas.fill(player.getColor());

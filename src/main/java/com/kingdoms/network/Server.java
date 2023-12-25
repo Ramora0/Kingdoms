@@ -72,6 +72,7 @@ public class Server extends Network {
   private void sendWorldData() {
     System.out.println("Sending world data...");
     out.println(NetworkMessages.SENDING_WORLD_DATA);
+    System.out.println("World data sent, waiting for clinet to confirm data was received error-free...");
     out.println(JSON.stringify(World.toJSON()));
 
     waitForText(NetworkMessages.WORLD_DATA_RECEIVED); // Confirm with client that data was received error-free

@@ -42,6 +42,7 @@ public class BuildScene extends WorldDisplayScene {
     int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
     if (option.canBuildAt(x, y)) {
       World.receiveInstruction(new BuildInstruction(option, World.me, x, y));
+      // System.out.println("Tile: " + World.toJSON());
       UI.changeScene(new MainScene());
     }
   }
