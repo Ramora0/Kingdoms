@@ -19,7 +19,9 @@ public class World {
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        tiles[x][y] = new Tile(x, y, MathUtils.chance(0.5));
+        float height = MathUtils.noise(x * 0.1f, y * 0.1f);
+        height -= MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) * 0.08f;
+        tiles[x][y] = new Tile(x, y, height < 0);
       }
     }
 

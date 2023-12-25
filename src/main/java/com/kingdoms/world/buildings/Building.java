@@ -28,6 +28,7 @@ public abstract class Building implements JSONSerializable {
     this.player = player;
   }
 
+  @Deprecated
   public Building() {
   }
 

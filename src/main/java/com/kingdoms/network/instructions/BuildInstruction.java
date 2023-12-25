@@ -23,6 +23,7 @@ public class BuildInstruction extends Instruction {
     this.y = y;
   }
 
+  @Deprecated
   public BuildInstruction() {
   }
 

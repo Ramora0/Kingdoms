@@ -12,8 +12,8 @@ public class City extends Building {
     super(BuildingType.CITY, tile, player);
   }
 
+  @Deprecated
   public City() {
-
   }
 
   @Override

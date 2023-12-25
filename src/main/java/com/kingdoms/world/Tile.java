@@ -39,9 +39,7 @@ public class Tile implements JSONSerializable {
     this.isWater = isWater;
   }
 
-  /**
-   * @deprecated This constructor should only be used by JSONSerializer.
-   */
+  @Deprecated
   public Tile() {
   }
 

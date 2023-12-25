@@ -15,6 +15,7 @@ public abstract class Instruction implements JSONSerializable {
     this.type = type;
   }
 
+  @Deprecated
   public Instruction() {
   }
 

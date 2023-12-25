@@ -15,6 +15,7 @@ public class Player implements JSONSerializable {
     resources = (int) (500 * Math.random());
   }
 
+  @Deprecated
   public Player() {
   }
 
