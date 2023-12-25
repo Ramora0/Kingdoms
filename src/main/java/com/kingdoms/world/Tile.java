@@ -1,7 +1,8 @@
 package com.kingdoms.world;
 
 import com.kingdoms.helpers.Colors;
-import com.kingdoms.helpers.JSONSerializable;
+import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.ui.scenes.MainScene;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -16,13 +17,10 @@ public class Tile implements JSONSerializable {
     this.isWater = isWater;
   }
 
-  public Tile(JSONObject json) {
-    fromJSON(json);
-  }
-
   public void display(PApplet canvas) {
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    canvas.square(x * 10, y * 10, 10);
+    float scale = MainScene.scale;
+    canvas.square(scale * (x - World.WORLD_SIZE / 2) * 50, scale * (y - World.WORLD_SIZE / 2) * 50, scale * 50);
   }
 
   public JSONObject toJSON() {

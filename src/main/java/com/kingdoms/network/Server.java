@@ -4,10 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
 
-import com.kingdoms.helpers.JSON;
+import com.kingdoms.helpers.json.JSON;
+import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.MainScene;
 import com.kingdoms.world.World;
@@ -30,29 +35,67 @@ public class Server extends Network {
 
   @Override
   public void initializeWorld() {
-    World.generateWorld(100);
-    out.println("world data");
-    out.println(JSON.stringify(World.toJSON()));
+    World.generateWorld(20); // Generate world
+
+    sendWorldData();
+
+    System.out.println("Client is ready!"); // Move to the game
+    UI.changeScene(new MainScene());
+  }
+
+  @Override
+  public void nextTurn() {
+    out.println(NetworkMessages.NEXT_TURN);
+
+    waitForText(NetworkMessages.NEXT_TURN);
+
     try {
-      String response = in.readLine();
-      if (response.equals("we good")) { // Confirm with client that data was received error-free
-        System.out.println("Client is ready!");
-        UI.changeScene(new MainScene());
+      int instructionCount = Integer.parseInt(in.readLine());
+      for (int i = 0; i < instructionCount; i++) {
+        Instruction instruction = JSONSerializable.createFromJSON(JSON.parse(in.readLine()), Instruction.class);
+        World.receiveInstruction(instruction);
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    World.nextTurn();
+
+    sendWorldData();
+
+    Network.cleanupNextTurn();
   }
 
   @Override
-  public void sendMessages() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'sendMessages'");
+  public void receiveInstruction(Instruction instruction) {
   }
 
   // SERVER METHODS\\
+  private void sendWorldData() {
+    out.println(NetworkMessages.SENDING_WORLD_DATA);
+    out.println(JSON.stringify(World.toJSON()));
+
+    waitForText(NetworkMessages.WORLD_DATA_RECEIVED); // Confirm with client that data was received error-free
+  }
+
   public String getIP() {
-    return serverSocket.getInetAddress().getHostAddress();
+    try {
+      Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+      while (networkInterfaces.hasMoreElements()) {
+        NetworkInterface networkInterface = networkInterfaces.nextElement();
+        Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
+        while (inetAddresses.hasMoreElements()) {
+          InetAddress inetAddress = inetAddresses.nextElement();
+          if (!inetAddress.isLoopbackAddress() && inetAddress.getHostAddress().indexOf(":") == -1) {
+            return inetAddress.getHostAddress();
+          }
+        }
+      }
+      return null;
+    } catch (SocketException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public void waitForClient() {

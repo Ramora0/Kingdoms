@@ -1,4 +1,4 @@
-package com.kingdoms.helpers;
+package com.kingdoms.helpers.math;
 
 public class MathUtils {
   public static boolean chance(double chance) {

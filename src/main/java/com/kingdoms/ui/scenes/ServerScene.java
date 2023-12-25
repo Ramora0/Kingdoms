@@ -16,7 +16,10 @@ public class ServerScene extends Scene {
     Network.setNetwork(server);
     elements.add(new UIText("Waiting for client...", 600, 300, 40));
 
-    elements.add(new UIText("IP: " + server.getIP(), 600, 300, 40));
+    String ip = server.getIP();
+    if (ip == null)
+      ip = "localhost";
+    elements.add(new UIText("IP: " + ip, 600, 400, 40));
   }
 
   boolean once = false;
@@ -25,11 +28,10 @@ public class ServerScene extends Scene {
   public void display(PApplet canvas) {
     super.display(canvas);
     if (!once) {
-      server.waitForClient();
-      Network.network.initializeWorld();
       once = true;
       return;
     }
-    throw new RuntimeException("This should never happen");
+    server.waitForClient();
+    Network.network.initializeWorld();
   }
 }

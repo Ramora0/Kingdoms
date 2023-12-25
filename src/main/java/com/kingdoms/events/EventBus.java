@@ -8,7 +8,14 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.kingdoms.ui.scenes.MainScene;
+
 public class EventBus {
+  public static void subscribeStaticMethods() {
+    subscribe("mouseDragged", "MainScene", (canvas) -> MainScene.mouseDragged(canvas));
+    subscribe("mouseWheel", "MainScene", (count) -> MainScene.mouseWheel(count));
+  }
+
   public interface EventListener {
     void update(Object data);
   }

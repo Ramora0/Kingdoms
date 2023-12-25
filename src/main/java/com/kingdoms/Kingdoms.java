@@ -4,22 +4,22 @@ import com.kingdoms.events.EventBus;
 import com.kingdoms.ui.UI;
 
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 public class Kingdoms extends PApplet {
   public static PApplet canvas;
 
   public void settings() {
     size(1200, 800);
-    // smooth(0);
   }
 
   public void setup() {
     Kingdoms.canvas = this;
 
+    EventBus.subscribeStaticMethods();
     UI.init();
 
-    // Test
-    // World.generateWorld(100);
+    // World.generateWorld(20);
     // UI.changeScene(new MainScene());
   }
 
@@ -30,8 +30,16 @@ public class Kingdoms extends PApplet {
     UI.display(canvas);
   }
 
+  public void mouseWheel(MouseEvent event) {
+    EventBus.notify("mouseWheel", event.getCount());
+  }
+
   public void mousePressed() {
     EventBus.notify("mousePressed", canvas);
+  }
+
+  public void mouseDragged() {
+    EventBus.notify("mouseDragged", canvas);
   }
 
   public static void main(String[] passedArgs) {

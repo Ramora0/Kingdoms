@@ -21,12 +21,11 @@ public class ClientScene extends Scene {
   public void display(PApplet canvas) {
     super.display(canvas);
     if (!once) {
-      this.client = new Client("192.168.1.176");
-      Network.setNetwork(client);
-      Network.network.initializeWorld();
       once = true;
       return;
     }
-    throw new RuntimeException("This should never happen");
+    this.client = new Client("192.168.1.176");
+    Network.setNetwork(client);
+    Network.network.initializeWorld();
   }
 }

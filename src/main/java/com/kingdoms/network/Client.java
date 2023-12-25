@@ -5,16 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.kingdoms.helpers.json.JSON;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.world.Player;
 import com.kingdoms.world.World;
 
-import processing.data.JSONObject;
-
 public class Client extends Network {
-  private BufferedReader in;
-  private PrintWriter out;
+  List<Instruction> instructions = new ArrayList<Instruction>();
 
   public Client(String ip) {
     try {
@@ -29,22 +30,50 @@ public class Client extends Network {
 
   @Override
   public void initializeWorld() {
-    try {
-      String response = in.readLine();
-      if (response.equals("world data")) {
-        System.out.println("Received world data!");
-        String worldData = in.readLine();
-        World.fromJSON(JSONObject.parse(worldData));
-        out.println("we good"); // Confirm with server that data was received error-free
-        UI.changeScene(new MainScene());
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    readWorldData();
+
+    // Confirm with server that data was received error-free
+    UI.changeScene(new MainScene());
   }
 
   @Override
-  public void sendMessages() {
-    throw new UnsupportedOperationException("Unimplemented method 'sendMessages'");
+  public void nextTurn() {
+    out.println(NetworkMessages.NEXT_TURN);
+
+    waitForText(NetworkMessages.NEXT_TURN);
+
+    out.println(instructions.size());
+    for (Instruction instruction : instructions) {
+      out.println(JSON.stringify(instruction));
+    }
+    instructions.clear();
+
+    readWorldData();
+
+    Network.cleanupNextTurn();
+  }
+
+  @Override
+  public void receiveInstruction(Instruction instruction) {
+    instructions.add(instruction);
+  }
+
+  // CLIENT METHODS\\
+
+  public void readWorldData() {
+    waitForText(NetworkMessages.SENDING_WORLD_DATA);
+
+    try {
+      String worldData = in.readLine();
+      World.fromJSON(JSON.parse(worldData));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    Player temp = World.me;
+    World.me = World.other;
+    World.other = temp;
+
+    out.println(NetworkMessages.WORLD_DATA_RECEIVED);
   }
 }
