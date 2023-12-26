@@ -2,8 +2,6 @@ package com.kingdoms;
 
 import com.kingdoms.events.EventBus;
 import com.kingdoms.ui.UI;
-import com.kingdoms.ui.scenes.MainScene;
-import com.kingdoms.world.World;
 
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -21,8 +19,9 @@ public class Kingdoms extends PApplet {
     EventBus.subscribeStaticMethods();
     UI.init();
 
-    World.generateWorld(20);
-    UI.changeScene(new MainScene());
+    // TODO: Have this reference a testing variable so I can turn that off
+    // World.generateWorld(20);
+    // UI.changeScene(new MainScene());
   }
 
   public void draw() {
