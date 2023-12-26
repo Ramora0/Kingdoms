@@ -12,7 +12,7 @@ public class Player implements JSONSerializable {
   public Player(String id, int color) {
     this.id = id;
     this.color = color;
-    resources = (int) (500 * Math.random());
+    resources = 1000;
   }
 
   @Deprecated
