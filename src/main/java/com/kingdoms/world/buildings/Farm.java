@@ -13,6 +13,10 @@ public class Farm extends Building {
     super(BuildingType.FARM, tile, player);
   }
 
+  @Deprecated
+  public Farm() {
+  }
+
   @Override
   public void display(PApplet canvas) {
     canvas.fill(Colors.color(247, 182, 62));

@@ -76,7 +76,7 @@ public class Server extends Network {
     out.println(JSON.stringify(World.toJSON()));
 
     waitForText(NetworkMessages.WORLD_DATA_RECEIVED); // Confirm with client that data was received error-free
-    System.out.println("World data sent!");
+    System.out.println("They are good!");
   }
 
   public String getIP() {
