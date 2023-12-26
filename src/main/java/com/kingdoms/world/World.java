@@ -81,7 +81,7 @@ public class World {
   public static boolean hasAdjacentTile(int x, int y, TilePredicate predicate) {
     for (int dx = -1; dx <= 1; dx++)
       for (int dy = -1; dy <= 1; dy++)
-        if (predicate.test(tiles[x][y]))
+        if (World.in(x + dx, y + dy) && predicate.test(tiles[x + dx][y + dy]))
           return true;
     return false;
   }

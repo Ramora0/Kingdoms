@@ -10,13 +10,13 @@ import com.kingdoms.world.buildings.Farm;
 
 /** BuildOption represents a kind of building to build */
 public enum BuildOption {
-  CITY {
+  CITY(500) {
     @Override
     public boolean canBuildAt(Player player, int x, int y) {
-      if (!World.in(x, y))
+      Tile tile = CITY.getTileIfAllowed(player, x, y);
+      if (tile == null)
         return false;
-      Tile tile = World.tiles[x][y];
-      return !tile.hasBuilding() && tile.isLand();
+      return tile.isLand();
     }
 
     @Override
@@ -25,12 +25,13 @@ public enum BuildOption {
       tile.build(new City(tile, player));
     }
   },
-  FARM {
+  FARM(100) {
     @Override
     public boolean canBuildAt(Player player, int x, int y) {
-      if (!World.in(x, y))
+      Tile tile = FARM.getTileIfAllowed(player, x, y);
+
+      if (tile == null)
         return false;
-      Tile tile = World.tiles[x][y];
 
       if (!World.hasAdjacentTile(x, y, (t) -> {
         Building building = t.getBuilding();
@@ -43,7 +44,7 @@ public enum BuildOption {
       })) {
         return false;
       }
-      return !tile.hasBuilding() && tile.isLand();
+      return tile.isLand();
     }
 
     @Override
@@ -53,7 +54,30 @@ public enum BuildOption {
     }
   };
 
+  private int cost;
+
+  BuildOption(int cost) {
+    this.cost = cost;
+  }
+
+  public int getCost() {
+    return cost;
+  }
+
   public abstract boolean canBuildAt(Player player, int x, int y);
+
+  /** Only used by enums for common checks */
+  private Tile getTileIfAllowed(Player player, int x, int y) {
+    if (!World.in(x, y))
+      return null;
+    if (player.getResources() < cost)
+      return null;
+
+    Tile tile = World.tiles[x][y];
+    if (tile.hasBuilding())
+      return null;
+    return tile;
+  }
 
   protected abstract void buildAt(Player player, int x, int y);
 };
