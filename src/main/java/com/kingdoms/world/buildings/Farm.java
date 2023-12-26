@@ -1,0 +1,39 @@
+package com.kingdoms.world.buildings;
+
+import com.kingdoms.helpers.Colors;
+import com.kingdoms.ui.scenes.WorldDisplayScene;
+import com.kingdoms.world.Player;
+import com.kingdoms.world.Tile;
+
+import processing.core.PApplet;
+import processing.data.JSONObject;
+
+public class Farm extends Building {
+  public Farm(Tile tile, Player player) {
+    super(BuildingType.FARM, tile, player);
+  }
+
+  @Override
+  public void display(PApplet canvas) {
+    canvas.fill(Colors.color(247, 182, 62));
+    WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
+    canvas.fill(player.getColor());
+    WorldDisplayScene.circle(canvas, tile.getX() + 0.5, tile.getY() + 0.5, 1);
+  }
+
+  @Override
+  public void onNextTurn() {
+    player.addResources(100);
+  }
+
+  @Override
+  public JSONObject toJSON() {
+    JSONObject json = super.mainToJSON();
+    return json;
+  }
+
+  @Override
+  public void fromJSON(JSONObject json) {
+    super.mainFromJSON(json);
+  }
+}

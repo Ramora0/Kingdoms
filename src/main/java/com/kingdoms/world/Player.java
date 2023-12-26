@@ -27,6 +27,10 @@ public class Player implements JSONSerializable {
     return resources;
   }
 
+  public void addResources(int amount) {
+    resources += amount;
+  }
+
   public String getID() {
     return id;
   }

@@ -28,7 +28,7 @@ public class BuildScene extends WorldDisplayScene {
     int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
     int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
 
-    if (option.canBuildAt(x, y))
+    if (option.canBuildAt(World.me, x, y))
       canvas.fill(World.me.getColor(), 100);
     else
       canvas.fill(100, 100);
@@ -40,7 +40,7 @@ public class BuildScene extends WorldDisplayScene {
   public void mousePressed(PApplet canvas) {
     int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
     int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
-    if (option.canBuildAt(x, y)) {
+    if (option.canBuildAt(World.me, x, y)) {
       World.receiveInstruction(new BuildInstruction(option, World.me, x, y));
       // System.out.println("Tile: " + World.toJSON());
       UI.changeScene(new MainScene());

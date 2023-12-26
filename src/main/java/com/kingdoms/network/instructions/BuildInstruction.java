@@ -28,7 +28,7 @@ public class BuildInstruction extends Instruction {
   }
 
   public boolean canBuild() {
-    return option.canBuildAt(x, y);
+    return option.canBuildAt(player, x, y);
   }
 
   public void build() {

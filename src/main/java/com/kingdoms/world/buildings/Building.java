@@ -10,12 +10,28 @@ import processing.data.JSONObject;
 
 public abstract class Building implements JSONSerializable {
   public enum BuildingType {
-    CITY
+    CITY(City.class),
+    FARM(Farm.class);
+
+    public final Class<? extends Building> buildingClass;
+
+    BuildingType(Class<? extends Building> buildingClass) {
+      this.buildingClass = buildingClass;
+    }
   }
 
   BuildingType type;
 
+  public BuildingType getType() {
+    return type;
+  }
+
   Player player;
+
+  public Player getPlayer() {
+    return player;
+  }
+
   Tile tile;
 
   public void setTile(Tile tile) {
@@ -32,7 +48,12 @@ public abstract class Building implements JSONSerializable {
   public Building() {
   }
 
+  public void onNextTurn() {
+  }
+
   public abstract void display(PApplet canvas);
+
+  // JSON METHODS \\
 
   public JSONObject mainToJSON() {
     JSONObject json = new JSONObject();
@@ -51,11 +72,6 @@ public abstract class Building implements JSONSerializable {
 
   public static Building createFromJSON(JSONObject json) {
     BuildingType type = BuildingType.valueOf(json.getString("type"));
-    switch (type) {
-      case CITY:
-        return JSONSerializable.createFromJSON(json, City.class);
-      default:
-        throw new IllegalArgumentException("Building type \"" + type + "\" is not supported");
-    }
+    return JSONSerializable.createFromJSON(json, type.buildingClass);
   }
 }

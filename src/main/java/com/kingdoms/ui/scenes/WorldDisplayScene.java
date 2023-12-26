@@ -55,4 +55,8 @@ public abstract class WorldDisplayScene extends Scene {
   public static void square(PApplet canvas, double x, double y) {
     canvas.square(displayX(x), displayY(y), (float) scale);
   }
+
+  public static void circle(PApplet canvas, double x, double y, double diameter) {
+    canvas.circle(displayX(x), displayY(y), (float) (scale * diameter));
+  }
 }

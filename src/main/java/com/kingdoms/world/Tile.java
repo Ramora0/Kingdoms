@@ -11,14 +11,12 @@ import processing.data.JSONObject;
 public class Tile implements JSONSerializable {
   Building building;
 
-  public boolean hasBuilding() {
-    return building != null;
+  public Building getBuilding() {
+    return building;
   }
 
-  public void build(Building building) {
-    if (hasBuilding())
-      throw new RuntimeException("Tile (" + x + ", " + y + ") already has a building!");
-    this.building = building;
+  public boolean hasBuilding() {
+    return building != null;
   }
 
   int x, y;
@@ -55,6 +53,17 @@ public class Tile implements JSONSerializable {
       building.display(canvas);
     }
   }
+
+  // WRITE FUNCTIONS \\
+
+  @Deprecated
+  public void build(Building building) {
+    if (hasBuilding())
+      throw new RuntimeException("Tile (" + x + ", " + y + ") already has a building!");
+    this.building = building;
+  }
+
+  // JSON FUNCTIONS \\
 
   public JSONObject toJSON() {
     JSONObject json = new JSONObject();

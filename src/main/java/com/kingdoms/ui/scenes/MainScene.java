@@ -10,6 +10,7 @@ import com.kingdoms.world.World;
 public class MainScene extends WorldDisplayScene {
   public MainScene() {
     super();
+    // TODO: Make dynamic button
     elements.add(new UIButton("Next Turn", 10, 10, 40, () -> Network.network.nextTurn()).setTopLeft());
     elements.add(new UIButton("Build", 10, 60, 40, () -> UI.changeScene(new BuildOptionsScene())).setTopLeft());
 
