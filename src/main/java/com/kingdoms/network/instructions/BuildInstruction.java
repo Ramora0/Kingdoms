@@ -1,7 +1,7 @@
 package com.kingdoms.network.instructions;
 
+import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.World;
 
 import processing.data.JSONObject;
 
@@ -38,7 +38,8 @@ public class BuildInstruction extends Instruction {
   public JSONObject toJSON() {
     JSONObject json = super.mainToJSON();
     json.setString("option", option.toString());
-    json.setString("player", player.getID());
+    // json.setString("player", player.getID());
+    json.setJSONObject("player", player.toReferenceJSON());
     json.setInt("x", x);
     json.setInt("y", y);
     return json;
@@ -47,7 +48,8 @@ public class BuildInstruction extends Instruction {
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
     option = BuildOption.valueOf(json.getString("option"));
-    player = World.getPlayer(json.getString("player"));
+    // player = World.getPlayer(json.getString("player"));
+    player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
     x = json.getInt("x");
     y = json.getInt("y");
   }

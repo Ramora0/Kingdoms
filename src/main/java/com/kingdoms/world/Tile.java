@@ -1,6 +1,7 @@
 package com.kingdoms.world;
 
 import com.kingdoms.helpers.Colors;
+import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.WorldDisplayScene;
 import com.kingdoms.world.buildings.Building;
@@ -8,7 +9,7 @@ import com.kingdoms.world.buildings.Building;
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public class Tile implements JSONSerializable {
+public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   Building building;
 
   public Building getBuilding() {
@@ -71,6 +72,7 @@ public class Tile implements JSONSerializable {
 
   // JSON FUNCTIONS \\
 
+  @Override
   public JSONObject toJSON() {
     JSONObject json = new JSONObject();
     json.setInt("x", x);
@@ -82,6 +84,7 @@ public class Tile implements JSONSerializable {
     return json;
   }
 
+  @Override
   public void fromJSON(JSONObject json) {
     x = json.getInt("x");
     y = json.getInt("y");
@@ -90,5 +93,19 @@ public class Tile implements JSONSerializable {
       building = Building.createFromJSON(json.getJSONObject("building"));
       building.setTile(this);
     }
+  }
+
+  @Override
+  public JSONObject toReferenceJSON() {
+    JSONObject json = new JSONObject();
+    json.setInt("x", x);
+    json.setInt("y", y);
+    return json;
+  }
+
+  @Override
+  public Tile fromReferenceJSON(JSONObject json) {
+    int x = json.getInt("x"), y = json.getInt("y");
+    return World.tiles[x][y];
   }
 }

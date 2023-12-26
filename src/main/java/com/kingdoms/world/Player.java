@@ -1,10 +1,11 @@
 package com.kingdoms.world;
 
+import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 
 import processing.data.JSONObject;
 
-public class Player implements JSONSerializable {
+public class Player implements JSONSerializable, JSONReferenceSerializable<Player> {
   String id;
   int color;
   int resources;
@@ -47,5 +48,17 @@ public class Player implements JSONSerializable {
     color = json.getInt("color");
     resources = json.getInt("resources");
     id = json.getString("id");
+  }
+
+  @Override
+  public JSONObject toReferenceJSON() {
+    JSONObject json = new JSONObject();
+    json.setString("id", id);
+    return json;
+  }
+
+  @Override
+  public Player fromReferenceJSON(JSONObject json) {
+    return World.getPlayer(json.getString("id"));
   }
 }

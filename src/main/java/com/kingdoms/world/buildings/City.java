@@ -14,6 +14,7 @@ public class City extends Building {
 
   @Deprecated
   public City() {
+    super(BuildingType.CITY);
   }
 
   @Override

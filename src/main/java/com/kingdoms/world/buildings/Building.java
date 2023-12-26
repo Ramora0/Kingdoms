@@ -1,9 +1,9 @@
 package com.kingdoms.world.buildings;
 
+import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
-import com.kingdoms.world.World;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -45,7 +45,8 @@ public abstract class Building implements JSONSerializable {
   }
 
   @Deprecated
-  public Building() {
+  public Building(BuildingType type) {
+    this.type = type;
   }
 
   public void nextTurn() {
@@ -57,17 +58,21 @@ public abstract class Building implements JSONSerializable {
 
   public JSONObject mainToJSON() {
     JSONObject json = new JSONObject();
-    json.setString("player", player.getID());
-    json.setInt("x", tile.getX());
-    json.setInt("y", tile.getY());
+    // json.setString("player", player.getID());
+    json.setJSONObject("player", player.toReferenceJSON());
+    // json.setInt("x", tile.getX());
+    // json.setInt("y", tile.getY());
+    json.setJSONObject("tile", tile.toReferenceJSON());
     json.setString("type", type.toString());
     return json;
   }
 
   public void mainFromJSON(JSONObject json) {
     type = BuildingType.valueOf(json.getString("type"));
-    player = World.getPlayer(json.getString("player"));
-    tile = World.tiles[json.getInt("x")][json.getInt("y")];
+    // player = World.getPlayer(json.getString("player"));
+    player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
+    // tile = World.tiles[json.getInt("x")][json.getInt("y")];
+    tile = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("tile"), Tile.class);
   }
 
   public static Building createFromJSON(JSONObject json) {

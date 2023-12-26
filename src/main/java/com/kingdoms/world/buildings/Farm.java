@@ -15,6 +15,7 @@ public class Farm extends Building {
 
   @Deprecated
   public Farm() {
+    super(BuildingType.FARM);
   }
 
   @Override
