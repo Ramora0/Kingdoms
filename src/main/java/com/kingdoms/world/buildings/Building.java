@@ -48,7 +48,7 @@ public abstract class Building implements JSONSerializable {
   public Building() {
   }
 
-  public void onNextTurn() {
+  public void nextTurn() {
   }
 
   public abstract void display(PApplet canvas);

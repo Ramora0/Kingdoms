@@ -61,7 +61,11 @@ public class World {
   }
 
   public static void nextTurn() {
-    // TODO: Implement next turn logic
+    for (int x = 0; x < WORLD_SIZE; x++) {
+      for (int y = 0; y < WORLD_SIZE; y++) {
+        tiles[x][y].nextTurn();
+      }
+    }
   }
 
   public static void display(PApplet canvas) {

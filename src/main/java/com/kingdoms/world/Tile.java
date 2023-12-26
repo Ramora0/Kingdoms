@@ -54,6 +54,12 @@ public class Tile implements JSONSerializable {
     }
   }
 
+  public void nextTurn() {
+    if (hasBuilding()) {
+      building.nextTurn();
+    }
+  }
+
   // WRITE FUNCTIONS \\
 
   @Deprecated
