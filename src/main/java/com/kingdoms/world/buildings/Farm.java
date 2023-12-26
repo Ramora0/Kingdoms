@@ -22,7 +22,7 @@ public class Farm extends Building {
     canvas.fill(Colors.color(247, 182, 62));
     WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
     canvas.fill(player.getColor());
-    WorldDisplayScene.circle(canvas, tile.getX() + 0.5, tile.getY() + 0.5, 1);
+    WorldDisplayScene.circle(canvas, tile.getX() + 0.5, tile.getY() + 0.5, 0.2);
   }
 
   @Override

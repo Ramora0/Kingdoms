@@ -20,7 +20,9 @@ public enum BuildOption {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void buildAt(Player player, int x, int y) {
+      CITY.superBuild(player, x, y);
       Tile tile = World.tiles[x][y];
       tile.build(new City(tile, player));
     }
@@ -30,7 +32,7 @@ public enum BuildOption {
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = FARM.getTileIfAllowed(player, x, y);
 
-      if (tile == null)
+      if (tile == null || !tile.isLand())
         return false;
 
       if (!World.hasAdjacentTile(x, y, (t) -> {
@@ -44,11 +46,13 @@ public enum BuildOption {
       })) {
         return false;
       }
-      return tile.isLand();
+      return true;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void buildAt(Player player, int x, int y) {
+      FARM.superBuild(player, x, y);
       Tile tile = World.tiles[x][y];
       tile.build(new Farm(tile, player));
     }
@@ -80,4 +84,8 @@ public enum BuildOption {
   }
 
   protected abstract void buildAt(Player player, int x, int y);
+
+  private void superBuild(Player player, int x, int y) {
+    player.addResources(-cost);
+  }
 };
