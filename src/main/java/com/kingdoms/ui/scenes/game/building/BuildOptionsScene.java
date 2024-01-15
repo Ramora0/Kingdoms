@@ -1,4 +1,4 @@
-package com.kingdoms.ui.scenes.building;
+package com.kingdoms.ui.scenes.game.building;
 
 import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.Scene;

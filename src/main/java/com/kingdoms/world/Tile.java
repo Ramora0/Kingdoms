@@ -1,9 +1,9 @@
 package com.kingdoms.world;
 
-import com.kingdoms.helpers.Colors;
+import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
-import com.kingdoms.ui.scenes.WorldDisplayScene;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.buildings.Building;
 
 import processing.core.PApplet;
@@ -47,6 +47,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   }
 
   public void display(PApplet canvas) {
+    canvas.stroke(0);
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     WorldDisplayScene.square(canvas, x, y);
 

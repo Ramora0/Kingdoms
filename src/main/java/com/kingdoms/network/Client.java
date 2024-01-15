@@ -11,7 +11,7 @@ import java.util.List;
 import com.kingdoms.helpers.json.JSON;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.ui.UI;
-import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.World;
 
@@ -34,7 +34,7 @@ public class Client extends Network {
     readWorldData();
 
     // Confirm with server that data was received error-free
-    UI.changeScene(new MainScene());
+    UI.changeScene(new GameScene());
   }
 
   @Override

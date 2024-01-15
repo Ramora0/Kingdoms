@@ -9,13 +9,11 @@ public class Soldier extends Troop {
 
   @Override
   public JSONObject toJSON() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
+    return super.mainToJSON();
   }
 
   @Override
   public void fromJSON(JSONObject json) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'fromJSON'");
+    super.mainFromJSON(json);
   }
 }

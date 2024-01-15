@@ -24,3 +24,5 @@ dependency-reduced-pom.xml
 *.jar
 *.war
 *.ear
+
+.fake

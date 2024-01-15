@@ -3,6 +3,7 @@ package com.kingdoms.ui.elements;
 import processing.core.PApplet;
 
 public abstract class UILabel extends UIElement {
+  protected float padding = 10f;
   protected float size;
 
   public abstract String getText();
@@ -11,7 +12,15 @@ public abstract class UILabel extends UIElement {
     super(x, y);
     this.size = size;
 
-    setDimensions(tempLabel, size);
+    setDimensions(tempLabel, size, padding);
+  }
+
+  public void setPadding(float padding) {
+    this.padding = padding;
+  }
+
+  public void setDimensions(String text, float size) {
+    setDimensions(text, size, padding);
   }
 
   public void display(PApplet canvas) {

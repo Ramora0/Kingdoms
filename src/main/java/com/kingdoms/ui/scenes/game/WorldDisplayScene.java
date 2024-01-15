@@ -1,4 +1,4 @@
-package com.kingdoms.ui.scenes;
+package com.kingdoms.ui.scenes.game;
 
 import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.ui.Scene;

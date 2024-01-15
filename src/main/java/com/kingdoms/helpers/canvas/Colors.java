@@ -1,4 +1,4 @@
-package com.kingdoms.helpers;
+package com.kingdoms.helpers.canvas;
 
 import com.kingdoms.Kingdoms;
 

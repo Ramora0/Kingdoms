@@ -88,8 +88,7 @@ public abstract class UIElement {
     this.height = height;
   }
 
-  protected void setDimensions(String text, float size) {
-    float padding = 10;
+  protected void setDimensions(String text, float size, float padding) {
     PApplet canvas = Kingdoms.canvas;
 
     canvas.textSize(size);

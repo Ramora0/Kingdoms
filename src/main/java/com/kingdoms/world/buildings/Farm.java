@@ -1,7 +1,7 @@
 package com.kingdoms.world.buildings;
 
-import com.kingdoms.helpers.Colors;
-import com.kingdoms.ui.scenes.WorldDisplayScene;
+import com.kingdoms.helpers.canvas.Colors;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 
@@ -21,9 +21,8 @@ public class Farm extends Building {
   @Override
   public void display(PApplet canvas) {
     canvas.fill(Colors.color(247, 182, 62));
+    canvas.stroke(player.getColor());
     WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
-    canvas.fill(player.getColor());
-    WorldDisplayScene.circle(canvas, tile.getX() + 0.5, tile.getY() + 0.5, 0.2);
   }
 
   @Override
@@ -33,8 +32,7 @@ public class Farm extends Building {
 
   @Override
   public JSONObject toJSON() {
-    JSONObject json = super.mainToJSON();
-    return json;
+    return super.mainToJSON();
   }
 
   @Override

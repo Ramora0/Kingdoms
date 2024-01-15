@@ -1,6 +1,6 @@
 package com.kingdoms.world.buildings;
 
-import com.kingdoms.ui.scenes.WorldDisplayScene;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 
@@ -25,8 +25,7 @@ public class City extends Building {
 
   @Override
   public JSONObject toJSON() {
-    JSONObject json = super.mainToJSON();
-    return json;
+    return super.mainToJSON();
   }
 
   @Override

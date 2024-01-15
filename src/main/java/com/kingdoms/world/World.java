@@ -1,6 +1,6 @@
 package com.kingdoms.world;
 
-import com.kingdoms.helpers.Colors;
+import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.network.Network;

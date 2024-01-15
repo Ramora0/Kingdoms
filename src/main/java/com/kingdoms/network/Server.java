@@ -13,7 +13,7 @@ import java.util.Enumeration;
 import com.kingdoms.helpers.json.JSON;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.ui.UI;
-import com.kingdoms.ui.scenes.MainScene;
+import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.world.World;
 
 public class Server extends Network {
@@ -35,7 +35,7 @@ public class Server extends Network {
     sendWorldData();
 
     System.out.println("Client is ready!"); // Move to the game
-    UI.changeScene(new MainScene());
+    UI.changeScene(new GameScene());
   }
 
   @Override
