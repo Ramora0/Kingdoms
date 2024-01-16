@@ -1,11 +1,15 @@
 package com.kingdoms.ui.scenes.game;
 
+import com.kingdoms.helpers.events.EventBus.Subscribe;
 import com.kingdoms.network.Network;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
 import com.kingdoms.world.World;
+
+import processing.core.PApplet;
 
 public class GameScene extends WorldDisplayScene {
   public GameScene() {
@@ -15,9 +19,24 @@ public class GameScene extends WorldDisplayScene {
     UIButton build = (UIButton) new UIButton("Build", 10, 60, 30, () -> UI.changeScene(new BuildOptionsScene()))
         .setTopLeft().below(nextTurn, 10);
 
+    UIText resources = (UIText) new UIText(() -> "Resources: " + World.me.getResources(), 1190, 10, 30)
+        .setRight().setTop();
+    UIText otherResources = (UIText) new UIText(() -> "Other: " + World.other.getResources(), 1190, 50, 30)
+        .setRight().below(resources, 0);
+    UIContainer resourcesContainer = new UIContainer(6, resources, otherResources);
+
     addElement(nextTurn);
     addElement(build);
-    addElement(new UIText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
-    addElement(new UIText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
+    addElement(resourcesContainer);
+  }
+
+  @Subscribe
+  public void mousePressed(Object data) {
+    PApplet canvas = (PApplet) data;
+
+    int tx = (int) coordX(canvas.mouseX), ty = (int) coordY(canvas.mouseY);
+    if (World.in(tx, ty)) {
+      UI.changeScene(new BuildingFocusScene(World.tiles[tx][ty]));
+    }
   }
 }

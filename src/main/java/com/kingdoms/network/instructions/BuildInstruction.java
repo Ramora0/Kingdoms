@@ -38,7 +38,6 @@ public class BuildInstruction extends Instruction {
   public JSONObject toJSON() {
     JSONObject json = super.mainToJSON();
     json.setString("option", option.toString());
-    // json.setString("player", player.getID());
     json.setJSONObject("player", player.toReferenceJSON());
     json.setInt("x", x);
     json.setInt("y", y);
@@ -48,7 +47,6 @@ public class BuildInstruction extends Instruction {
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
     option = BuildOption.valueOf(json.getString("option"));
-    // player = World.getPlayer(json.getString("player"));
     player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
     x = json.getInt("x");
     y = json.getInt("y");

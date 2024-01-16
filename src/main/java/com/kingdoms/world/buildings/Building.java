@@ -75,4 +75,9 @@ public abstract class Building implements JSONSerializable {
     BuildingType type = BuildingType.valueOf(json.getString("type"));
     return JSONSerializable.createFromJSON(json, type.buildingClass);
   }
+
+  @Override
+  public String toString() {
+    return type.toString();
+  }
 }

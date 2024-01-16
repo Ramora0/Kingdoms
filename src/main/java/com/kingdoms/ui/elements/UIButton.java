@@ -1,6 +1,6 @@
 package com.kingdoms.ui.elements;
 
-import com.kingdoms.events.EventBus.Subscribe;
+import com.kingdoms.helpers.events.EventBus.Subscribe;
 
 import processing.core.PApplet;
 

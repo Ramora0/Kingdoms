@@ -1,7 +1,7 @@
 package com.kingdoms.ui.scenes.game.building;
 
-import com.kingdoms.events.EventBus.Subscribe;
 import com.kingdoms.helpers.canvas.Constants;
+import com.kingdoms.helpers.events.EventBus.Subscribe;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.Keys;

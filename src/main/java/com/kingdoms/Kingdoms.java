@@ -1,7 +1,7 @@
 package com.kingdoms;
 
-import com.kingdoms.events.EventBus;
 import com.kingdoms.helpers.canvas.Constants;
+import com.kingdoms.helpers.events.EventBus;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.world.World;
@@ -26,9 +26,9 @@ public class Kingdoms extends PApplet {
     UI.init();
 
     // TODO: Have this reference a testing variable so I can turn that off
-    // World.generateWorld(20);
-    // World.tiles[10][10].build(new Farm(World.tiles[10][10], World.me));
-    // UI.changeScene(new GameScene());
+    World.generateWorld(20);
+    World.tiles[10][10].build(new Farm(World.tiles[10][10], World.me));
+    UI.changeScene(new GameScene());
   }
 
   public void draw() {

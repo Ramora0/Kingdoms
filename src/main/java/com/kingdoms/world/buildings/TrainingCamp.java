@@ -4,6 +4,8 @@ import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
+import com.kingdoms.world.World;
+import com.kingdoms.world.troops.Soldier;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -27,7 +29,7 @@ public class TrainingCamp extends Building {
 
   @Override
   public void nextTurn() {
-    player.addResources(100);
+    tile.addTroops(new Soldier(tile, World.me, 10));
   }
 
   @Override

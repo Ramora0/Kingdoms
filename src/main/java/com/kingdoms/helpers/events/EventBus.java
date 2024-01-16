@@ -1,4 +1,4 @@
-package com.kingdoms.events;
+package com.kingdoms.helpers.events;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

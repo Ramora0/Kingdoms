@@ -3,7 +3,7 @@ package com.kingdoms.ui.scenes;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kingdoms.events.EventBus;
+import com.kingdoms.helpers.events.EventBus;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIElement;
 

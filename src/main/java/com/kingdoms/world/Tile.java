@@ -19,18 +19,14 @@ import processing.data.JSONObject;
 public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   List<Troop> troops;
 
-  public Tile(int x, int y, boolean isWater) {
-    this.x = x;
-    this.y = y;
-    this.isWater = isWater;
-
-    troops = new ArrayList<Troop>();
-  }
-
-  // HELPER \\
-
-  @Deprecated
-  public Tile() {
+  public void addTroops(Troop troop) {
+    for (Troop t : troops) {
+      if (t.getType() == troop.getType()) {
+        t.absorb(troop);
+        return;
+      }
+    }
+    troops.add(troop);
   }
 
   int x, y;
@@ -59,6 +55,20 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     return building != null;
   }
 
+  public Tile(int x, int y, boolean isWater) {
+    this.x = x;
+    this.y = y;
+    this.isWater = isWater;
+
+    troops = new ArrayList<Troop>();
+  }
+
+  // HELPER \\
+
+  @Deprecated
+  public Tile() {
+  }
+
   // GAMEPLAY \\
 
   public void nextTurn() {
@@ -82,22 +92,19 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   UIContainer container;
 
   public void addUI() {
-    UIText biomeText = (UIText) new UIText(isWater ? "Water" : "Land",
+    if (!hasBuilding())
+      return;
+
+    UIText buildingText = (UIText) new UIText(building.getType().toString(),
         () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y), 20);
-
-    container = new UIContainer(0, biomeText);
-
-    if (hasBuilding()) {
-      UIText buildingText = (UIText) new UIText(building.getType().toString(),
-          () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y),
-          20).above(biomeText, 5f);
-      container.addChild(buildingText);
-    }
+    container = new UIContainer(0, buildingText);
 
     UI.currentScene.addElement(container);
   }
 
   public void removeUI() {
+    if (container == null)
+      return;
     UI.currentScene.removeElement(container);
     container = null;
   }

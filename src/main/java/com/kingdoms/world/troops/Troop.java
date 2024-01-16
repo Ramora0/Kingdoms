@@ -20,12 +20,27 @@ public abstract class Troop implements JSONSerializable {
 
   TroopType type;
 
+  public TroopType getType() {
+    return type;
+  }
+
   Player player;
   Tile tile;
   int count;
 
-  public Troop(TroopType type) {
+  public int getCount() {
+    return count;
+  }
+
+  public Troop(TroopType type, Tile tile, Player player, int count) {
     this.type = type;
+    this.tile = tile;
+    this.player = player;
+    this.count = count;
+  }
+
+  public void absorb(Troop troop) {
+    count += troop.count;
   }
 
   public static Troop createFromJSON(JSONObject json) {

@@ -3,8 +3,8 @@ package com.kingdoms.ui.elements;
 import java.util.function.Supplier;
 
 import com.kingdoms.Kingdoms;
-import com.kingdoms.events.EventBus;
 import com.kingdoms.helpers.StaticSupplier;
+import com.kingdoms.helpers.events.EventBus;
 
 import processing.core.PApplet;
 
