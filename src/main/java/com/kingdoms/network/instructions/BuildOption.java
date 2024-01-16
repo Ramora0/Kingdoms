@@ -7,6 +7,7 @@ import com.kingdoms.world.buildings.Building;
 import com.kingdoms.world.buildings.Building.BuildingType;
 import com.kingdoms.world.buildings.City;
 import com.kingdoms.world.buildings.Farm;
+import com.kingdoms.world.buildings.TrainingCamp;
 
 /** BuildOption represents a kind of building to build */
 public enum BuildOption {
@@ -22,7 +23,7 @@ public enum BuildOption {
     @Override
     @SuppressWarnings("deprecation")
     protected void buildAt(Player player, int x, int y) {
-      CITY.superBuild(player, x, y);
+      CITY.preBuild(player, x, y);
       Tile tile = World.tiles[x][y];
       tile.build(new City(tile, player));
     }
@@ -35,26 +36,40 @@ public enum BuildOption {
       if (tile == null || !tile.isLand())
         return false;
 
-      if (!World.hasAdjacentTile(x, y, (t) -> {
+      return World.hasAdjacentTile(x, y, (t) -> {
         Building building = t.getBuilding();
-        if (building == null)
-          return false;
-        if (building.getPlayer() != player)
-          return false;
-        return building.getType() == BuildingType.CITY
-            || building.getType() == BuildingType.FARM;
-      })) {
-        return false;
-      }
-      return true;
+        return building != null && building.getPlayer() == player;
+      });
     }
 
     @Override
     @SuppressWarnings("deprecation")
     protected void buildAt(Player player, int x, int y) {
-      FARM.superBuild(player, x, y);
+      FARM.preBuild(player, x, y);
       Tile tile = World.tiles[x][y];
       tile.build(new Farm(tile, player));
+    }
+  },
+  TRAINING_CAMP(200) {
+    @Override
+    public boolean canBuildAt(Player player, int x, int y) {
+      Tile tile = TRAINING_CAMP.getTileIfAllowed(player, x, y);
+
+      if (tile == null || !tile.isLand())
+        return false;
+
+      return World.hasAdjacentTile(x, y, (t) -> {
+        Building building = t.getBuilding();
+        return building != null && building.getPlayer() == player;
+      });
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    protected void buildAt(Player player, int x, int y) {
+      TRAINING_CAMP.preBuild(player, x, y);
+      Tile tile = World.tiles[x][y];
+      tile.build(new TrainingCamp(tile, player));
     }
   };
 
@@ -85,7 +100,7 @@ public enum BuildOption {
 
   protected abstract void buildAt(Player player, int x, int y);
 
-  private void superBuild(Player player, int x, int y) {
+  private void preBuild(Player player, int x, int y) {
     player.addResources(-cost);
   }
 };
