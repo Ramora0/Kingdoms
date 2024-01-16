@@ -24,7 +24,7 @@ public class ClientScene extends Scene {
       once = true;
       return;
     }
-    this.client = new Client("192.168.1.176");
+    this.client = new Client("192.168.1.52");
     Network.setNetwork(client);
     Network.network.initializeWorld();
   }
