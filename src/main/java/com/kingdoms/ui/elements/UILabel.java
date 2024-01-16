@@ -1,5 +1,10 @@
 package com.kingdoms.ui.elements;
 
+import java.util.function.Supplier;
+
+import com.kingdoms.ui.elements.managers.position.DynamicPositionManager;
+import com.kingdoms.ui.elements.managers.position.StaticPositionManager;
+
 import processing.core.PApplet;
 
 public abstract class UILabel extends UIElement {
@@ -9,7 +14,14 @@ public abstract class UILabel extends UIElement {
   public abstract String getText();
 
   public UILabel(String tempLabel, float x, float y, float size) {
-    super(x, y);
+    super(new StaticPositionManager(x, y));
+    this.size = size;
+
+    setDimensions(tempLabel, size, padding);
+  }
+
+  public UILabel(String tempLabel, Supplier<Float> x, Supplier<Float> y, float size) {
+    super(new DynamicPositionManager(x, y));
     this.size = size;
 
     setDimensions(tempLabel, size, padding);

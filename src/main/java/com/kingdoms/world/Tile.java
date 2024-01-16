@@ -5,6 +5,8 @@ import java.util.List;
 import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.ui.UI;
+import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.buildings.Building;
 import com.kingdoms.world.troops.Troop;
@@ -14,7 +16,19 @@ import processing.data.JSONObject;
 
 public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   List<Troop> troops;
-  Building building;
+
+  public Tile(int x, int y, boolean isWater) {
+    this.x = x;
+    this.y = y;
+    this.isWater = isWater;
+  }
+
+  // HELPER \\
+
+  @Deprecated
+  public Tile() {
+  }
+
   int x, y;
 
   public int getX() {
@@ -27,19 +41,11 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   boolean isWater;
 
-  public Tile(int x, int y, boolean isWater) {
-    this.x = x;
-    this.y = y;
-    this.isWater = isWater;
-  }
-
-  @Deprecated
-  public Tile() {
-  }
-
   public boolean isLand() {
     return !isWater;
   }
+
+  Building building;
 
   public Building getBuilding() {
     return building;
@@ -48,6 +54,16 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   public boolean hasBuilding() {
     return building != null;
   }
+
+  // GAMEPLAY \\
+
+  public void nextTurn() {
+    if (hasBuilding()) {
+      building.nextTurn();
+    }
+  }
+
+  // UI \\
 
   public void display(PApplet canvas) {
     canvas.stroke(0);
@@ -59,10 +75,26 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     }
   }
 
-  public void nextTurn() {
-    if (hasBuilding()) {
-      building.nextTurn();
-    }
+  UIText biomeLabel;
+
+  public void addUI() {
+    biomeLabel = (UIText) new UIText(isWater ? "Water" : "Land",
+        () -> WorldDisplayScene.displayX(x), () -> WorldDisplayScene.displayY(y),
+        20);
+    UI.currentScene.addElement(biomeLabel);
+
+    // if (hasBuilding()) {
+    // building.addUI(addElement);
+    // }
+  }
+
+  public void removeUI() {
+    UI.currentScene.removeElement(biomeLabel);
+    biomeLabel = null;
+
+    // if (hasBuilding()) {
+    // building.removeUI(removeElement);
+    // }
   }
 
   // WRITE FUNCTIONS \\
@@ -85,7 +117,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     if (hasBuilding()) {
       json.setJSONObject("building", building.toJSON());
     }
-    //Save list of troops
+    // Save list of troops
     json.setJSONArray("troops", JSONSerializable.toJSONArray(troops));
     return json;
   }

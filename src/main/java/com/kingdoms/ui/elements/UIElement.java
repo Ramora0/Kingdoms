@@ -2,6 +2,7 @@ package com.kingdoms.ui.elements;
 
 import com.kingdoms.Kingdoms;
 import com.kingdoms.events.EventBus;
+import com.kingdoms.ui.elements.managers.Managers.PositionManager;
 
 import processing.core.PApplet;
 
@@ -18,17 +19,16 @@ public abstract class UIElement {
 
   YAlignment yAlignment = YAlignment.CENTER;
 
-  private float x, y;
-  float width, height;
+  protected PositionManager position;
 
   public float getX() {
     switch (xAlignment) {
       case LEFT:
-        return x;
+        return position.baseGetX();
       case CENTER:
-        return x - width / 2;
+        return position.baseGetX() - width / 2;
       case RIGHT:
-        return x - width;
+        return position.baseGetX() - width;
     }
     return Float.NaN;
   }
@@ -36,18 +36,28 @@ public abstract class UIElement {
   public float getY() {
     switch (yAlignment) {
       case TOP:
-        return y;
+        return position.baseGetY();
       case CENTER:
-        return y - height / 2;
+        return position.baseGetY() - height / 2;
       case BOTTOM:
-        return y - height;
+        return position.baseGetY() - height;
     }
     return Float.NaN;
   }
 
-  public UIElement(float x, float y) {
-    this.x = x;
-    this.y = y;
+  float width, height;
+
+  public float getWidth() {
+    return width;
+  }
+
+  public float getHeight() {
+    return height;
+  }
+
+  public UIElement(PositionManager position) {
+    this.position = position;
+    
     EventBus.register(this);
   }
 
@@ -80,30 +90,6 @@ public abstract class UIElement {
   public UIElement setBottomRight() {
     setRight();
     setBottom();
-    return this;
-  }
-
-  public UIElement below(UIElement element, float padding) {
-    y = element.getY() + element.height + padding;
-    setTop();
-    return this;
-  }
-
-  public UIElement above(UIElement element, float padding) {
-    y = element.getY() - padding;
-    setBottom();
-    return this;
-  }
-
-  public UIElement left(UIElement element, float padding) {
-    x = element.getX() - padding;
-    setRight();
-    return this;
-  }
-
-  public UIElement right(UIElement element, float padding) {
-    x = element.getX() + element.width + padding;
-    setLeft();
     return this;
   }
 

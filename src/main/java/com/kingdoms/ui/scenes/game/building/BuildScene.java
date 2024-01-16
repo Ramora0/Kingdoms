@@ -30,8 +30,11 @@ public class BuildScene extends WorldDisplayScene {
   public void display(PApplet canvas) {
     super.display(canvas);
 
-    int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
-    int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
+    int x = (int) Math.floor(WorldDisplayScene.coordX(canvas.mouseX));
+    int y = (int) Math.floor(WorldDisplayScene.coordY(canvas.mouseY));
+
+    if (!World.in(x, y))
+      return;
 
     canvas.pushStyle();
     canvas.stroke(World.me.getColor());
