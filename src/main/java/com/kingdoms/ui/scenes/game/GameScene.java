@@ -7,6 +7,7 @@ import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
+import com.kingdoms.ui.scenes.game.focus.BuildingFocusScene;
 import com.kingdoms.world.World;
 
 import processing.core.PApplet;
@@ -35,7 +36,7 @@ public class GameScene extends WorldDisplayScene {
     PApplet canvas = (PApplet) data;
 
     int tx = (int) coordX(canvas.mouseX), ty = (int) coordY(canvas.mouseY);
-    if (World.in(tx, ty)) {
+    if (World.in(tx, ty) && World.tiles[tx][ty].getBuilding() != null) {
       UI.changeScene(new BuildingFocusScene(World.tiles[tx][ty]));
     }
   }

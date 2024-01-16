@@ -35,6 +35,10 @@ public abstract class UIElement {
     return Float.NaN;
   }
 
+  public void setX(float x) {
+    this.x = new StaticSupplier<Float>(x);
+  }
+
   public boolean staticX() {
     return x instanceof StaticSupplier;
   }
@@ -51,6 +55,10 @@ public abstract class UIElement {
     return Float.NaN;
   }
 
+  public void setY(float y) {
+    this.y = new StaticSupplier<Float>(y);
+  }
+
   public boolean staticY() {
     return y instanceof StaticSupplier;
   }
@@ -61,8 +69,23 @@ public abstract class UIElement {
     return width.get();
   }
 
+  public void setWidth(float width) {
+    this.width = new StaticSupplier<Float>(width);
+  }
+
   public float getHeight() {
     return height.get();
+  }
+
+  public void setHeight(float height) {
+    this.height = new StaticSupplier<Float>(height);
+  }
+
+  public void setBounds(float x, float y, float width, float height) {
+    this.x = new StaticSupplier<Float>(x);
+    this.y = new StaticSupplier<Float>(y);
+    this.width = new StaticSupplier<Float>(width);
+    this.height = new StaticSupplier<Float>(height);
   }
 
   // When you need to manually calculate x, y, width, and height or they dont

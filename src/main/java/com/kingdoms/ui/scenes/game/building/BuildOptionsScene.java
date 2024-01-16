@@ -4,6 +4,7 @@ import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.scenes.Scene;
+import com.kingdoms.ui.scenes.game.GameScene;
 
 public class BuildOptionsScene extends Scene {
   public BuildOptionsScene() {
@@ -15,11 +16,14 @@ public class BuildOptionsScene extends Scene {
     UIButton farmButton = (UIButton) new UIButton("Farm", 10, 60, 40,
         () -> UI.changeScene(new BuildScene(BuildOption.FARM)))
         .setTopLeft().below(cityButton, 10);
-    UIButton trainingCampButton = (UIButton) new UIButton("Training Camp", 10,
-    60, 40,
-    () -> UI.changeScene(new BuildScene(BuildOption.TRAINING_CAMP)))
-    .setTopLeft().below(farmButton, 10);
+    UIButton trainingCampButton = (UIButton) new UIButton("Training Camp", 10, 60, 40,
+        () -> UI.changeScene(new BuildScene(BuildOption.TRAINING_CAMP)))
+        .setTopLeft().below(farmButton, 10);
 
+    UIButton close = (UIButton) new UIButton("X", 1190, 10, 50, () -> UI.changeScene(new GameScene()))
+        .setTop().setRight();
+
+    addElement(close);
     addElement(cityButton);
     addElement(farmButton);
     addElement(trainingCampButton);
