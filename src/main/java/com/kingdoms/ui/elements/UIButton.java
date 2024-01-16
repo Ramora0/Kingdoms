@@ -15,7 +15,7 @@ public class UIButton extends UIElement {
     this.size = size;
     this.listener = listener;
 
-    setDimensions(text, size);
+    setDimensions(text, size, 10f);
   }
 
   public void display(PApplet canvas) {
