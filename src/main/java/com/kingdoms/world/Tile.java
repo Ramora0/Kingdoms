@@ -1,5 +1,6 @@
 package com.kingdoms.world;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kingdoms.helpers.canvas.Colors;
@@ -22,6 +23,8 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     this.x = x;
     this.y = y;
     this.isWater = isWater;
+
+    troops = new ArrayList<Troop>();
   }
 
   // HELPER \\
