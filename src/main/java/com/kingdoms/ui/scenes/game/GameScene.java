@@ -3,7 +3,7 @@ package com.kingdoms.ui.scenes.game;
 import com.kingdoms.network.Network;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
-import com.kingdoms.ui.elements.UIDynamicText;
+import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
 import com.kingdoms.world.World;
 
@@ -17,7 +17,7 @@ public class GameScene extends WorldDisplayScene {
 
     addElement(nextTurn);
     addElement(build);
-    addElement(new UIDynamicText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
-    addElement(new UIDynamicText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
+    addElement(new UIText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
+    addElement(new UIText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
   }
 }
