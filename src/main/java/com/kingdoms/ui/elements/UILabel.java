@@ -3,7 +3,7 @@ package com.kingdoms.ui.elements;
 import processing.core.PApplet;
 
 public abstract class UILabel extends UIElement {
-  protected float padding = 10f;
+  protected float padding = 7;
   protected float size;
 
   public abstract String getText();
@@ -28,6 +28,6 @@ public abstract class UILabel extends UIElement {
 
     canvas.textSize(size);
     canvas.fill(0);
-    canvas.text(getText(), x, y);
+    canvas.text(getText(), x + width / 2, y + height / 2 - canvas.textDescent() + 3);
   }
 }

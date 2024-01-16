@@ -25,14 +25,13 @@ public class Kingdoms extends PApplet {
     UI.init();
 
     // TODO: Have this reference a testing variable so I can turn that off
-    // World.generateWorld(20);
-    // UI.changeScene(new GameScene());
+    World.generateWorld(20);
+    UI.changeScene(new GameScene());
   }
 
   public void draw() {
     background(255);
-    textAlign(LEFT, TOP);
-    // translate(600, 400);
+    textAlign(CENTER, CENTER);
     UI.display(canvas);
   }
 

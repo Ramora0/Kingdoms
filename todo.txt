@@ -1,4 +1,2 @@
 UI:
 Dynamic button 4 ready 4 next turn
-Place UIElements in relation other UIElements
-

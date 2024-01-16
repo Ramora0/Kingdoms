@@ -9,12 +9,15 @@ public class BuildOptionsScene extends Scene {
   public BuildOptionsScene() {
     super();
 
-    elements.add(
-        new UIButton("City", 10, 10, 40, () -> UI.changeScene(new BuildScene(BuildOption.CITY)))
-            .setTopLeft());
-    elements.add(
-        new UIButton("Farm", 10, 60, 40, () -> UI.changeScene(new BuildScene(BuildOption.FARM)))
-            .setTopLeft());
+    UIButton cityButton = (UIButton) new UIButton("City", 10, 10, 40,
+        () -> UI.changeScene(new BuildScene(BuildOption.CITY)))
+        .setTopLeft();
+    UIButton farmButton = (UIButton) new UIButton("Farm", 10, 60, 40,
+        () -> UI.changeScene(new BuildScene(BuildOption.FARM)))
+        .setTopLeft().below(cityButton, 10);
+
+    elements.add(cityButton);
+    elements.add(farmButton);
   }
 
 }

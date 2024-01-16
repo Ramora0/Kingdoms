@@ -30,7 +30,7 @@ public abstract class UIElement {
       case RIGHT:
         return x - width;
     }
-    return 0;
+    return Float.NaN;
   }
 
   public float getY() {
@@ -42,7 +42,7 @@ public abstract class UIElement {
       case BOTTOM:
         return y - height;
     }
-    return 0;
+    return Float.NaN;
   }
 
   public UIElement(float x, float y) {
@@ -83,9 +83,33 @@ public abstract class UIElement {
     return this;
   }
 
-  protected void setDimensions(float width, float height) {
-    this.width = width;
-    this.height = height;
+  public UIElement below(UIElement element, float padding) {
+    y = element.getY() + element.height + padding;
+    setTop();
+    return this;
+  }
+
+  public UIElement above(UIElement element, float padding) {
+    y = element.getY() - padding;
+    setBottom();
+    return this;
+  }
+
+  public UIElement left(UIElement element, float padding) {
+    x = element.getX() - padding;
+    setRight();
+    return this;
+  }
+
+  public UIElement right(UIElement element, float padding) {
+    x = element.getX() + element.width + padding;
+    setLeft();
+    return this;
+  }
+
+  protected void setDimensions(float width, float height, float padding) {
+    this.width = width + 2 * padding;
+    this.height = height + 2 * padding;
   }
 
   protected void setDimensions(String text, float size, float padding) {
@@ -93,10 +117,10 @@ public abstract class UIElement {
 
     canvas.textSize(size);
 
-    float textWidth = canvas.textWidth(text) + padding;
-    float textHeight = canvas.textAscent() + canvas.textDescent() + padding;
+    float textWidth = canvas.textWidth(text);
+    float textHeight = canvas.textAscent() + canvas.textDescent();
 
-    setDimensions(textWidth, textHeight);
+    setDimensions(textWidth, textHeight, padding);
   }
 
   public boolean isInBounds(float x, float y) {
