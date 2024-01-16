@@ -6,6 +6,7 @@ import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.world.World;
 import com.kingdoms.world.buildings.Farm;
+import com.kingdoms.world.troops.Soldier;
 
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -28,6 +29,7 @@ public class Kingdoms extends PApplet {
     // TODO: Have this reference a testing variable so I can turn that off
     World.generateWorld(20);
     World.tiles[10][10].build(new Farm(World.tiles[10][10], World.me));
+    World.tiles[10][10].addTroops(new Soldier(World.tiles[10][10], World.me, 10));
     UI.changeScene(new GameScene());
   }
 

@@ -63,4 +63,9 @@ public abstract class Troop implements JSONSerializable {
     player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("tile"), Tile.class);
   }
+
+  @Override
+  public String toString() {
+    return count + " " + type.toString() + "s";
+  }
 }

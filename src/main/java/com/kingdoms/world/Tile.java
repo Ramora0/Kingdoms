@@ -29,6 +29,10 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     troops.add(troop);
   }
 
+  public List<Troop> getTroops() {
+    return troops;
+  }
+
   int x, y;
 
   public int getX() {
