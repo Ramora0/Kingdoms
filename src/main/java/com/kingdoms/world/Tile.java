@@ -1,25 +1,20 @@
 package com.kingdoms.world;
 
+import java.util.List;
+
 import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.buildings.Building;
+import com.kingdoms.world.troops.Troop;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
+  List<Troop> troops;
   Building building;
-
-  public Building getBuilding() {
-    return building;
-  }
-
-  public boolean hasBuilding() {
-    return building != null;
-  }
-
   int x, y;
 
   public int getX() {
@@ -44,6 +39,14 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   public boolean isLand() {
     return !isWater;
+  }
+
+  public Building getBuilding() {
+    return building;
+  }
+
+  public boolean hasBuilding() {
+    return building != null;
   }
 
   public void display(PApplet canvas) {
@@ -82,6 +85,8 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     if (hasBuilding()) {
       json.setJSONObject("building", building.toJSON());
     }
+    //Save list of troops
+    json.setJSONArray("troops", JSONSerializable.toJSONArray(troops));
     return json;
   }
 
@@ -94,6 +99,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
       building = Building.createFromJSON(json.getJSONObject("building"));
       building.setTile(this);
     }
+    troops = JSONSerializable.createFromJSONArray(json.getJSONArray("troops"), Troop.class);
   }
 
   @Override

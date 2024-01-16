@@ -15,9 +15,9 @@ public class GameScene extends WorldDisplayScene {
     UIButton build = (UIButton) new UIButton("Build", 10, 60, 30, () -> UI.changeScene(new BuildOptionsScene()))
         .setTopLeft().below(nextTurn, 10);
 
-    elements.add(nextTurn);
-    elements.add(build);
-    elements.add(new UIDynamicText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
-    elements.add(new UIDynamicText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
+    addElement(nextTurn);
+    addElement(build);
+    addElement(new UIDynamicText(() -> "Me: " + World.me.getResources(), 1190, 10, 30).setRight().setTop());
+    addElement(new UIDynamicText(() -> "Other: " + World.other.getResources(), 1190, 50, 30).setRight().setTop());
   }
 }

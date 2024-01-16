@@ -2,8 +2,8 @@ package com.kingdoms.ui.scenes.network;
 
 import com.kingdoms.network.Client;
 import com.kingdoms.network.Network;
-import com.kingdoms.ui.Scene;
 import com.kingdoms.ui.elements.UIText;
+import com.kingdoms.ui.scenes.Scene;
 
 import processing.core.PApplet;
 
@@ -12,7 +12,7 @@ public class ClientScene extends Scene {
 
   public ClientScene() {
     super();
-    elements.add(new UIText("Connecting to server...", 600, 400, 40));
+    addElement(new UIText("Connecting to server...", 600, 400, 40));
   }
 
   boolean once = false;

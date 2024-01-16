@@ -22,8 +22,8 @@ public class BuildScene extends WorldDisplayScene {
     this.option = option;
     String buildingName = option.toString().substring(0, 1).toUpperCase()
         + option.toString().substring(1).toLowerCase();
-    elements.add(new UIText("Building: " + buildingName, 10, 10, 30).setTopLeft());
-    elements.add(
+    addElement(new UIText("Building: " + buildingName, 10, 10, 30).setTopLeft());
+    addElement(
         new UIButton("X", Constants.width - 10, 10, 30, () -> UI.changeScene(new GameScene())).setTop().setRight());
   }
 

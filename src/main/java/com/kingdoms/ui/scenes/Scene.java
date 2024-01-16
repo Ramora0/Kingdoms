@@ -1,4 +1,4 @@
-package com.kingdoms.ui;
+package com.kingdoms.ui.scenes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.kingdoms.ui.elements.UIElement;
 import processing.core.PApplet;
 
 public abstract class Scene {
-  protected List<UIElement> elements;
+  private List<UIElement> elements;
 
   public Scene() {
     EventBus.register(this);
@@ -20,6 +20,15 @@ public abstract class Scene {
     for (UIElement element : elements) {
       element.display(canvas);
     }
+  }
+
+  public void addElement(UIElement element) {
+    elements.add(element);
+  }
+
+  public void removeElement(UIElement element) {
+    element.kill();
+    elements.remove(element);
   }
 
   public void kill() {

@@ -1,9 +1,9 @@
 package com.kingdoms.ui.scenes.game.building;
 
 import com.kingdoms.network.instructions.BuildOption;
-import com.kingdoms.ui.Scene;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.scenes.Scene;
 
 public class BuildOptionsScene extends Scene {
   public BuildOptionsScene() {
@@ -16,8 +16,8 @@ public class BuildOptionsScene extends Scene {
         () -> UI.changeScene(new BuildScene(BuildOption.FARM)))
         .setTopLeft().below(cityButton, 10);
 
-    elements.add(cityButton);
-    elements.add(farmButton);
+    addElement(cityButton);
+    addElement(farmButton);
   }
 
 }

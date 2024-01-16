@@ -1,5 +1,6 @@
 package com.kingdoms.ui;
 
+import com.kingdoms.ui.scenes.Scene;
 import com.kingdoms.ui.scenes.network.OpeningScene;
 
 import processing.core.PApplet;

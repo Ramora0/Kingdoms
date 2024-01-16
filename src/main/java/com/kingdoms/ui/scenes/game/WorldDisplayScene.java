@@ -1,8 +1,8 @@
 package com.kingdoms.ui.scenes.game;
 
 import com.kingdoms.helpers.math.Vector;
-import com.kingdoms.ui.Scene;
 import com.kingdoms.ui.UI;
+import com.kingdoms.ui.scenes.Scene;
 import com.kingdoms.world.World;
 
 import processing.core.PApplet;
