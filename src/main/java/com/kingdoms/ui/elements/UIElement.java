@@ -1,8 +1,10 @@
 package com.kingdoms.ui.elements;
 
+import java.util.function.Supplier;
+
 import com.kingdoms.Kingdoms;
 import com.kingdoms.events.EventBus;
-import com.kingdoms.ui.elements.managers.Managers.PositionManager;
+import com.kingdoms.helpers.StaticSupplier;
 
 import processing.core.PApplet;
 
@@ -19,16 +21,16 @@ public abstract class UIElement {
 
   YAlignment yAlignment = YAlignment.CENTER;
 
-  protected PositionManager position;
+  protected Supplier<Float> x, y;
 
   public float getX() {
     switch (xAlignment) {
       case LEFT:
-        return position.baseGetX();
+        return x.get();
       case CENTER:
-        return position.baseGetX() - width / 2;
+        return x.get() - width / 2;
       case RIGHT:
-        return position.baseGetX() - width;
+        return x.get() - width;
     }
     return Float.NaN;
   }
@@ -36,11 +38,11 @@ public abstract class UIElement {
   public float getY() {
     switch (yAlignment) {
       case TOP:
-        return position.baseGetY();
+        return y.get();
       case CENTER:
-        return position.baseGetY() - height / 2;
+        return y.get() - height / 2;
       case BOTTOM:
-        return position.baseGetY() - height;
+        return y.get() - height;
     }
     return Float.NaN;
   }
@@ -55,9 +57,10 @@ public abstract class UIElement {
     return height;
   }
 
-  public UIElement(PositionManager position) {
-    this.position = position;
-    
+  public UIElement(Supplier<Float> x, Supplier<Float> y) {
+    this.x = x;
+    this.y = y;
+
     EventBus.register(this);
   }
 
@@ -91,6 +94,53 @@ public abstract class UIElement {
     setRight();
     setBottom();
     return this;
+  }
+
+  public UIElement below(UIElement element, float padding) {
+    try {
+      getStatic(y).set(element.y.get() + element.getHeight() + padding);
+      setTop();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return this;
+  }
+
+  public UIElement above(UIElement element, float padding) {
+    try {
+      getStatic(y).set(element.y.get() - padding);
+      setBottom();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return this;
+  }
+
+  public UIElement rightOf(UIElement element, float padding) {
+    try {
+      getStatic(x).set(element.x.get() + element.getWidth() + padding);
+      setLeft();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return this;
+  }
+
+  public UIElement leftOf(UIElement element, float padding) {
+    try {
+      getStatic(x).set(element.x.get() - padding);
+      setRight();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return this;
+  }
+
+  public <T> StaticSupplier<T> getStatic(Supplier<T> supplier) {
+    if (supplier instanceof StaticSupplier) {
+      return (StaticSupplier<T>) supplier;
+    }
+    throw new IllegalArgumentException("Supplier is not a StaticSupplier");
   }
 
   protected void setDimensions(float width, float height, float padding) {
