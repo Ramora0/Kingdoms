@@ -6,6 +6,7 @@ import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
+import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.buildings.Building;
@@ -75,13 +76,16 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     }
   }
 
-  UIText biomeLabel;
+  UIContainer container;
 
   public void addUI() {
-    biomeLabel = (UIText) new UIText(isWater ? "Water" : "Land",
-        () -> WorldDisplayScene.displayX(x), () -> WorldDisplayScene.displayY(y),
+    UIText biomeText = (UIText) new UIText(isWater ? "Water" : "Land",
+        () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y),
         20);
-    UI.currentScene.addElement(biomeLabel);
+
+    container = new UIContainer(0, biomeText);
+
+    UI.currentScene.addElement(container);
 
     // if (hasBuilding()) {
     // building.addUI(addElement);
@@ -89,8 +93,8 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   }
 
   public void removeUI() {
-    UI.currentScene.removeElement(biomeLabel);
-    biomeLabel = null;
+    UI.currentScene.removeElement(container);
+    container = null;
 
     // if (hasBuilding()) {
     // building.removeUI(removeElement);

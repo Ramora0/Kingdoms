@@ -7,6 +7,11 @@ import processing.core.PApplet;
 
 public class UIContainer extends UIElement {
   List<UIElement> children;
+
+  public List<UIElement> getChildren() {
+    return children;
+  }
+
   float padding;
 
   public UIContainer(float padding, UIElement... elements) {
@@ -27,6 +32,20 @@ public class UIContainer extends UIElement {
       }
       return minY - padding;
     };
+    width = () -> {
+      float maxX = Float.MIN_VALUE;
+      for (UIElement element : children) {
+        maxX = Math.max(maxX, element.getX() + element.getWidth());
+      }
+      return maxX - x.get() + padding;
+    };
+    height = () -> {
+      float maxY = Float.MIN_VALUE;
+      for (UIElement element : children) {
+        maxY = Math.max(maxY, element.getY() + element.getHeight());
+      }
+      return maxY - y.get() + padding;
+    };
 
     this.children = new ArrayList<>();
     for (UIElement element : elements) {
@@ -36,7 +55,18 @@ public class UIContainer extends UIElement {
 
   @Override
   public void display(PApplet canvas) {
-    throw new UnsupportedOperationException("Unimplemented method 'display'");
+    canvas.fill(255);
+    canvas.rect(x.get(), y.get(), width.get(), height.get(), 10);
+    for (UIElement element : children) {
+      element.display(canvas);
+    }
   }
 
+  @Override
+  public void kill() {
+    for (UIElement element : children) {
+      element.kill();
+    }
+    super.kill();
+  }
 }
