@@ -18,6 +18,7 @@ public abstract class Scene {
   }
 
   public void display(PApplet canvas) {
+    canvas.strokeWeight(1);
     for (int i = elements.size() - 1; i >= 0; i--) {
       elements.get(i).display(canvas);
     }

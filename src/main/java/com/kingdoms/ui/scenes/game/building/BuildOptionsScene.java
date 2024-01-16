@@ -15,9 +15,13 @@ public class BuildOptionsScene extends Scene {
     UIButton farmButton = (UIButton) new UIButton("Farm", 10, 60, 40,
         () -> UI.changeScene(new BuildScene(BuildOption.FARM)))
         .setTopLeft().below(cityButton, 10);
+    // UIButton trainingCampButton = (UIButton) new UIButton("Training Camp", 10,
+    // 60, 40,
+    // () -> UI.changeScene(new BuildScene(BuildOption.TRAINING_CAMP)))
+    // .setTopLeft().below(farmButton, 10);
 
     addElement(cityButton);
     addElement(farmButton);
+    // addElement(trainingCampButton);
   }
-
 }

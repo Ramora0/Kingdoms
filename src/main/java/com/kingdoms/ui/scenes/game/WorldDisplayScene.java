@@ -72,6 +72,7 @@ public abstract class WorldDisplayScene extends Scene {
   }
 
   public static void square(PApplet canvas, double x, double y) {
+    canvas.strokeWeight(scale / 100);
     canvas.square(displayX(x), displayY(y), (float) scale);
   }
 

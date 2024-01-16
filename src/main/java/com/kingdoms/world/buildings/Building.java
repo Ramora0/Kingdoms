@@ -11,7 +11,8 @@ import processing.data.JSONObject;
 public abstract class Building implements JSONSerializable {
   public enum BuildingType {
     CITY(City.class),
-    FARM(Farm.class);
+    FARM(Farm.class),
+    TRAINING_CAMP(TrainingCamp.class),;
 
     public final Class<? extends Building> buildingClass;
 

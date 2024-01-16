@@ -97,10 +97,6 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   public void removeUI() {
     UI.currentScene.removeElement(container);
     container = null;
-
-    // if (hasBuilding()) {
-    // building.removeUI(removeElement);
-    // }
   }
 
   // WRITE FUNCTIONS \\
