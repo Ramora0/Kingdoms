@@ -28,9 +28,9 @@ public abstract class UIElement {
       case LEFT:
         return x.get();
       case CENTER:
-        return x.get() - width / 2;
+        return x.get() - width.get() / 2;
       case RIGHT:
-        return x.get() - width;
+        return x.get() - width.get();
     }
     return Float.NaN;
   }
@@ -40,26 +40,39 @@ public abstract class UIElement {
       case TOP:
         return y.get();
       case CENTER:
-        return y.get() - height / 2;
+        return y.get() - height.get() / 2;
       case BOTTOM:
-        return y.get() - height;
+        return y.get() - height.get();
     }
     return Float.NaN;
   }
 
-  float width, height;
+  Supplier<Float> width, height;
 
   public float getWidth() {
-    return width;
+    return width.get();
   }
 
   public float getHeight() {
-    return height;
+    return height.get();
   }
 
+  // When you need to manually calculate x, y, width, and height
+  public UIElement() {
+    this.x = new StaticSupplier<>(Float.NaN);
+    this.y = new StaticSupplier<>(Float.NaN);
+    this.width = new StaticSupplier<>(Float.NaN);
+    this.height = new StaticSupplier<>(Float.NaN);
+
+    EventBus.register(this);
+  }
+
+  // When the width and height are static and to be calculated
   public UIElement(Supplier<Float> x, Supplier<Float> y) {
     this.x = x;
     this.y = y;
+    this.width = new StaticSupplier<>(Float.NaN);
+    this.height = new StaticSupplier<>(Float.NaN);
 
     EventBus.register(this);
   }
@@ -96,9 +109,9 @@ public abstract class UIElement {
     return this;
   }
 
-  public UIElement below(UIElement element, float padding) {
+  public UIElement below(UIElement element, float margin) {
     try {
-      getStatic(y).set(element.y.get() + element.getHeight() + padding);
+      getStatic(y).set(element.y.get() + element.getHeight() + margin);
       setTop();
     } catch (Exception e) {
       e.printStackTrace();
@@ -106,9 +119,9 @@ public abstract class UIElement {
     return this;
   }
 
-  public UIElement above(UIElement element, float padding) {
+  public UIElement above(UIElement element, float margin) {
     try {
-      getStatic(y).set(element.y.get() - padding);
+      getStatic(y).set(element.y.get() - margin);
       setBottom();
     } catch (Exception e) {
       e.printStackTrace();
@@ -116,9 +129,9 @@ public abstract class UIElement {
     return this;
   }
 
-  public UIElement rightOf(UIElement element, float padding) {
+  public UIElement rightOf(UIElement element, float margin) {
     try {
-      getStatic(x).set(element.x.get() + element.getWidth() + padding);
+      getStatic(x).set(element.x.get() + element.getWidth() + margin);
       setLeft();
     } catch (Exception e) {
       e.printStackTrace();
@@ -126,14 +139,50 @@ public abstract class UIElement {
     return this;
   }
 
-  public UIElement leftOf(UIElement element, float padding) {
+  public UIElement leftOf(UIElement element, float margin) {
     try {
-      getStatic(x).set(element.x.get() - padding);
+      getStatic(x).set(element.x.get() - margin);
       setRight();
     } catch (Exception e) {
       e.printStackTrace();
     }
     return this;
+  }
+
+  protected void setDimensions(float width, float height, float padding) {
+    try {
+      this.width = new StaticSupplier<>(width + 2 * padding);
+      this.height = new StaticSupplier<>(height + 2 * padding);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  protected void setDimensions(String text, float size, float padding) {
+    PApplet canvas = Kingdoms.canvas;
+
+    canvas.textSize(size);
+
+    float textWidth = canvas.textWidth(text);
+    float textHeight = canvas.textAscent();
+
+    setDimensions(textWidth, textHeight, padding);
+  }
+
+  protected float getWidth(String text, float size, float padding) {
+    PApplet canvas = Kingdoms.canvas;
+    canvas.textSize(size);
+
+    float textWidth = canvas.textWidth(text);
+    return textWidth + 2 * padding;
+  }
+
+  protected float getHeight(float size, float padding) {
+    PApplet canvas = Kingdoms.canvas;
+    canvas.textSize(size);
+
+    float textHeight = canvas.textAscent();
+    return textHeight + 2 * padding;
   }
 
   public <T> StaticSupplier<T> getStatic(Supplier<T> supplier) {
@@ -143,24 +192,8 @@ public abstract class UIElement {
     throw new IllegalArgumentException("Supplier is not a StaticSupplier");
   }
 
-  protected void setDimensions(float width, float height, float padding) {
-    this.width = width + 2 * padding;
-    this.height = height + 2 * padding;
-  }
-
-  protected void setDimensions(String text, float size, float padding) {
-    PApplet canvas = Kingdoms.canvas;
-
-    canvas.textSize(size);
-
-    float textWidth = canvas.textWidth(text);
-    float textHeight = canvas.textAscent() + canvas.textDescent();
-
-    setDimensions(textWidth, textHeight, padding);
-  }
-
   public boolean isInBounds(float x, float y) {
-    return x >= getX() && x <= getX() + width && y >= getY() && y <= getY() + height;
+    return x >= getX() && x <= getX() + width.get() && y >= getY() && y <= getY() + height.get();
   }
 
   public abstract void display(PApplet canvas);

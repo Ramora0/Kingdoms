@@ -20,10 +20,11 @@ public class UIButton extends UIText {
     if (isInBounds(canvas.mouseX, canvas.mouseY)) {
       float mouseIncrease = 3f;
       canvas.fill(230);
-      canvas.rect(x - mouseIncrease, y - mouseIncrease, width + mouseIncrease * 2, height + mouseIncrease * 2, 10);
+      canvas.rect(x - mouseIncrease, y - mouseIncrease, width.get() + mouseIncrease * 2,
+          height.get() + mouseIncrease * 2, 10);
     } else {
       canvas.fill(255);
-      canvas.rect(x, y, width, height, 10);
+      canvas.rect(x, y, width.get(), height.get(), 10);
     }
 
     super.display(canvas);
