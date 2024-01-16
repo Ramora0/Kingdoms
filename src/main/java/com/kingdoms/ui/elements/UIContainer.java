@@ -1,21 +1,12 @@
 package com.kingdoms.ui.elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import processing.core.PApplet;
 
-public class UIContainer extends UIElement {
-  List<UIElement> children;
-
-  public List<UIElement> getChildren() {
-    return children;
-  }
-
+public class UIContainer extends UIGroup {
   float padding;
 
   public UIContainer(float padding, UIElement... elements) {
-    super(() -> 0f, () -> 0f);
+    super(elements);
     this.padding = padding;
 
     x = () -> {
@@ -46,27 +37,12 @@ public class UIContainer extends UIElement {
       }
       return maxY - y.get() + padding;
     };
-
-    this.children = new ArrayList<>();
-    for (UIElement element : elements) {
-      this.children.add(element);
-    }
   }
 
   @Override
   public void display(PApplet canvas) {
     canvas.fill(255);
     canvas.rect(x.get(), y.get(), width.get(), height.get(), 10);
-    for (UIElement element : children) {
-      element.display(canvas);
-    }
-  }
-
-  @Override
-  public void kill() {
-    for (UIElement element : children) {
-      element.kill();
-    }
-    super.kill();
+    super.display(canvas);
   }
 }

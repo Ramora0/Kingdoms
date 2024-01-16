@@ -80,16 +80,18 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   public void addUI() {
     UIText biomeText = (UIText) new UIText(isWater ? "Water" : "Land",
-        () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y),
-        20);
+        () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y), 20);
 
     container = new UIContainer(0, biomeText);
 
-    UI.currentScene.addElement(container);
+    if (hasBuilding()) {
+      UIText buildingText = (UIText) new UIText(building.getType().toString(),
+          () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y),
+          20).above(biomeText, 5f);
+      container.addChild(buildingText);
+    }
 
-    // if (hasBuilding()) {
-    // building.addUI(addElement);
-    // }
+    UI.currentScene.addElement(container);
   }
 
   public void removeUI() {

@@ -35,6 +35,10 @@ public abstract class UIElement {
     return Float.NaN;
   }
 
+  public boolean staticX() {
+    return x instanceof StaticSupplier;
+  }
+
   public float getY() {
     switch (yAlignment) {
       case TOP:
@@ -47,6 +51,10 @@ public abstract class UIElement {
     return Float.NaN;
   }
 
+  public boolean staticY() {
+    return y instanceof StaticSupplier;
+  }
+
   Supplier<Float> width, height;
 
   public float getWidth() {
@@ -57,13 +65,9 @@ public abstract class UIElement {
     return height.get();
   }
 
-  // When you need to manually calculate x, y, width, and height
+  // When you need to manually calculate x, y, width, and height or they dont
+  // exist
   public UIElement() {
-    this.x = new StaticSupplier<>(Float.NaN);
-    this.y = new StaticSupplier<>(Float.NaN);
-    this.width = new StaticSupplier<>(Float.NaN);
-    this.height = new StaticSupplier<>(Float.NaN);
-
     EventBus.register(this);
   }
 
@@ -71,8 +75,6 @@ public abstract class UIElement {
   public UIElement(Supplier<Float> x, Supplier<Float> y) {
     this.x = x;
     this.y = y;
-    this.width = new StaticSupplier<>(Float.NaN);
-    this.height = new StaticSupplier<>(Float.NaN);
 
     EventBus.register(this);
   }
@@ -110,52 +112,44 @@ public abstract class UIElement {
   }
 
   public UIElement below(UIElement element, float margin) {
-    try {
-      getStatic(y).set(element.y.get() + element.getHeight() + margin);
-      setTop();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    if (element.staticY())
+      y = new StaticSupplier<>(element.y.get() + element.getHeight() + margin);
+    else
+      y = () -> element.y.get() + element.getHeight() + margin;
+    setTop();
     return this;
   }
 
   public UIElement above(UIElement element, float margin) {
-    try {
-      getStatic(y).set(element.y.get() - margin);
-      setBottom();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    if (element.staticY())
+      y = new StaticSupplier<>(element.y.get() - margin);
+    else
+      y = () -> element.y.get() - margin;
+    setBottom();
     return this;
   }
 
   public UIElement rightOf(UIElement element, float margin) {
-    try {
-      getStatic(x).set(element.x.get() + element.getWidth() + margin);
-      setLeft();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    if (element.staticX())
+      x = new StaticSupplier<>(element.x.get() + element.getWidth() + margin);
+    else
+      x = () -> element.x.get() + element.getWidth() + margin;
+    setLeft();
     return this;
   }
 
   public UIElement leftOf(UIElement element, float margin) {
-    try {
-      getStatic(x).set(element.x.get() - margin);
-      setRight();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    if (element.staticX())
+      x = new StaticSupplier<>(element.x.get() - margin);
+    else
+      x = () -> element.x.get() - margin;
+    setRight();
     return this;
   }
 
   protected void setDimensions(float width, float height, float padding) {
-    try {
-      this.width = new StaticSupplier<>(width + 2 * padding);
-      this.height = new StaticSupplier<>(height + 2 * padding);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    this.width = new StaticSupplier<>(width + 2 * padding);
+    this.height = new StaticSupplier<>(height + 2 * padding);
   }
 
   protected void setDimensions(String text, float size, float padding) {
@@ -183,13 +177,6 @@ public abstract class UIElement {
 
     float textHeight = canvas.textAscent();
     return textHeight + 2 * padding;
-  }
-
-  public <T> StaticSupplier<T> getStatic(Supplier<T> supplier) {
-    if (supplier instanceof StaticSupplier) {
-      return (StaticSupplier<T>) supplier;
-    }
-    throw new IllegalArgumentException("Supplier is not a StaticSupplier");
   }
 
   public boolean isInBounds(float x, float y) {

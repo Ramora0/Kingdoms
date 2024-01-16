@@ -58,10 +58,7 @@ public abstract class Building implements JSONSerializable {
 
   public JSONObject mainToJSON() {
     JSONObject json = new JSONObject();
-    // json.setString("player", player.getID());
     json.setJSONObject("player", player.toReferenceJSON());
-    // json.setInt("x", tile.getX());
-    // json.setInt("y", tile.getY());
     json.setJSONObject("tile", tile.toReferenceJSON());
     json.setString("type", type.toString());
     return json;
@@ -69,9 +66,7 @@ public abstract class Building implements JSONSerializable {
 
   public void mainFromJSON(JSONObject json) {
     type = BuildingType.valueOf(json.getString("type"));
-    // player = World.getPlayer(json.getString("player"));
     player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
-    // tile = World.tiles[json.getInt("x")][json.getInt("y")];
     tile = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("tile"), Tile.class);
   }
 
