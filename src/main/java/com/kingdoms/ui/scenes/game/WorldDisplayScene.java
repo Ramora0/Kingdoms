@@ -30,9 +30,8 @@ public abstract class WorldDisplayScene extends Scene {
       hoveredTile = null;
     }
 
-    Shaders.applyScaleShader(canvas);
     World.display(canvas);
-    Shaders.resetShader(canvas);
+    Shaders.applyScaleShader(canvas);
 
     super.display(canvas);
   }
@@ -89,7 +88,7 @@ public abstract class WorldDisplayScene extends Scene {
 
   public static void square(PApplet canvas, double x, double y) {
     canvas.strokeWeight(scale / 100);
-    canvas.square(displayX(x), displayY(y), (float) 1);
+    canvas.square((float) x, (float) y, (float) 1);
   }
 
   public static void circle(PApplet canvas, double x, double y, double diameter) {

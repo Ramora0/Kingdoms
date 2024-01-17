@@ -9,7 +9,7 @@ public class Shaders {
 
   public static void loadShaders(PApplet canvas) {
     scaleShader = canvas.loadShader("scale_shader.frag");
-    scaleShader.set("resolution", new PVector(canvas.width, canvas.height));
+    scaleShader.set("resolution", new PVector((float) canvas.width, (float) canvas.height));
     scaleShader.set("scaleFactor", 1f);
   }
 
@@ -18,7 +18,8 @@ public class Shaders {
   }
 
   public static void applyScaleShader(PApplet canvas) {
-    canvas.shader(scaleShader);
+    scaleShader.set("resolution", new PVector((float) canvas.width, (float) canvas.height));
+    canvas.filter(scaleShader);
   }
 
   public static void resetShader(PApplet canvas) {

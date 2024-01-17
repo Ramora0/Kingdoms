@@ -14,6 +14,7 @@ public class UIContainer extends UIGroup {
   @Override
   public void display(PApplet canvas) {
     canvas.fill(255);
+    canvas.stroke(0);
     canvas.rect(x.get(), y.get(), width.get(), height.get(), 10);
     super.display(canvas);
   }

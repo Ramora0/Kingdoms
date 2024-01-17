@@ -22,6 +22,7 @@ public class UIButton extends UIText {
   public void display(PApplet canvas) {
     float x = getX(), y = getY();
 
+    canvas.stroke(0);
     if (onClick == null) {
       canvas.fill(230);
       canvas.rect(x, y, width.get(), height.get(), 10);
