@@ -1,7 +1,10 @@
 package com.kingdoms.helpers.json;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
+import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T>> {
@@ -9,7 +12,15 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
 
   public T fromReferenceJSON(JSONObject json);
 
-  static <T extends JSONReferenceSerializable<T>> T getFromReferenceJSON(JSONObject json, Class<T> clazz) {
+  static JSONArray toJSONArray(List<? extends JSONReferenceSerializable<?>> array) {
+    JSONArray jsonArray = new JSONArray();
+    for (JSONReferenceSerializable<?> element : array) {
+      jsonArray.append(element.toReferenceJSON());
+    }
+    return jsonArray;
+  }
+
+  static <T extends JSONReferenceSerializable<T>> T getFromJSON(JSONObject json, Class<T> clazz) {
     try {
       T instance = clazz.getDeclaredConstructor().newInstance();
       return instance.fromReferenceJSON(json);
@@ -21,5 +32,13 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
       e.printStackTrace();
       return null;
     }
+  }
+
+  static <T extends JSONReferenceSerializable<T>> List<T> getFromJSONArray(JSONArray json, Class<T> clazz) {
+    List<T> list = new ArrayList<>();
+    for (int i = 0; i < json.size(); i++) {
+      list.add(getFromJSON(json.getJSONObject(i), clazz));
+    }
+    return list;
   }
 }

@@ -94,14 +94,16 @@ public abstract class Troop implements JSONSerializable {
     json.setInt("count", count);
     json.setJSONObject("player", player.toReferenceJSON());
     json.setJSONObject("tile", tile.toReferenceJSON());
+    json.setJSONArray("path", JSONReferenceSerializable.toJSONArray(path));
     return json;
   }
 
   public void mainFromJSON(JSONObject json) {
     type = TroopType.valueOf(json.getString("type"));
     count = json.getInt("count");
-    player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
-    tile = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("tile"), Tile.class);
+    player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
+    tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
+    path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
   }
 
   @Override

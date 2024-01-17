@@ -47,7 +47,7 @@ public class BuildInstruction extends Instruction {
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
     option = BuildOption.valueOf(json.getString("option"));
-    player = JSONReferenceSerializable.getFromReferenceJSON(json.getJSONObject("player"), Player.class);
+    player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     x = json.getInt("x");
     y = json.getInt("y");
   }
