@@ -12,7 +12,7 @@ public class BuildInstruction extends Instruction {
   BuildOption option;
 
   public Player player;
-  public int x, y;
+  public int x, y; // TODO: Change to tile and store as a tile reference
 
   public BuildInstruction(BuildOption option, Player player, int x, int y) {
     super(InstructionType.BUILD);

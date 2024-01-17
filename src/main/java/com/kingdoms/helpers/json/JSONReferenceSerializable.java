@@ -20,10 +20,10 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
     return jsonArray;
   }
 
-  static <T extends JSONReferenceSerializable<T>> T getFromJSON(JSONObject json, Class<T> clazz) {
+  static <T extends JSONReferenceSerializable<?>> T getFromJSON(JSONObject json, Class<T> clazz) {
     try {
       T instance = clazz.getDeclaredConstructor().newInstance();
-      return instance.fromReferenceJSON(json);
+      return (T) instance.fromReferenceJSON(json);
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
       e.printStackTrace();
       return null;

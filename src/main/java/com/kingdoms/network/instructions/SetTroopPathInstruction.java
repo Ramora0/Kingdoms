@@ -5,6 +5,7 @@ import java.util.List;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.troops.Troop;
+import com.kingdoms.world.troops.Troop.TroopType;
 
 import processing.data.JSONObject;
 
@@ -38,7 +39,10 @@ public class SetTroopPathInstruction extends Instruction {
   @Override
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
-    troop = JSONReferenceSerializable.getFromJSON(json.getJSONObject("troop"), Troop.class);
+
+    TroopType troopType = TroopType.valueOf(json.getJSONObject("troop").getString("type"));
+    troop = JSONReferenceSerializable.getFromJSON(json.getJSONObject("troop"), troopType.clazz);
+
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
   }
 }

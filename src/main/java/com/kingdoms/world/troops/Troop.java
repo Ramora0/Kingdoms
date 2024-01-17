@@ -16,10 +16,10 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
   public enum TroopType {
     SOLDIER(Soldier.class);
 
-    public final Class<? extends Troop> troopClass;
+    public final Class<? extends Troop> clazz;
 
     TroopType(Class<? extends Troop> troopClass) {
-      this.troopClass = troopClass;
+      this.clazz = troopClass;
     }
   }
 
@@ -94,7 +94,7 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
   /** Helper method to load from JSON when you don't know the type of troop */
   public static Troop createFromJSON(JSONObject json) {
     TroopType type = TroopType.valueOf(json.getString("type"));
-    return JSONSerializable.createFromJSON(json, type.troopClass);
+    return JSONSerializable.createFromJSON(json, type.clazz);
   }
 
   public JSONObject mainToJSON() {
