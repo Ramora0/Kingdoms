@@ -30,6 +30,11 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
   }
 
   Player player;
+
+  public Player getPlayer() {
+    return player;
+  }
+
   Tile tile;
 
   public Tile getTile() {
