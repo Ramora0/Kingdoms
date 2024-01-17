@@ -26,14 +26,10 @@ public class TroopFocusScene extends FocusScene {
     UIGroup[] groups = new UIGroup[troops.size()];
     UIText troopLabel = (UIText) new UIText(troops.get(0).toString(), 10, 10, 30).below(buildingTab, 10).setLeft();
 
-    System.out.println("I am: " + World.me.getID());
-    System.out.println("Troop is: " + troops.get(0).getPlayer().getID());
-
     if (troops.get(0).getPlayer() == World.me) {
       UIButton move = (UIButton) new UIButton("Move", 10, 10, 30, () -> {
         UI.changeScene(new TroopMovingScene(troops.get(0)));
       }).rightOf(troopLabel, 10).below(buildingTab, 10);
-      System.out.println("Should be running!");
       groups[0] = new UIGroup(troopLabel, move);
     } else {
       groups[0] = new UIGroup(troopLabel);
