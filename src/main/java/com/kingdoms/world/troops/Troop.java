@@ -36,6 +36,10 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
     return tile;
   }
 
+  public void setTile(Tile tile) {
+    this.tile = tile;
+  }
+
   List<Tile> path;
 
   public List<Tile> getPath() {
@@ -82,7 +86,7 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
   }
 
   // JSON \\
-
+  /** Helper method to load from JSON when you don't know the type of troop */
   public static Troop createFromJSON(JSONObject json) {
     TroopType type = TroopType.valueOf(json.getString("type"));
     return JSONSerializable.createFromJSON(json, type.troopClass);
@@ -103,6 +107,9 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
     count = json.getInt("count");
     player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
+    if (tile == null) {
+      System.out.println("God dammit why is tile null");
+    }
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
   }
 
@@ -121,7 +128,8 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
         return troop;
       }
     }
-    throw new RuntimeException("Troop of type " + type.toString() + " not found on tile " + json.getJSONObject("tile").toString() + "!");
+    throw new RuntimeException(
+        "Troop of type " + type.toString() + " not found on tile " + json.getJSONObject("tile").toString() + "!");
   }
 
   @Override
