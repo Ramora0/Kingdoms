@@ -63,6 +63,10 @@ public class World {
     }
   }
 
+  public static Player other(Player player) {
+    return player == me ? other : me;
+  }
+
   public static void receiveInstruction(Instruction instruction) {
     Network.network.receiveInstruction(instruction);
 

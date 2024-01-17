@@ -9,6 +9,7 @@ import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.Updateable;
+import com.kingdoms.world.World;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -91,8 +92,43 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     path.remove(0);
     updated = true;
 
+    Troop.combat(tile.getTroops(player), tile.getTroops(World.other(player)));
+    tile.pruneTroops();
+
     if (tile.getBuilding().getPlayer() != player) {
       tile.destroyBuilding();
+    }
+  }
+
+  public static void combat(List<Troop> a, List<Troop> b) {
+    int aCount = a.stream().mapToInt(t -> t.count).sum();
+    int bCount = b.stream().mapToInt(t -> t.count).sum();
+
+    if (aCount == 0 || bCount == 0) {
+      return;
+    }
+
+    int aIndex = 0;
+    int bIndex = 0;
+
+    while (aIndex < a.size() && bIndex < b.size()) {
+      Troop aTroop = a.get(aIndex);
+      Troop bTroop = b.get(bIndex);
+
+      if (aTroop.count > bTroop.count) {
+        aTroop.count -= bTroop.count;
+        bTroop.count = 0;
+        bIndex++;
+      } else if (aTroop.count < bTroop.count) {
+        bTroop.count -= aTroop.count;
+        aTroop.count = 0;
+        aIndex++;
+      } else {
+        aTroop.count = 0;
+        bTroop.count = 0;
+        aIndex++;
+        bIndex++;
+      }
     }
   }
 

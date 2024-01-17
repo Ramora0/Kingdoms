@@ -1,9 +1,11 @@
 package com.kingdoms;
 
+import com.jogamp.opengl.GLProfile;
 import com.kingdoms.helpers.canvas.Constants;
 import com.kingdoms.helpers.events.EventBus;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
+import com.kingdoms.ui.shaders.Shaders;
 import com.kingdoms.world.World;
 
 import processing.core.PApplet;
@@ -13,13 +15,16 @@ public class Kingdoms extends PApplet {
   public static PApplet canvas;
 
   public void settings() {
-    size(1200, 800);
+    GLProfile.initSingleton();
+    size(1200, 800, P2D);
   }
 
   public void setup() {
     Kingdoms.canvas = this;
 
     Constants.setDimensions(width, height);
+
+    Shaders.loadShaders(canvas);
 
     EventBus.subscribeStaticMethods();
     UI.init();

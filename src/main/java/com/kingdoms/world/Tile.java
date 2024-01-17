@@ -33,6 +33,14 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     return troops;
   }
 
+  public List<Troop> getTroops(Player player) {
+    return troops.stream().filter(t -> t.getPlayer() == player).toList();
+  }
+
+  public void pruneTroops() {
+    troops.removeIf(t -> t.getCount() <= 0);
+  }
+
   int x, y;
 
   public int getX() {
@@ -85,7 +93,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   public static void move(Troop troop, Tile from, Tile to) {
     from.troops.remove(troop);
-    to.troops.add(troop);
+    to.addTroops(troop);
   }
 
   public void nextTurn() {
@@ -111,7 +119,8 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   // UI \\
 
   public void display(PApplet canvas) {
-    canvas.stroke(0);
+    // canvas.stroke(0);
+    canvas.noStroke();
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     WorldDisplayScene.square(canvas, x, y);
 

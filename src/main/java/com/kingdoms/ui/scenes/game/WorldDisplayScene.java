@@ -3,6 +3,7 @@ package com.kingdoms.ui.scenes.game;
 import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.Scene;
+import com.kingdoms.ui.shaders.Shaders;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
 
@@ -13,7 +14,7 @@ public abstract class WorldDisplayScene extends Scene {
   static Tile hoveredTile;
   static Vector offset = new Vector(0, 0);
 
-  public static float scale = 50;
+  public static float scale = 1;
 
   public void display(PApplet canvas) {
     int x = (int) coordX(canvas.mouseX), y = (int) coordY(canvas.mouseY);
@@ -29,7 +30,10 @@ public abstract class WorldDisplayScene extends Scene {
       hoveredTile = null;
     }
 
+    Shaders.applyScaleShader(canvas);
     World.display(canvas);
+    Shaders.resetShader(canvas);
+
     super.display(canvas);
   }
 
@@ -48,16 +52,25 @@ public abstract class WorldDisplayScene extends Scene {
     }
 
     scale *= Math.pow(2, ((Integer) data) / 100.0);
+    Shaders.setScale(scale);
   }
 
   /** Takes a world x coordinate and converts it to a canvas x coordinate */
+  // public static float displayX(double x) {
+  // return (float) (scale * x + offset.x * scale + 600);
+  // }
+
   public static float displayX(double x) {
-    return (float) (scale * x + offset.x * scale + 600);
+    return (float) (x + scale + 600);
   }
 
   /** Takes a world y coordinate and converts it to a canvas y coordinate */
+  // public static float displayY(double y) {
+  // return (float) (scale * y + offset.y * scale + 400);
+  // }
+
   public static float displayY(double y) {
-    return (float) (scale * y + offset.y * scale + 400);
+    return (float) (y + offset.y + 400);
   }
 
   /** Takes a canvas x coordinate and converts it to a world x coordinate */
@@ -76,7 +89,7 @@ public abstract class WorldDisplayScene extends Scene {
 
   public static void square(PApplet canvas, double x, double y) {
     canvas.strokeWeight(scale / 100);
-    canvas.square(displayX(x), displayY(y), (float) scale);
+    canvas.square(displayX(x), displayY(y), (float) 1);
   }
 
   public static void circle(PApplet canvas, double x, double y, double diameter) {
