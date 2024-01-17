@@ -8,6 +8,7 @@ import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
 import com.kingdoms.ui.scenes.game.focus.BuildingFocusScene;
+import com.kingdoms.ui.scenes.game.focus.TroopFocusScene;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
 
@@ -37,8 +38,12 @@ public class GameScene extends WorldDisplayScene {
     PApplet canvas = (PApplet) data;
 
     Tile tile = WorldDisplayScene.getHighlightedTile(canvas);
-    if (tile != null && tile.getBuilding() != null) {
-      UI.changeScene(new BuildingFocusScene(tile));
+    if (tile != null) {
+      if (tile.getBuilding() != null) {
+        UI.changeScene(new BuildingFocusScene(tile));
+      } else if (tile.getTroops().size() > 0) {
+        UI.changeScene(new TroopFocusScene(tile));
+      }
     }
   }
 }
