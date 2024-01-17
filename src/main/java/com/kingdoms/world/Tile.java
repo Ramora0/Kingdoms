@@ -163,7 +163,11 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
       building = Building.createFromJSON(json.getJSONObject("building"));
       building.setTile(this);
     }
-    troops = JSONSerializable.createFromJSONArray(json.getJSONArray("troops"), Troop.class);
+    troops = new ArrayList<>();
+    for (int i = 0; i < json.getJSONArray("troops").size(); i++) {
+      JSONObject troopJSON = json.getJSONArray("troops").getJSONObject(i);
+      troops.add(Troop.createFromJSON(troopJSON));
+    }
   }
 
   @Override
