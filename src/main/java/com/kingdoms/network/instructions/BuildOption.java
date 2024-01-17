@@ -4,7 +4,6 @@ import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
 import com.kingdoms.world.buildings.Building;
-import com.kingdoms.world.buildings.Building.BuildingType;
 import com.kingdoms.world.buildings.City;
 import com.kingdoms.world.buildings.Farm;
 import com.kingdoms.world.buildings.TrainingCamp;
@@ -87,13 +86,11 @@ public enum BuildOption {
 
   /** Only used by enums for common checks */
   private Tile getTileIfAllowed(Player player, int x, int y) {
-    if (!World.in(x, y))
-      return null;
     if (player.getResources() < cost)
       return null;
 
-    Tile tile = World.tiles[x][y];
-    if (tile.hasBuilding())
+    Tile tile = World.getTile(x, y);
+    if (tile == null || tile.hasBuilding())
       return null;
     return tile;
   }

@@ -1,10 +1,15 @@
 package com.kingdoms.world.troops;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 
+import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public abstract class Troop implements JSONSerializable {
@@ -26,6 +31,21 @@ public abstract class Troop implements JSONSerializable {
 
   Player player;
   Tile tile;
+
+  public Tile getTile() {
+    return tile;
+  }
+
+  List<Tile> path;
+
+  public List<Tile> getPath() {
+    return path;
+  }
+
+  public void setPath(List<Tile> path) {
+    this.path = path;
+  }
+
   int count;
 
   public int getCount() {
@@ -37,11 +57,27 @@ public abstract class Troop implements JSONSerializable {
     this.tile = tile;
     this.player = player;
     this.count = count;
+    path = new ArrayList<>();
   }
 
   public void absorb(Troop troop) {
     count += troop.count;
   }
+
+  public void nextTurn() {
+    if (path != null && path.size() > 0) {
+      Tile.move(this, tile, path.get(0));
+      tile = path.get(0);
+      path.remove(0);
+    }
+  }
+
+  public void display(PApplet canvas) {
+    canvas.fill(player.getColor());
+    WorldDisplayScene.circle(canvas, tile.getX() + 0.5f, tile.getY() + 0.5f, Math.sqrt(count) / 10);
+  }
+
+  // JSON \\
 
   public static Troop createFromJSON(JSONObject json) {
     TroopType type = TroopType.valueOf(json.getString("type"));

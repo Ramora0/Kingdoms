@@ -90,6 +90,10 @@ public class World {
     return false;
   }
 
+  public static Tile getTile(int x, int y) {
+    return in(x, y) ? tiles[x][y] : null;
+  }
+
   public static boolean in(int x, int y) {
     return x >= 0 && x < WORLD_SIZE && y >= 0 && y < WORLD_SIZE;
   }

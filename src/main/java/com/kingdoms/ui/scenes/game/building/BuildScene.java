@@ -10,6 +10,7 @@ import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
+import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
 
 import processing.core.PApplet;
@@ -30,20 +31,19 @@ public class BuildScene extends WorldDisplayScene {
   public void display(PApplet canvas) {
     super.display(canvas);
 
-    int x = (int) Math.floor(WorldDisplayScene.coordX(canvas.mouseX));
-    int y = (int) Math.floor(WorldDisplayScene.coordY(canvas.mouseY));
+    Tile tile = WorldDisplayScene.getHighlightedTile(canvas);
 
-    if (!World.in(x, y))
+    if (tile == null)
       return;
 
     canvas.pushStyle();
     canvas.stroke(World.me.getColor());
     canvas.strokeWeight(3);
-    if (!option.canBuildAt(World.me, x, y))
+    if (!option.canBuildAt(World.me, tile.getX(), tile.getY()))
       canvas.noFill();
     else
       canvas.fill(World.me.getColor(), 100);
-    WorldDisplayScene.square(canvas, x, y);
+    WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
     canvas.popStyle();
   }
 

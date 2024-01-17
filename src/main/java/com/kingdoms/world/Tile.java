@@ -67,17 +67,29 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     troops = new ArrayList<Troop>();
   }
 
-  // HELPER \\
+  // HELPERS \\
 
   @Deprecated
   public Tile() {
   }
 
+  public static boolean neighbors(Tile a, Tile b) {
+    return Math.abs(a.x - b.x) <= 1 && Math.abs(a.y - b.y) <= 1;
+  }
+
   // GAMEPLAY \\
+
+  public static void move(Troop troop, Tile from, Tile to) {
+    from.troops.remove(troop);
+    to.troops.add(troop);
+  }
 
   public void nextTurn() {
     if (hasBuilding()) {
       building.nextTurn();
+    }
+    for (Troop troop : troops) {
+      troop.nextTurn();
     }
   }
 
@@ -90,6 +102,10 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
     if (hasBuilding()) {
       building.display(canvas);
+    }
+
+    for (Troop troop : troops) {
+      troop.display(canvas);
     }
   }
 

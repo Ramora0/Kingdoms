@@ -18,8 +18,8 @@ public abstract class WorldDisplayScene extends Scene {
   public void display(PApplet canvas) {
     int x = (int) coordX(canvas.mouseX), y = (int) coordY(canvas.mouseY);
 
-    Tile on = null;
-    if (World.in(x, y) && (on = World.tiles[x][y]) != hoveredTile) {
+    Tile on = World.getTile(x, y);
+    if (on != null && on != hoveredTile) {
       if (hoveredTile != null)
         hoveredTile.removeUI();
       hoveredTile = on;
@@ -71,6 +71,10 @@ public abstract class WorldDisplayScene extends Scene {
     return (y - offset.y * scale - 400) / scale;
   }
 
+  public static Tile getHighlightedTile(PApplet canvas) {
+    return World.getTile((int) Math.floor(coordX(canvas.mouseX)), (int) Math.floor(coordY(canvas.mouseY)));
+  }
+
   public static void square(PApplet canvas, double x, double y) {
     canvas.strokeWeight(scale / 100);
     canvas.square(displayX(x), displayY(y), (float) scale);
@@ -78,5 +82,9 @@ public abstract class WorldDisplayScene extends Scene {
 
   public static void circle(PApplet canvas, double x, double y, double diameter) {
     canvas.circle(displayX(x), displayY(y), (float) (scale * diameter));
+  }
+
+  public static void line(PApplet canvas, double x1, double y1, double x2, double y2) {
+    canvas.line(displayX(x1), displayY(y1), displayX(x2), displayY(y2));
   }
 }
