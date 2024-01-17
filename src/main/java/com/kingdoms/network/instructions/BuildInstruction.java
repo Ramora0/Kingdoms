@@ -35,6 +35,7 @@ public class BuildInstruction extends Instruction {
     option.buildAt(player, x, y);
   }
 
+  @Override
   public JSONObject toJSON() {
     JSONObject json = super.mainToJSON();
     json.setString("option", option.toString());
@@ -44,6 +45,7 @@ public class BuildInstruction extends Instruction {
     return json;
   }
 
+  @Override
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
     option = BuildOption.valueOf(json.getString("option"));

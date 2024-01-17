@@ -6,7 +6,14 @@ import processing.data.JSONObject;
 
 public abstract class Instruction implements JSONSerializable {
   public enum InstructionType {
-    BUILD
+    BUILD(BuildInstruction.class),
+    SET_TROOP_PATH(SetTroopPathInstruction.class);
+
+    public final Class<? extends Instruction> clazz;
+
+    InstructionType(Class<? extends Instruction> clazz) {
+      this.clazz = clazz;
+    }
   }
 
   InstructionType type;
@@ -31,11 +38,6 @@ public abstract class Instruction implements JSONSerializable {
 
   public static Instruction createFromJSON(JSONObject json) {
     InstructionType type = InstructionType.valueOf(json.getString("type"));
-    switch (type) {
-      case BUILD:
-        return JSONSerializable.createFromJSON(json, BuildInstruction.class);
-      default:
-        throw new IllegalArgumentException("Instruction type \"" + type + "\" is not supported");
-    }
+    return JSONSerializable.createFromJSON(json, type.clazz);
   }
 }

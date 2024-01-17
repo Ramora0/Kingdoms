@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kingdoms.helpers.events.EventBus.Subscribe;
+import com.kingdoms.network.instructions.SetTroopPathInstruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.world.Tile;
+import com.kingdoms.world.World;
 import com.kingdoms.world.troops.Troop;
 
 import processing.core.PApplet;
@@ -26,7 +28,8 @@ public class TroopMovingScene extends WorldDisplayScene {
     UIButton reset = (UIButton) new UIButton("Reset", 5, 40, 30, () -> path = new ArrayList<>())
         .below(cancel, 10).setLeft();
     UIButton confirm = (UIButton) new UIButton("Confirm", 5, 75, 30, () -> {
-      troop.setPath(path);
+      // troop.setPath(path);
+      World.receiveInstruction(new SetTroopPathInstruction(troop, path));
       UI.changeScene(new GameScene());
     }).below(reset, 10).setLeft();
 

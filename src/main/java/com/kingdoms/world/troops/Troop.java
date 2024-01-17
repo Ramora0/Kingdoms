@@ -12,7 +12,7 @@ import com.kingdoms.world.Tile;
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public abstract class Troop implements JSONSerializable {
+public abstract class Troop implements JSONSerializable, JSONReferenceSerializable<Troop> {
   public enum TroopType {
     SOLDIER(Soldier.class);
 
@@ -104,6 +104,24 @@ public abstract class Troop implements JSONSerializable {
     player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
+  }
+
+  public JSONObject toReferenceJSON() {
+    JSONObject json = new JSONObject();
+    json.setString("type", type.toString());
+    json.setJSONObject("tile", tile.toReferenceJSON());
+    return json;
+  }
+
+  public Troop fromReferenceJSON(JSONObject json) {
+    type = TroopType.valueOf(json.getString("type"));
+    List<Troop> troops = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class).getTroops();
+    for (Troop troop : troops) {
+      if (troop.getType() == type) {
+        return troop;
+      }
+    }
+    throw new RuntimeException("Troop of type " + type.toString() + " not found on tile " + json.getJSONObject("tile").toString() + "!");
   }
 
   @Override

@@ -14,10 +14,10 @@ public abstract class Building implements JSONSerializable {
     FARM(Farm.class),
     TRAINING_CAMP(TrainingCamp.class),;
 
-    public final Class<? extends Building> buildingClass;
+    public final Class<? extends Building> clazz;
 
     BuildingType(Class<? extends Building> buildingClass) {
-      this.buildingClass = buildingClass;
+      this.clazz = buildingClass;
     }
   }
 
@@ -73,7 +73,7 @@ public abstract class Building implements JSONSerializable {
 
   public static Building createFromJSON(JSONObject json) {
     BuildingType type = BuildingType.valueOf(json.getString("type"));
-    return JSONSerializable.createFromJSON(json, type.buildingClass);
+    return JSONSerializable.createFromJSON(json, type.clazz);
   }
 
   @Override

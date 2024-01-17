@@ -6,6 +6,7 @@ import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.network.Network;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.Instruction;
+import com.kingdoms.network.instructions.SetTroopPathInstruction;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -57,6 +58,10 @@ public class World {
       } else {
         throw new IllegalArgumentException("Cannot build instruction: " + buildInstruction.toJSON().toString());
       }
+    } else if (instruction instanceof SetTroopPathInstruction) {
+      SetTroopPathInstruction setTroopPathInstruction = (SetTroopPathInstruction) instruction;
+
+      setTroopPathInstruction.setPath();
     }
   }
 
