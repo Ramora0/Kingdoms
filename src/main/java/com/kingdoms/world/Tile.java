@@ -95,6 +95,9 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   }
 
   public void unupdate() {
+    if (hasBuilding()) {
+      building.unupdate();
+    }
     for (int i = troops.size() - 1; i >= 0; i--) {
       Troop troop = troops.get(i);
       troop.unupdate();
