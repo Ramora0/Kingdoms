@@ -31,10 +31,6 @@ public class TrainingCamp extends Building {
   public void nextTurn() {
     Troop troop = new Soldier(tile, player, 10);
     tile.addTroops(troop);
-
-    System.out.println("At tile: " + tile.toReferenceJSON());
-    System.out.println("Player: " + player.getID());
-    System.out.println("Produced troop: " + troop.toJSON().toString());
   }
 
   @Override

@@ -112,9 +112,6 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
     count = json.getInt("count");
     player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
-    if (tile == null) {
-      System.out.println("God dammit why is tile null");
-    }
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
   }
 
