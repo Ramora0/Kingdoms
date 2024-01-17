@@ -27,7 +27,6 @@ public abstract class WorldDisplayScene extends Scene {
     } else if (hoveredTile != null && on == null) {
       hoveredTile.removeUI();
       hoveredTile = null;
-      System.out.println("Removed UI" + Math.random());
     }
 
     World.display(canvas);
