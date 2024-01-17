@@ -1,4 +1,4 @@
-package com.kingdoms.ui.scenes.network;
+package com.kingdoms.ui.scenes.menu;
 
 import com.kingdoms.network.Network;
 import com.kingdoms.network.Server;

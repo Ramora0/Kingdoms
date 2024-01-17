@@ -2,13 +2,32 @@ package com.kingdoms.world;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.world.buildings.Building.BuildingType;
 
 import processing.data.JSONObject;
 
 public class Player implements JSONSerializable, JSONReferenceSerializable<Player> {
   String id;
+
+  public String getID() {
+    return id;
+  }
+
   int color;
+
+  public int getColor() {
+    return color;
+  }
+
   int resources;
+
+  public int getResources() {
+    return resources;
+  }
+
+  public void addResources(int amount) {
+    resources += amount;
+  }
 
   public Player(String id, int color) {
     this.id = id;
@@ -20,21 +39,19 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
   public Player() {
   }
 
-  public int getColor() {
-    return color;
+  public int getCityCount() {
+    int count = 0;
+    for (Tile[] row : World.tiles) {
+      for (Tile tile : row) {
+        if (tile.getBuilding() != null && tile.getBuilding().getPlayer() == this
+            && tile.getBuilding().getType() == BuildingType.CITY)
+          count++;
+      }
+    }
+    return count;
   }
 
-  public int getResources() {
-    return resources;
-  }
-
-  public void addResources(int amount) {
-    resources += amount;
-  }
-
-  public String getID() {
-    return id;
-  }
+  // JSON \\
 
   public JSONObject toJSON() {
     JSONObject json = new JSONObject();

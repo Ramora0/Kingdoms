@@ -1,12 +1,15 @@
 package com.kingdoms.world;
 
 import com.kingdoms.helpers.canvas.Colors;
+import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.network.Network;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.network.instructions.SetTroopPathInstruction;
+import com.kingdoms.ui.UI;
+import com.kingdoms.ui.scenes.menu.EndScene;
 import com.kingdoms.world.buildings.City;
 
 import processing.core.PApplet;
@@ -90,7 +93,23 @@ public class World {
       }
     }
 
-    // checkForWin();
+    Player victor = checkForWin();
+    if (victor != null) {
+      if (victor == me) {
+        UI.changeScene(new EndScene(true));
+      } else {
+        UI.changeScene(new EndScene(false));
+      }
+    }
+  }
+
+  static Player checkForWin() {
+    if (me.getCityCount() == 0) {
+      return other;
+    } else if (other.getCityCount() == 0) {
+      return me;
+    }
+    return null;
   }
 
   public static void display(PApplet canvas) {
@@ -127,6 +146,13 @@ public class World {
 
   public static JSONObject toJSON() { // Almost exclusively run on server
     JSONObject json = new JSONObject();
+    Player victor = checkForWin();
+
+    if (victor != null) {
+      json.setJSONObject("victor", victor.toReferenceJSON());
+      return json;
+    }
+
     json.setInt("WORLD_SIZE", WORLD_SIZE);
 
     JSONObject tilesJSON = new JSONObject();
@@ -146,6 +172,15 @@ public class World {
   public static void fromJSON(JSONObject json) { // Almost exclusively run on client
     me = JSONSerializable.createFromJSON(json.getJSONObject("me"), Player.class);
     other = JSONSerializable.createFromJSON(json.getJSONObject("other"), Player.class);
+
+    if (json.hasKey("victor")) {
+      Player victor = JSONReferenceSerializable.getFromJSON(json.getJSONObject("victor"), Player.class);
+      if (victor == me) {
+        UI.changeScene(new EndScene(true));
+      } else {
+        UI.changeScene(new EndScene(false));
+      }
+    }
 
     WORLD_SIZE = json.getInt("WORLD_SIZE");
     JSONObject tilesJSON = json.getJSONObject("tiles");
