@@ -82,11 +82,17 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
 
   @Override
   public void doUpdate() {
-    if (!updated && path != null && path.size() > 0) {
-      Tile.move(this, tile, path.get(0));
-      tile = path.get(0);
-      path.remove(0);
-      updated = true;
+    if (updated || path == null || path.isEmpty()) {
+      return;
+    }
+
+    Tile.move(this, tile, path.get(0));
+    tile = path.get(0);
+    path.remove(0);
+    updated = true;
+
+    if (tile.getBuilding().getPlayer() != player) {
+      tile.destroyBuilding();
     }
   }
 

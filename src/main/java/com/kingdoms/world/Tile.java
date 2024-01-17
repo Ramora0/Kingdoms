@@ -59,6 +59,10 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     return building != null;
   }
 
+  public void destroyBuilding() {
+    building = null;
+  }
+
   public Tile(int x, int y, boolean isWater) {
     this.x = x;
     this.y = y;

@@ -7,6 +7,7 @@ import com.kingdoms.network.Network;
 import com.kingdoms.network.instructions.BuildInstruction;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.network.instructions.SetTroopPathInstruction;
+import com.kingdoms.world.buildings.City;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
@@ -15,7 +16,7 @@ public class World {
   public static int WORLD_SIZE;
   public static Tile[][] tiles;
 
-  public static void generateWorld(int size) {
+  public static void generateWorld(int size) { // Only run on server
     WORLD_SIZE = size;
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
@@ -31,7 +32,19 @@ public class World {
     me = new Player("serverPlayer", Colors.color(0, 0, 255));
     other = new Player("clientPlayer", Colors.color(255, 0, 0));
 
-    // TODO: Generate cities!
+    for (int x = WORLD_SIZE / 2; x < WORLD_SIZE; x++) {
+      if (World.tiles[x + 1][WORLD_SIZE / 2].isLand())
+        continue;
+      tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], me));
+      break;
+    }
+
+    for (int x = WORLD_SIZE / 2 - 1; x >= 0; x--) {
+      if (World.tiles[x - 1][WORLD_SIZE / 2].isLand())
+        continue;
+      tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], other));
+      break;
+    }
   }
 
   public static Player me;
@@ -76,6 +89,8 @@ public class World {
         tiles[x][y].unupdate();
       }
     }
+
+    // checkForWin();
   }
 
   public static void display(PApplet canvas) {
