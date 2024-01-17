@@ -10,6 +10,11 @@ public class Soldier extends Troop {
     super(TroopType.SOLDIER, tile, player, count);
   }
 
+  @Deprecated
+  public Soldier() {
+    super();
+  }
+
   @Override
   public JSONObject toJSON() {
     return super.mainToJSON();

@@ -60,6 +60,10 @@ public abstract class Troop implements JSONSerializable {
     path = new ArrayList<>();
   }
 
+  @Deprecated
+  public Troop() {
+  }
+
   public void absorb(Troop troop) {
     count += troop.count;
   }
