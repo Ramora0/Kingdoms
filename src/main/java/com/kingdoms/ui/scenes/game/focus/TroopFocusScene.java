@@ -33,6 +33,7 @@ public class TroopFocusScene extends FocusScene {
       UIButton move = (UIButton) new UIButton("Move", 10, 10, 30, () -> {
         UI.changeScene(new TroopMovingScene(troops.get(0)));
       }).rightOf(troopLabel, 10).below(buildingTab, 10);
+      System.out.println("Should be running!");
       groups[0] = new UIGroup(troopLabel, move);
     } else {
       groups[0] = new UIGroup(troopLabel);

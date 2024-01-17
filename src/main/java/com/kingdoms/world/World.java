@@ -124,6 +124,9 @@ public class World {
   }
 
   public static void fromJSON(JSONObject json) { // Almost exclusively run on client
+    me = JSONSerializable.createFromJSON(json.getJSONObject("me"), Player.class);
+    other = JSONSerializable.createFromJSON(json.getJSONObject("other"), Player.class);
+
     WORLD_SIZE = json.getInt("WORLD_SIZE");
     JSONObject tilesJSON = json.getJSONObject("tiles");
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
@@ -133,8 +136,5 @@ public class World {
         tiles[x][y] = JSONSerializable.createFromJSON(tileJSON, Tile.class);
       }
     }
-
-    me = JSONSerializable.createFromJSON(json.getJSONObject("me"), Player.class);
-    other = JSONSerializable.createFromJSON(json.getJSONObject("other"), Player.class);
   }
 }
