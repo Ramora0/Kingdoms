@@ -18,6 +18,11 @@ public class SetTroopPathInstruction extends Instruction {
     this.path = path;
   }
 
+  @Deprecated
+  public SetTroopPathInstruction() {
+    super();
+  }
+
   public void setPath() {
     troop.setPath(path);
   }
