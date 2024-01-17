@@ -24,6 +24,10 @@ public class City extends Building {
   }
 
   @Override
+  public void doUpdate() {
+  }
+
+  @Override
   public JSONObject toJSON() {
     return super.mainToJSON();
   }

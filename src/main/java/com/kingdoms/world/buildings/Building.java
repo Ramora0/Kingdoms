@@ -4,11 +4,12 @@ import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
+import com.kingdoms.world.Updateable;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public abstract class Building implements JSONSerializable {
+public abstract class Building extends Updateable implements JSONSerializable {
   public enum BuildingType {
     CITY(City.class),
     FARM(Farm.class),
@@ -48,9 +49,6 @@ public abstract class Building implements JSONSerializable {
   @Deprecated
   public Building(BuildingType type) {
     this.type = type;
-  }
-
-  public void nextTurn() {
   }
 
   public abstract void display(PApplet canvas);

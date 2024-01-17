@@ -26,7 +26,7 @@ public class Farm extends Building {
   }
 
   @Override
-  public void nextTurn() {
+  public void doUpdate() {
     player.addResources(100);
   }
 

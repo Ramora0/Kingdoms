@@ -8,11 +8,12 @@ import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
+import com.kingdoms.world.Updateable;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public abstract class Troop implements JSONSerializable, JSONReferenceSerializable<Troop> {
+public abstract class Troop extends Updateable implements JSONSerializable, JSONReferenceSerializable<Troop> {
   public enum TroopType {
     SOLDIER(Soldier.class);
 
@@ -77,11 +78,15 @@ public abstract class Troop implements JSONSerializable, JSONReferenceSerializab
     count += troop.count;
   }
 
-  public void nextTurn() {
-    if (path != null && path.size() > 0) {
+  boolean updated;
+
+  @Override
+  public void doUpdate() {
+    if (!updated && path != null && path.size() > 0) {
       Tile.move(this, tile, path.get(0));
       tile = path.get(0);
       path.remove(0);
+      updated = true;
     }
   }
 

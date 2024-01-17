@@ -86,11 +86,18 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   public void nextTurn() {
     if (hasBuilding()) {
-      building.nextTurn();
+      building.update();
     }
     for (int i = troops.size() - 1; i >= 0; i--) {
       Troop troop = troops.get(i);
-      troop.nextTurn();
+      troop.update();
+    }
+  }
+
+  public void unupdate() {
+    for (int i = troops.size() - 1; i >= 0; i--) {
+      Troop troop = troops.get(i);
+      troop.unupdate();
     }
   }
 

@@ -28,7 +28,7 @@ public class TrainingCamp extends Building {
   }
 
   @Override
-  public void nextTurn() {
+  public void doUpdate() {
     Troop troop = new Soldier(tile, player, 10);
     tile.addTroops(troop);
   }

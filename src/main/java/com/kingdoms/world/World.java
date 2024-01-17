@@ -71,6 +71,11 @@ public class World {
         tiles[x][y].nextTurn();
       }
     }
+    for (int x = 0; x < WORLD_SIZE; x++) {
+      for (int y = 0; y < WORLD_SIZE; y++) {
+        tiles[x][y].unupdate();
+      }
+    }
   }
 
   public static void display(PApplet canvas) {
