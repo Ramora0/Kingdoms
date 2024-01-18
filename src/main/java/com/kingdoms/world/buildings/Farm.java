@@ -17,7 +17,7 @@ public class Farm extends Building {
     super(BuildingType.FARM);
   }
 
-  public void init() {
+  public void initSprite() {
     sprite = new Sprite(ImageManager.getImage("images/farm1.png"));
   }
 

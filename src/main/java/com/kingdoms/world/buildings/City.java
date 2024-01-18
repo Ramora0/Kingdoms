@@ -16,7 +16,7 @@ public class City extends Building {
     super(BuildingType.CITY);
   }
 
-  public void init() {
+  public void initSprite() {
     sprite = new ColorSprite(player.getColor());
   }
 

@@ -19,7 +19,7 @@ public class TrainingCamp extends Building {
     super(BuildingType.TRAINING_CAMP);
   }
 
-  public void init() {
+  public void initSprite() {
     // sprite = new Sprite(ImageCache.getImage("images/farm1"));
     sprite = new ColorSprite(Colors.color(150));
   }
