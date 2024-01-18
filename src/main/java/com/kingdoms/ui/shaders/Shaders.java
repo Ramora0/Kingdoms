@@ -16,7 +16,7 @@ public class Shaders {
   public static void setOffset(PVector offset) {
     scaleShader.set("offsetX", offset.x);
     scaleShader.set("offsetY", offset.y);
-    System.out.println(offset);
+    // System.out.println(offset);
   }
 
   public static void setScale(float scale) {

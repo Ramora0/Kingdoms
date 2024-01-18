@@ -17,6 +17,8 @@ import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
+  public static final int TILE_WIDTH = 16;
+
   List<Troop> troops;
 
   public void addTroops(Troop troop) {
@@ -122,7 +124,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     // canvas.stroke(0);
     canvas.noStroke();
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    canvas.square(x, y, 1);
+    canvas.square(TILE_WIDTH * x, TILE_WIDTH * y, TILE_WIDTH);
 
     if (hasBuilding()) {
       building.display(canvas);

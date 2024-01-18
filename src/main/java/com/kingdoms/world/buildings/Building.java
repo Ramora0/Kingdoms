@@ -2,6 +2,7 @@ package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.Updateable;
@@ -40,18 +41,26 @@ public abstract class Building extends Updateable implements JSONSerializable {
     this.tile = tile;
   }
 
+  Sprite sprite;
+
   public Building(BuildingType type, Tile tile, Player player) {
     this.type = type;
     this.tile = tile;
     this.player = player;
+    init();
   }
 
   @Deprecated
   public Building(BuildingType type) {
     this.type = type;
+    init();
   }
 
-  public abstract void display(PApplet canvas);
+  public abstract void init();
+
+  public void display(PApplet canvas) {
+    sprite.display(canvas, tile.getX() * Tile.TILE_WIDTH, tile.getY() * Tile.TILE_WIDTH);
+  }
 
   // JSON METHODS \\
 

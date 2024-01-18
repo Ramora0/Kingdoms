@@ -1,12 +1,12 @@
 package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.canvas.Colors;
+import com.kingdoms.ui.images.ColorSprite;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.troops.Soldier;
 import com.kingdoms.world.troops.Troop;
 
-import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public class TrainingCamp extends Building {
@@ -19,11 +19,9 @@ public class TrainingCamp extends Building {
     super(BuildingType.TRAINING_CAMP);
   }
 
-  @Override
-  public void display(PApplet canvas) {
-    canvas.fill(Colors.color(220));
-    canvas.stroke(player.getColor());
-    canvas.square(tile.getX(), tile.getY(), 1);
+  public void init() {
+    // sprite = new Sprite(ImageCache.getImage("images/farm1"));
+    sprite = new ColorSprite(Colors.color(150));
   }
 
   @Override

@@ -14,13 +14,25 @@ public abstract class WorldDisplayScene extends Scene {
   static Tile hoveredTile;
   static Vector offset = new Vector(0, 0);
 
-  public static float scale = 25;
+  public static float scale = 4;
 
   public void display(PApplet canvas) {
     canvas.background(100, 150, 255);
+
+    World.display(canvas);
+    Shaders.setOffset(offset.toPVector());
+    Shaders.setScale(scale);
+    Shaders.applyScaleShader(canvas);
+
     int x = (int) coordX(canvas.mouseX), y = (int) coordY(canvas.mouseY);
 
     Tile on = World.getTile(x, y);
+    if (on != null) {
+      canvas.noFill();
+      canvas.stroke(0, 0, 0);
+      canvas.square(displayX(x), displayY(y), Tile.TILE_WIDTH * (float) scale);
+    }
+
     if (on != null && on != hoveredTile) {
       if (hoveredTile != null)
         hoveredTile.removeUI();
@@ -30,11 +42,6 @@ public abstract class WorldDisplayScene extends Scene {
       hoveredTile.removeUI();
       hoveredTile = null;
     }
-
-    World.display(canvas);
-    Shaders.setOffset(offset.toPVector());
-    Shaders.setScale(scale);
-    Shaders.applyScaleShader(canvas);
 
     super.display(canvas);
   }
@@ -57,19 +64,19 @@ public abstract class WorldDisplayScene extends Scene {
   }
 
   public static float displayX(double x) {
-    return (float) (scale * x + offset.x);
+    return (float) (scale * x + offset.x) * Tile.TILE_WIDTH;
   }
 
   public static float displayY(double y) {
-    return (float) (scale * y + offset.y);
+    return (float) (scale * y + offset.y) * Tile.TILE_WIDTH;
   }
 
   public static double coordX(double x) {
-    return (x - offset.x) / scale;
+    return (x / Tile.TILE_WIDTH - offset.x) / scale;
   }
 
   public static double coordY(double y) {
-    return (y - offset.y) / scale;
+    return (y / Tile.TILE_WIDTH - offset.y) / scale;
   }
 
   public static Tile getHighlightedTile(PApplet canvas) {
