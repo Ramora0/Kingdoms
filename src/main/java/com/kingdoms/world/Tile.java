@@ -122,7 +122,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     // canvas.stroke(0);
     canvas.noStroke();
     canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    WorldDisplayScene.square(canvas, x, y);
+    canvas.square(x, y, 1);
 
     if (hasBuilding()) {
       building.display(canvas);

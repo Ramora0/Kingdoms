@@ -14,9 +14,10 @@ public abstract class WorldDisplayScene extends Scene {
   static Tile hoveredTile;
   static Vector offset = new Vector(0, 0);
 
-  public static float scale = 1;
+  public static float scale = 25;
 
   public void display(PApplet canvas) {
+    canvas.background(100, 150, 255);
     int x = (int) coordX(canvas.mouseX), y = (int) coordY(canvas.mouseY);
 
     Tile on = World.getTile(x, y);
@@ -31,6 +32,8 @@ public abstract class WorldDisplayScene extends Scene {
     }
 
     World.display(canvas);
+    Shaders.setOffset(offset.toPVector());
+    Shaders.setScale(scale);
     Shaders.applyScaleShader(canvas);
 
     super.display(canvas);
@@ -42,7 +45,7 @@ public abstract class WorldDisplayScene extends Scene {
     }
 
     PApplet canvas = (PApplet) data;
-    offset.add(new Vector(canvas.mouseX - canvas.pmouseX, canvas.mouseY - canvas.pmouseY).div(scale));
+    offset.add(new Vector(canvas.mouseX - canvas.pmouseX, canvas.mouseY - canvas.pmouseY));
   }
 
   public static void mouseWheel(Object data) {
@@ -51,51 +54,39 @@ public abstract class WorldDisplayScene extends Scene {
     }
 
     scale *= Math.pow(2, ((Integer) data) / 100.0);
-    Shaders.setScale(scale);
   }
-
-  /** Takes a world x coordinate and converts it to a canvas x coordinate */
-  // public static float displayX(double x) {
-  // return (float) (scale * x + offset.x * scale + 600);
-  // }
 
   public static float displayX(double x) {
-    return (float) (x + scale + 600);
+    return (float) (scale * x + offset.x);
   }
-
-  /** Takes a world y coordinate and converts it to a canvas y coordinate */
-  // public static float displayY(double y) {
-  // return (float) (scale * y + offset.y * scale + 400);
-  // }
 
   public static float displayY(double y) {
-    return (float) (y + offset.y + 400);
+    return (float) (scale * y + offset.y);
   }
 
-  /** Takes a canvas x coordinate and converts it to a world x coordinate */
-  public static double coordX(float x) {
-    return (x - offset.x * scale - 600) / scale;
+  public static double coordX(double x) {
+    return (x - offset.x) / scale;
   }
 
-  /** Takes a canvas y coordinate and converts it to a world y coordinate */
-  public static double coordY(float y) {
-    return (y - offset.y * scale - 400) / scale;
+  public static double coordY(double y) {
+    return (y - offset.y) / scale;
   }
 
   public static Tile getHighlightedTile(PApplet canvas) {
     return World.getTile((int) Math.floor(coordX(canvas.mouseX)), (int) Math.floor(coordY(canvas.mouseY)));
   }
 
-  public static void square(PApplet canvas, double x, double y) {
-    canvas.strokeWeight(scale / 100);
-    canvas.square((float) x, (float) y, (float) 1);
-  }
+  // public static void square(PApplet canvas, double x, double y) {
+  // canvas.square(displayX(x), displayY(y), (float) 1);
+  // }
 
-  public static void circle(PApplet canvas, double x, double y, double diameter) {
-    canvas.circle(displayX(x), displayY(y), (float) (scale * diameter));
-  }
+  // public static void circle(PApplet canvas, double x, double y, double
+  // diameter) {
+  // canvas.circle(displayX(x), displayY(y), (float) (scale * diameter));
+  // }
 
-  public static void line(PApplet canvas, double x1, double y1, double x2, double y2) {
-    canvas.line(displayX(x1), displayY(y1), displayX(x2), displayY(y2));
-  }
+  // public static void line(PApplet canvas, double x1, double y1, double x2,
+  // double y2) {
+  // canvas.line(displayX(x1), displayY(y1), displayX(x2), displayY(y2));
+  // }
 }

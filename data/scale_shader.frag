@@ -7,10 +7,14 @@ precision mediump float;
 uniform sampler2D texture;
 varying vec4 vertTexCoord;
 uniform vec2 resolution;
+
+uniform float offsetX;
+uniform float offsetY;
 uniform float scaleFactor;
 
 void main() {
-  vec2 uv = vec2(gl_FragCoord.x / 1200., gl_FragCoord.y / 800.);
+  vec2 coord = gl_FragCoord.xy;
+  vec2 uv = vec2((coord.x - offsetX) / 1200., (coord.y + offsetY) / 800.);
   uv.y = 1.0 - uv.y; // Flip the y-coordinate
 
   // Calculate the scaled UV coordinates

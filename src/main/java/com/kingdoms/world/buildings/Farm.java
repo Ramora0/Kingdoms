@@ -1,7 +1,6 @@
 package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.canvas.Colors;
-import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 
@@ -22,7 +21,7 @@ public class Farm extends Building {
   public void display(PApplet canvas) {
     canvas.fill(Colors.color(247, 182, 62));
     canvas.stroke(player.getColor());
-    WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
+    canvas.square(tile.getX(), tile.getY(), 1);
   }
 
   @Override

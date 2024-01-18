@@ -43,7 +43,7 @@ public class BuildScene extends WorldDisplayScene {
       canvas.noFill();
     else
       canvas.fill(World.me.getColor(), 100);
-    WorldDisplayScene.square(canvas, tile.getX(), tile.getY());
+    canvas.square(tile.getX(), tile.getY(), 1);
     canvas.popStyle();
   }
 

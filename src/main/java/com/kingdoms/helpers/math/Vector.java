@@ -1,5 +1,7 @@
 package com.kingdoms.helpers.math;
 
+import processing.core.PVector;
+
 public class Vector {
   public double x, y;
 
@@ -37,7 +39,12 @@ public class Vector {
     }
   }
 
-  // Static methods
+  public PVector toPVector() {
+    return new PVector((float) x, (float) y);
+  }
+
+  // Static methods \\
+
   public static Vector add(Vector v1, Vector v2) {
     return new Vector(v1.x + v2.x, v1.y + v2.y);
   }

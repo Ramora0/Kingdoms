@@ -13,12 +13,17 @@ public class Shaders {
     scaleShader.set("scaleFactor", 1f);
   }
 
+  public static void setOffset(PVector offset) {
+    scaleShader.set("offsetX", offset.x);
+    scaleShader.set("offsetY", offset.y);
+    System.out.println(offset);
+  }
+
   public static void setScale(float scale) {
     scaleShader.set("scaleFactor", scale);
   }
 
   public static void applyScaleShader(PApplet canvas) {
-    scaleShader.set("resolution", new PVector((float) canvas.width, (float) canvas.height));
     canvas.filter(scaleShader);
   }
 

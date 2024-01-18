@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
-import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Tile;
 import com.kingdoms.world.Updateable;
@@ -134,7 +133,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
 
   public void display(PApplet canvas) {
     canvas.fill(player.getColor());
-    WorldDisplayScene.circle(canvas, tile.getX() + 0.5f, tile.getY() + 0.5f, Math.sqrt(count) / 10);
+    canvas.circle((float) tile.getX() + 0.5f, (float) tile.getY() + 0.5f, (float) Math.sqrt(count) / 10);
   }
 
   // JSON \\

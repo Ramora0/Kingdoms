@@ -47,7 +47,7 @@ public class TroopMovingScene extends WorldDisplayScene {
       Tile a = path.get(i);
       Tile b = path.get(i + 1);
 
-      WorldDisplayScene.line(canvas, a.getX() + 0.5, a.getY() + 0.5, b.getX() + 0.5, b.getY() + 0.5);
+      canvas.line((float) a.getX() + 0.5f, (float) a.getY() + 0.5f, (float) b.getX() + 0.5f, (float) b.getY() + 0.5f);
     }
     path.remove(0);
   }
