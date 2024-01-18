@@ -47,18 +47,18 @@ public abstract class Building extends Updateable implements JSONSerializable {
     this.type = type;
     this.tile = tile;
     this.player = player;
-    init();
   }
 
   @Deprecated
   public Building(BuildingType type) {
     this.type = type;
-    init();
   }
 
-  public abstract void init();
+  public abstract void initSprite();
 
   public void display(PApplet canvas) {
+    if (sprite == null)
+      initSprite();
     sprite.display(canvas, tile.getX() * Tile.TILE_WIDTH, tile.getY() * Tile.TILE_WIDTH);
   }
 
