@@ -47,10 +47,10 @@ public abstract class FocusScene extends WorldDisplayScene {
     UIContainer container = new UIContainer(6, elements);
     container.setX(0);
     container.setWidth(300);
-    container.below(buildingTab, 0);
+    container.below(getRightTab(), 0);
 
     UIButton close = (UIButton) new UIButton("X", 10, 10, 50, () -> UI.changeScene(new GameScene()))
-        .setTop().rightOf(container, 5).below(buildingTab, 0);
+        .setTop().rightOf(container, 5).below(getRightTab(), 0);
 
     addElement(container);
     addElement(close);
