@@ -63,6 +63,18 @@ public abstract class WorldDisplayScene extends Scene {
     scale *= Math.pow(2, ((Integer) data) / 100.0);
   }
 
+  /**
+   * Converst raw world coordinate into tile scaled, pre shader display coordinate
+   */
+  public static float worldDisplayX(double x) {
+    return (float) (x * Tile.TILE_WIDTH);
+  }
+
+  public static float worldDisplayY(double y) {
+    return (float) (y * Tile.TILE_WIDTH);
+  }
+
+  /** Converts raw world coordinate to full display coordinate */
   public static float displayX(double x) {
     return (float) (scale * x * Tile.TILE_WIDTH + offset.x);
   }

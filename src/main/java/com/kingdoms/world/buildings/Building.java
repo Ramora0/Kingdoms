@@ -3,6 +3,7 @@ package com.kingdoms.world.buildings;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.images.Sprite;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Updateable;
 import com.kingdoms.world.tiles.Tile;
@@ -59,7 +60,7 @@ public abstract class Building extends Updateable implements JSONSerializable {
   public void display(PApplet canvas) {
     if (sprite == null)
       initSprite();
-    sprite.display(canvas, tile.getX() * Tile.TILE_WIDTH, tile.getY() * Tile.TILE_WIDTH);
+    sprite.display(canvas, WorldDisplayScene.worldDisplayX(tile.getX()), WorldDisplayScene.worldDisplayY(tile.getY()));
   }
 
   // JSON METHODS \\

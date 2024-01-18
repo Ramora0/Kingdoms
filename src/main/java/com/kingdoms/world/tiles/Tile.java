@@ -130,7 +130,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     if (sprite == null) {
       sprite = new ColorSprite(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
     }
-    sprite.display(canvas, TILE_WIDTH * x, TILE_WIDTH * y);
+    sprite.display(canvas, WorldDisplayScene.worldDisplayX(x), WorldDisplayScene.worldDisplayY(y));
 
     if (hasBuilding()) {
       building.display(canvas);
