@@ -6,7 +6,7 @@ import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIElement;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 
 public abstract class FocusScene extends WorldDisplayScene {
   enum FocusType {

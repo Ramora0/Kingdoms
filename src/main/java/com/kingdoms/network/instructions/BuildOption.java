@@ -1,12 +1,12 @@
 package com.kingdoms.network.instructions;
 
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
 import com.kingdoms.world.buildings.Building;
 import com.kingdoms.world.buildings.City;
 import com.kingdoms.world.buildings.Farm;
 import com.kingdoms.world.buildings.TrainingCamp;
+import com.kingdoms.world.tiles.Tile;
 
 /** BuildOption represents a kind of building to build */
 public enum BuildOption {

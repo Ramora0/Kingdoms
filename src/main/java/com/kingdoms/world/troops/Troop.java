@@ -6,9 +6,9 @@ import java.util.List;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.Updateable;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;

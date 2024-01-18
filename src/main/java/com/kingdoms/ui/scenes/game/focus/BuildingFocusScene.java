@@ -1,7 +1,7 @@
 package com.kingdoms.ui.scenes.game.focus;
 
 import com.kingdoms.ui.elements.UIText;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 
 public class BuildingFocusScene extends FocusScene {
   public BuildingFocusScene(Tile focus) {

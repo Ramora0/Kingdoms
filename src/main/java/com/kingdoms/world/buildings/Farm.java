@@ -1,9 +1,9 @@
 package com.kingdoms.world.buildings;
 
-import com.kingdoms.ui.images.ImageCache;
+import com.kingdoms.ui.images.ImageManager;
 import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.data.JSONObject;
 
@@ -18,7 +18,7 @@ public class Farm extends Building {
   }
 
   public void init() {
-    sprite = new Sprite(ImageCache.getImage("images/farm1.png"));
+    sprite = new Sprite(ImageManager.getImage("images/farm1.png"));
   }
 
   @Override

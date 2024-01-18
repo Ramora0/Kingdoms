@@ -3,7 +3,7 @@ package com.kingdoms.world.buildings;
 import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.ui.images.ColorSprite;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Soldier;
 import com.kingdoms.world.troops.Troop;
 

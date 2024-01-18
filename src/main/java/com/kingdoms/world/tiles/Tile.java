@@ -1,4 +1,4 @@
-package com.kingdoms.world;
+package com.kingdoms.world.tiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,11 @@ import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
+import com.kingdoms.ui.images.ColorSprite;
+import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
+import com.kingdoms.world.Player;
+import com.kingdoms.world.World;
 import com.kingdoms.world.buildings.Building;
 import com.kingdoms.world.troops.Troop;
 
@@ -59,6 +63,8 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     return !isWater;
   }
 
+  Sprite sprite;
+
   Building building;
 
   public Building getBuilding() {
@@ -77,6 +83,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     this.x = x;
     this.y = y;
     this.isWater = isWater;
+    sprite = new ColorSprite(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
 
     troops = new ArrayList<Troop>();
   }
@@ -121,10 +128,7 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   // UI \\
 
   public void display(PApplet canvas) {
-    // canvas.stroke(0);
-    canvas.noStroke();
-    canvas.fill(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    canvas.square(TILE_WIDTH * x, TILE_WIDTH * y, TILE_WIDTH);
+    sprite.display(canvas, TILE_WIDTH * x, TILE_WIDTH * y);
 
     if (hasBuilding()) {
       building.display(canvas);

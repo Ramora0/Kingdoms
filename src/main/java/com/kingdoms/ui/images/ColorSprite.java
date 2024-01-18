@@ -12,6 +12,7 @@ public class ColorSprite extends Sprite {
 
   @Override
   public void display(PApplet canvas, float x, float y) {
+    canvas.noStroke();
     canvas.fill(color);
     canvas.rect(x, y, 16, 16);
   }

@@ -4,8 +4,8 @@ import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.Scene;
 import com.kingdoms.ui.shaders.Shaders;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 
@@ -64,36 +64,22 @@ public abstract class WorldDisplayScene extends Scene {
   }
 
   public static float displayX(double x) {
-    return (float) (scale * x + offset.x) * Tile.TILE_WIDTH;
+    return (float) (scale * x * Tile.TILE_WIDTH + offset.x);
   }
 
   public static float displayY(double y) {
-    return (float) (scale * y + offset.y) * Tile.TILE_WIDTH;
+    return (float) (scale * y * Tile.TILE_WIDTH + offset.y);
   }
 
   public static double coordX(double x) {
-    return (x / Tile.TILE_WIDTH - offset.x) / scale;
+    return (x - offset.x) / (scale * Tile.TILE_WIDTH);
   }
 
   public static double coordY(double y) {
-    return (y / Tile.TILE_WIDTH - offset.y) / scale;
+    return (y - offset.y) / (scale * Tile.TILE_WIDTH);
   }
 
   public static Tile getHighlightedTile(PApplet canvas) {
     return World.getTile((int) Math.floor(coordX(canvas.mouseX)), (int) Math.floor(coordY(canvas.mouseY)));
   }
-
-  // public static void square(PApplet canvas, double x, double y) {
-  // canvas.square(displayX(x), displayY(y), (float) 1);
-  // }
-
-  // public static void circle(PApplet canvas, double x, double y, double
-  // diameter) {
-  // canvas.circle(displayX(x), displayY(y), (float) (scale * diameter));
-  // }
-
-  // public static void line(PApplet canvas, double x1, double y1, double x2,
-  // double y2) {
-  // canvas.line(displayX(x1), displayY(y1), displayX(x2), displayY(y2));
-  // }
 }

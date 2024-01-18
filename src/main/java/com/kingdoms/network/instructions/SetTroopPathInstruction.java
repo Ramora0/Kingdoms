@@ -3,7 +3,7 @@ package com.kingdoms.network.instructions;
 import java.util.List;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Troop;
 import com.kingdoms.world.troops.Troop.TroopType;
 

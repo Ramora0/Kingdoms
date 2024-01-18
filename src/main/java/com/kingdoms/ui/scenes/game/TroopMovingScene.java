@@ -7,8 +7,8 @@ import com.kingdoms.helpers.events.EventBus.Subscribe;
 import com.kingdoms.network.instructions.SetTroopPathInstruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Troop;
 
 import processing.core.PApplet;

@@ -7,8 +7,8 @@ import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIGroup;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.TroopMovingScene;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Troop;
 
 public class TroopFocusScene extends FocusScene {

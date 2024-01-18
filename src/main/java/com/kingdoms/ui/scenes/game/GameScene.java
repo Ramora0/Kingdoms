@@ -9,8 +9,8 @@ import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
 import com.kingdoms.ui.scenes.game.focus.BuildingFocusScene;
 import com.kingdoms.ui.scenes.game.focus.TroopFocusScene;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 

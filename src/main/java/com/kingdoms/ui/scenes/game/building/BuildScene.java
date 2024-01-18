@@ -10,8 +10,8 @@ import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
-import com.kingdoms.world.Tile;
 import com.kingdoms.world.World;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 

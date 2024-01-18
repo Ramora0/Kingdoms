@@ -1,2 +1,2 @@
-UI:
 Dynamic button 4 ready 4 next turn
+Tiles shoudl be seperate classes

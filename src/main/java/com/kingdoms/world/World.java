@@ -11,6 +11,7 @@ import com.kingdoms.network.instructions.SetTroopPathInstruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.menu.EndScene;
 import com.kingdoms.world.buildings.City;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;

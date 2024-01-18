@@ -2,7 +2,7 @@ package com.kingdoms.world.buildings;
 
 import com.kingdoms.ui.images.ColorSprite;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Tile;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.data.JSONObject;
 
