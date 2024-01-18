@@ -83,7 +83,6 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     this.x = x;
     this.y = y;
     this.isWater = isWater;
-    sprite = new ColorSprite(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
 
     troops = new ArrayList<Troop>();
   }
@@ -128,6 +127,9 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   // UI \\
 
   public void display(PApplet canvas) {
+    if (sprite == null) {
+      sprite = new ColorSprite(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
+    }
     sprite.display(canvas, TILE_WIDTH * x, TILE_WIDTH * y);
 
     if (hasBuilding()) {
