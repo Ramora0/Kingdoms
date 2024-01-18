@@ -11,7 +11,7 @@ public class BuildingFocusScene extends FocusScene {
       throw new IllegalArgumentException("Tile must have a building to focus on");
     }
 
-    UIText title = (UIText) new UIText(tile.getBuilding().toString(), 150, 10, 30).below(buildingTab, 20);
+    UIText title = (UIText) new UIText(tile.getBuilding().toString(), 150, 10, 30).below(getRightTab(), 20);
 
     addContainer(title);
   }

@@ -14,7 +14,12 @@ public abstract class FocusScene extends WorldDisplayScene {
   };
 
   Tile tile;
-  UIButton buildingTab;
+  private UIButton buildingTab;
+  private UIButton troopTab;
+
+  public UIButton getRightTab() {
+    return troopTab != null ? troopTab : buildingTab;
+  }
 
   FocusScene(FocusType type, Tile tile) {
     super();
@@ -27,7 +32,7 @@ public abstract class FocusScene extends WorldDisplayScene {
       addElement(buildingTab);
     }
     if (tile.getTroops().size() > 0) {
-      UIButton troopTab = (UIButton) new UIButton("Troops", 10, 10, 30,
+      troopTab = (UIButton) new UIButton("Troops", 10, 10, 30,
           type == FocusType.TROOP ? null : () -> UI.changeScene(new TroopFocusScene(tile)))
           .setTop();
       if (buildingTab != null)

@@ -24,12 +24,12 @@ public class TroopFocusScene extends FocusScene {
     }
 
     UIGroup[] groups = new UIGroup[troops.size()];
-    UIText troopLabel = (UIText) new UIText(troops.get(0).toString(), 10, 10, 30).below(buildingTab, 10).setLeft();
+    UIText troopLabel = (UIText) new UIText(troops.get(0).toString(), 10, 10, 30).below(getRightTab(), 10).setLeft();
 
     if (troops.get(0).getPlayer() == World.me) {
       UIButton move = (UIButton) new UIButton("Move", 10, 10, 30, () -> {
         UI.changeScene(new TroopMovingScene(troops.get(0)));
-      }).rightOf(troopLabel, 10).below(buildingTab, 10);
+      }).rightOf(troopLabel, 10).below(getRightTab(), 10);
       groups[0] = new UIGroup(troopLabel, move);
     } else {
       groups[0] = new UIGroup(troopLabel);
