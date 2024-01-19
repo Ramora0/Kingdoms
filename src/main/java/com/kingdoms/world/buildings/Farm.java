@@ -19,7 +19,7 @@ public class Farm extends Building {
   }
 
   public void initSprite() {
-    sprite = new Sprite(ImageManager.getImage("images/farm" + MathUtils.random(new int[] { 0, 1 }) + ".png"));
+    sprite = new Sprite(ImageManager.getImage("images/farm" + MathUtils.random(new int[] { 1, 2 }) + ".png"));
   }
 
   @Override
