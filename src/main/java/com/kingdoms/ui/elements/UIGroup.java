@@ -21,6 +21,11 @@ public class UIGroup extends UIElement {
     padding(0);
   }
 
+  public UIGroup(List<? extends UIElement> elements) {
+    this.children = new ArrayList<>(elements);
+    padding(0);
+  }
+
   public void padding(float padding) {
 
     x = () -> {
