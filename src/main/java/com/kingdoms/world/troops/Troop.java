@@ -53,7 +53,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     this.tile = tile;
   }
 
-  List<Tile> path;
+  List<Tile> path = new ArrayList<>();
 
   public List<Tile> getPath() {
     return path;
@@ -88,7 +88,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
 
   @Override
   public void doUpdate() {
-    if (path == null || path.isEmpty()) {
+    if (path.isEmpty()) {
       return;
     }
 
