@@ -1,7 +1,24 @@
 Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
-Test winning, destroyig buildings, and moving troops
+
 Set order updates occur
-Dont zoom in on top left
+Movement doesnt combine if theyre both moving
+Bopth move past makes them fight
+IF i attack he doesnt move
+
+UI:
 Need to see whos farms
 See troops moving while not selected
+Resources in build(ing) menu
+More info in build menu
+Costs in building screen
+Hold shift to build multiple buildings
+Shows sprite in building
+Group moving troops
+Building focus shows production
+NExt turn doesnt freeze game
+Phillips houses reset (nerd)
+Notification for not enough resources
+
+Done
+Dont zoom in on top left

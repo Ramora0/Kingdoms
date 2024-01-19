@@ -1,5 +1,6 @@
 package com.kingdoms.ui.scenes.game;
 
+import com.kingdoms.Kingdoms;
 import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.Scene;
@@ -60,7 +61,11 @@ public abstract class WorldDisplayScene extends Scene {
       return;
     }
 
+    float oldScale = scale;
+    double mx = coordX(Kingdoms.canvas.mouseX), my = coordY(Kingdoms.canvas.mouseY);
     scale *= Math.pow(2, ((Integer) data) / 100.0);
+    offset.x += mx * Tile.TILE_WIDTH * (oldScale - scale);
+    offset.y += my * Tile.TILE_WIDTH * (oldScale - scale);
   }
 
   /**
