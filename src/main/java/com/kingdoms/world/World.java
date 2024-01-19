@@ -174,17 +174,18 @@ public class World {
     return json;
   }
 
-  public static void fromJSON(JSONObject json) { // Almost exclusively run on client
+  public static void fromJSON(JSONObject json, boolean switchPlayers) { // Almost exclusively run on client
     me = JSONSerializable.createFromJSON(json.getJSONObject("me"), Player.class);
     other = JSONSerializable.createFromJSON(json.getJSONObject("other"), Player.class);
+    if (switchPlayers) {
+      Player temp = me;
+      me = other;
+      other = temp;
+    }
 
     if (json.hasKey("victor")) {
       Player victor = JSONReferenceSerializable.getFromJSON(json.getJSONObject("victor"), Player.class);
-      if (victor == me) {
-        UI.changeScene(new EndScene(true));
-      } else {
-        UI.changeScene(new EndScene(false));
-      }
+      UI.changeScene(new EndScene(victor == me));
       return;
     }
 

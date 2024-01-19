@@ -70,14 +70,14 @@ public class Client extends Network {
 
     try {
       String worldData = in.readLine();
-      World.fromJSON(JSON.parse(worldData));
+      World.fromJSON(JSON.parse(worldData), true);
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    Player temp = World.me;
-    World.me = World.other;
-    World.other = temp;
+    // Player temp = World.me;
+    // World.me = World.other;
+    // World.other = temp;
 
     out.println(NetworkMessages.WORLD_DATA_RECEIVED);
     System.out.println("World data processed!");
