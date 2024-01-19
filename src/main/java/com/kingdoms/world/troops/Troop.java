@@ -162,7 +162,10 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     count = json.getInt("count");
     player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
-    path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class); // This aint workin
+    path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
+    if (path.contains(null)) {
+      throw new IllegalArgumentException("Path contains a null tile on loading from JSON " + json.getJSONArray("path"));
+    }
   }
 
   public JSONObject toReferenceJSON() {
