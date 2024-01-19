@@ -81,28 +81,20 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
 
   @Override
   public void doUpdate() {
-    System.out.println("Starting doUpdate for troop: " + this);
-
     if (path == null || path.isEmpty()) {
-      System.out.println("Early return condition met. path: " + path);
       return;
     }
 
-    System.out.println("Moving troop from tile: " + tile + " to tile: " + path.get(0));
     Tile.move(this, tile, path.get(0));
     tile = path.get(0);
     path.remove(0);
 
-    System.out.println("Starting combat with troops at tile: " + tile);
     Troop.combat(tile.getTroops(player), tile.getTroops(World.other(player)));
     tile.pruneTroops();
 
     if (tile.hasBuilding() && tile.getBuilding().getPlayer() != player) {
-      System.out.println("Destroying building at tile: " + tile);
       tile.destroyBuilding();
     }
-
-    System.out.println("Finished doUpdate for troop: " + this);
   }
 
   public static void combat(List<Troop> a, List<Troop> b) {
@@ -110,7 +102,6 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     int bCount = b.stream().mapToInt(t -> t.count).sum();
 
     if (aCount == 0 || bCount == 0) {
-      System.out.println("No combat");
       return;
     }
 
