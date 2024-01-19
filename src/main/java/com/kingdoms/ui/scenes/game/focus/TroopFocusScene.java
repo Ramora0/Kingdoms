@@ -2,6 +2,7 @@ package com.kingdoms.ui.scenes.game.focus;
 
 import java.util.List;
 
+import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIGroup;
@@ -34,10 +35,8 @@ public class TroopFocusScene extends FocusScene {
     } else {
       groups[0] = new UIGroup(troopLabel);
     }
-    // for (int i = 1; i < troops.size(); i++) {
-    // groups[i] = (UIText) new UIText(troops.get(i).toString(), 10, 10,
-    // 30).below(groups[i - 1], 10).setLeft();
-    // }
+
+    System.out.println(JSONSerializable.toJSONArray(troops.get(0).getPath()).toString());
 
     addContainer(groups);
   }
