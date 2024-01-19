@@ -4,11 +4,8 @@ Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
 
 Set order updates occur
-Movement doesnt combine if theyre both moving
-Bopth move past makes them fight
-IF i attack he doesnt move
+Both move past makes them fight?
 Split troops
-Unique troop ids
 Stack if not moving
 
 UI:
@@ -26,3 +23,5 @@ Done
 Dont zoom in on top left
 Hold shift to build multiple buildings
 Costs in building screen
+Movement doesnt combine if theyre both moving
+Unique troop ids

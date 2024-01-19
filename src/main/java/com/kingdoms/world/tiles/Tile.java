@@ -26,6 +26,15 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   List<Troop> troops;
 
   public void addTroops(Troop troop) {
+    if (troop.getPath() == null || troop.getPath().isEmpty()) {
+      for (Troop other : troops) {
+        if (other.getPath() == null || other.getPath().isEmpty()
+            && other.getType() == troop.getType() && other.getPlayer() == troop.getPlayer()) {
+          other.absorb(troop);
+          return;
+        }
+      }
+    }
     troops.add(troop);
   }
 
