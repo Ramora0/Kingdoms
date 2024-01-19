@@ -9,6 +9,7 @@ Bopth move past makes them fight
 IF i attack he doesnt move
 Split troops
 Unique troop ids
+Stack if not moving
 
 UI:
 Need to see whos farms

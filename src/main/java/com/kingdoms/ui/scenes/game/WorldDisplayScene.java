@@ -63,7 +63,7 @@ public abstract class WorldDisplayScene extends Scene {
 
     float oldScale = scale;
     double mx = coordX(Kingdoms.canvas.mouseX), my = coordY(Kingdoms.canvas.mouseY);
-    scale *= Math.pow(2, ((Integer) data) / 100.0);
+    scale *= Math.pow(2, ((Integer) data) / 50.0);
     offset.x += mx * Tile.TILE_WIDTH * (oldScale - scale);
     offset.y += my * Tile.TILE_WIDTH * (oldScale - scale);
   }
