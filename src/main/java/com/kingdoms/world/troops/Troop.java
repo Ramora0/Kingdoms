@@ -92,7 +92,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     Troop.combat(tile.getTroops(player), tile.getTroops(World.other(player)));
     tile.pruneTroops();
 
-    if (tile.hasBuilding() && tile.getBuilding().getPlayer() != player) {
+    if (tile.hasBuilding() && tile.getBuilding().getPlayer() != player && count > 0) {
       tile.destroyBuilding();
     }
   }

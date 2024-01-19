@@ -36,7 +36,7 @@ public class TroopFocusScene extends FocusScene {
       groups[0] = new UIGroup(troopLabel);
     }
 
-    System.out.println(JSONSerializable.toJSONArray(troops.get(0).getPath()).toString());
+    System.out.println(JSONSerializable.toJSONArray(troops).toString());
 
     addContainer(groups);
   }
