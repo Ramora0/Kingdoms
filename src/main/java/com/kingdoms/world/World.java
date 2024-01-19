@@ -153,6 +153,10 @@ public class World {
     JSONObject json = new JSONObject();
     Player victor = checkForWin();
 
+    json.setJSONObject("me", me.toJSON()); // Maybe have this depend on Server/Client? But probs also works if we jsut
+                                           // switch it when loading
+    json.setJSONObject("other", other.toJSON());
+
     if (victor != null) {
       json.setJSONObject("victor", victor.toReferenceJSON());
       return json;
@@ -167,10 +171,6 @@ public class World {
       }
     }
     json.setJSONObject("tiles", tilesJSON);
-
-    json.setJSONObject("me", me.toJSON()); // Maybe have this depend on Server/Client? But probs also works if we jsut
-                                           // switch it when loading
-    json.setJSONObject("other", other.toJSON());
     return json;
   }
 
