@@ -185,6 +185,7 @@ public class World {
       } else {
         UI.changeScene(new EndScene(false));
       }
+      return;
     }
 
     WORLD_SIZE = json.getInt("WORLD_SIZE");
