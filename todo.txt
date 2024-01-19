@@ -1,3 +1,4 @@
 Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
 Test winning, destroyig buildings, and moving troops
+Set order updates occur
