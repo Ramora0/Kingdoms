@@ -14,6 +14,12 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
     return id;
   }
 
+  int troops = 0;
+
+  public String newTroopID() {
+    return id + "-" + troops++;
+  }
+
   int color;
 
   public int getColor() {
@@ -59,6 +65,7 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
     json.setInt("color", color);
     json.setInt("resources", resources);
     json.setString("id", id);
+    json.setInt("troops", troops);
     return json;
   }
 
@@ -66,6 +73,7 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
     color = json.getInt("color");
     resources = json.getInt("resources");
     id = json.getString("id");
+    troops = json.getInt("troops");
   }
 
   @Override

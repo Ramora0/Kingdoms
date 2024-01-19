@@ -25,6 +25,12 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     }
   }
 
+  String id;
+
+  public String getID() {
+    return id;
+  }
+
   TroopType type;
 
   public TroopType getType() {
@@ -69,6 +75,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     this.player = player;
     this.count = count;
     path = new ArrayList<>();
+    id = player.newTroopID();
   }
 
   @Deprecated
@@ -154,6 +161,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     json.setJSONObject("player", player.toReferenceJSON());
     json.setJSONObject("tile", tile.toReferenceJSON());
     json.setJSONArray("path", JSONReferenceSerializable.toJSONArray(path));
+    json.setString("id", id);
     return json;
   }
 
@@ -163,6 +171,7 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
     tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
+    id = json.getString("id");
     if (path.contains(null)) {
       throw new IllegalArgumentException("Path contains a null tile on loading from JSON " + json.getJSONArray("path"));
     }
@@ -170,16 +179,16 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
 
   public JSONObject toReferenceJSON() {
     JSONObject json = new JSONObject();
-    json.setString("type", type.toString());
+    json.setString("id", id);
     json.setJSONObject("tile", tile.toReferenceJSON());
     return json;
   }
 
   public Troop fromReferenceJSON(JSONObject json) {
-    type = TroopType.valueOf(json.getString("type"));
+    String id = json.getString("id");
     List<Troop> troops = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class).getTroops();
     for (Troop troop : troops) {
-      if (troop.getType() == type) {
+      if (troop.getID().equals(id)) {
         return troop;
       }
     }
