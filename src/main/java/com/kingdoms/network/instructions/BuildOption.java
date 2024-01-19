@@ -27,7 +27,7 @@ public enum BuildOption {
       tile.build(new City(tile, player));
     }
   },
-  FARM(100) {
+  FARM(300) {
     @Override
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = FARM.getTileIfAllowed(player, x, y);
@@ -49,7 +49,7 @@ public enum BuildOption {
       tile.build(new Farm(tile, player));
     }
   },
-  TRAINING_CAMP(200) {
+  TRAINING_CAMP(500) {
     @Override
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = TRAINING_CAMP.getTileIfAllowed(player, x, y);

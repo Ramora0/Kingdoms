@@ -6,10 +6,16 @@ public class Keys {
   public static boolean[] keyPressed = new boolean[128];
 
   public static void keyPressed(Object key) {
-    keyPressed[(Character) key] = true;
+    char c = (Character) key;
+    if (c < keyPressed.length) {
+      keyPressed[c] = true;
+    }
   }
 
   public static void keyReleased(Object key) {
-    keyPressed[(Character) key] = false;
+    char c = (Character) key;
+    if (c < keyPressed.length) {
+      keyPressed[c] = false;
+    }
   }
 }

@@ -2,3 +2,6 @@ Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
 Test winning, destroyig buildings, and moving troops
 Set order updates occur
+Dont zoom in on top left
+Need to see whos farms
+See troops moving while not selected
