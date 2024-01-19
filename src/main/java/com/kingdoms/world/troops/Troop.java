@@ -100,15 +100,10 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
   }
 
   public static void combat(List<Troop> a, List<Troop> b) {
-    System.out.println("Starting combat between troops: " + a + " and " + b);
-
     int aCount = a.stream().mapToInt(t -> t.count).sum();
     int bCount = b.stream().mapToInt(t -> t.count).sum();
 
-    System.out.println("Total count of troops A: " + aCount + ", Total count of troops B: " + bCount);
-
     if (aCount == 0 || bCount == 0) {
-      System.out.println("One of the troops has no units left. Ending combat.");
       return;
     }
 
@@ -119,20 +114,15 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
       Troop aTroop = a.get(aIndex);
       Troop bTroop = b.get(bIndex);
 
-      System.out.println("Troop A: " + aTroop + ", Troop B: " + bTroop);
-
       if (aTroop.count > bTroop.count) {
-        System.out.println("Troop A has more units. Reducing units of Troop A by " + bTroop.count);
         aTroop.count -= bTroop.count;
         bTroop.count = 0;
         bIndex++;
       } else if (aTroop.count < bTroop.count) {
-        System.out.println("Troop B has more units. Reducing units of Troop B by " + aTroop.count);
         bTroop.count -= aTroop.count;
         aTroop.count = 0;
         aIndex++;
       } else {
-        System.out.println("Troop A and Troop B have equal units. Setting both to 0.");
         aTroop.count = 0;
         bTroop.count = 0;
         aIndex++;
