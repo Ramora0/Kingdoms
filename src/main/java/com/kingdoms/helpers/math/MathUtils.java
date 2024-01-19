@@ -3,6 +3,14 @@ package com.kingdoms.helpers.math;
 import com.kingdoms.Kingdoms;
 
 public class MathUtils {
+  public static <T> T random(T[] values) {
+    return values[(int) (Math.random() * values.length)];
+  }
+
+  public static int random(int[] values) {
+    return values[(int) (Math.random() * values.length)];
+  }
+
   public static boolean chance(double chance) {
     return Math.random() < chance;
   }
