@@ -12,7 +12,6 @@ import com.kingdoms.helpers.json.JSON;
 import com.kingdoms.network.instructions.Instruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
-import com.kingdoms.world.Player;
 import com.kingdoms.world.World;
 
 public class Client extends Network {
@@ -74,10 +73,6 @@ public class Client extends Network {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    // Player temp = World.me;
-    // World.me = World.other;
-    // World.other = temp;
 
     out.println(NetworkMessages.WORLD_DATA_RECEIVED);
     System.out.println("World data processed!");

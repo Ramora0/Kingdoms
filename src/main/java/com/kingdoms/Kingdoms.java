@@ -7,8 +7,6 @@ import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.shaders.Shaders;
 import com.kingdoms.world.World;
-import com.kingdoms.world.buildings.Farm;
-import com.kingdoms.world.troops.Soldier;
 
 import processing.core.PApplet;
 import processing.event.MouseEvent;

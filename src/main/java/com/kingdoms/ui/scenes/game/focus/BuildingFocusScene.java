@@ -1,7 +1,6 @@
 package com.kingdoms.ui.scenes.game.focus;
 
 import com.kingdoms.ui.elements.UIText;
-import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.world.tiles.Tile;
 
 public class BuildingFocusScene extends FocusScene {

@@ -8,7 +8,6 @@ import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.Updateable;
-import com.kingdoms.world.World;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
