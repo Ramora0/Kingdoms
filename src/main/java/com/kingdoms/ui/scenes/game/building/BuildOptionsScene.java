@@ -36,5 +36,7 @@ public class BuildOptionsScene extends Scene {
 
     addElement(close);
     addElement(buildButtons);
+
+    GameScene.addResourceDisplay(this);
   }
 }

@@ -26,6 +26,8 @@ public class BuildScene extends WorldDisplayScene {
     addElement(new UIText("Building: " + buildingName, 10, 10, 30).setTopLeft());
     addElement(
         new UIButton("X", Constants.width - 10, 10, 30, () -> UI.changeScene(new GameScene())).setTop().setRight());
+
+    GameScene.addResourceDisplay(this);
   }
 
   public void display(PApplet canvas) {

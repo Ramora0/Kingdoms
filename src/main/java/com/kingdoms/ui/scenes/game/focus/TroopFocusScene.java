@@ -3,7 +3,6 @@ package com.kingdoms.ui.scenes.game.focus;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIElement;

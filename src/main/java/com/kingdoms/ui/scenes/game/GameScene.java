@@ -6,6 +6,7 @@ import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
+import com.kingdoms.ui.scenes.Scene;
 import com.kingdoms.ui.scenes.game.building.BuildOptionsScene;
 import com.kingdoms.ui.scenes.game.focus.BuildingFocusScene;
 import com.kingdoms.ui.scenes.game.focus.TroopFocusScene;
@@ -22,15 +23,20 @@ public class GameScene extends WorldDisplayScene {
     UIButton build = (UIButton) new UIButton("Build", 10, 60, 30, () -> UI.changeScene(new BuildOptionsScene()))
         .setTopLeft().below(nextTurn, 10);
 
+    addElement(nextTurn);
+    addElement(build);
+
+    addResourceDisplay(this);
+  }
+
+  public static void addResourceDisplay(Scene scene) {
     UIText resources = (UIText) new UIText(() -> "Resources: " + World.me.getResources(), 1190, 10, 30)
         .setRight().setTop();
     UIText otherResources = (UIText) new UIText(() -> "Other: " + World.other.getResources(), 1190, 50, 30)
         .setRight().below(resources, 0);
-    UIContainer resourcesContainer = new UIContainer(6, resources, otherResources);
+    UIContainer resourcesContainer = new UIContainer(3, resources, otherResources);
 
-    addElement(nextTurn);
-    addElement(build);
-    addElement(resourcesContainer);
+    scene.addElement(resourcesContainer);
   }
 
   @Subscribe

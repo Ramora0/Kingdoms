@@ -95,11 +95,7 @@ public class World {
 
     Player victor = checkForWin();
     if (victor != null) {
-      if (victor == me) {
-        UI.changeScene(new EndScene(true));
-      } else {
-        UI.changeScene(new EndScene(false));
-      }
+      UI.changeScene(new EndScene(victor == me));
     }
   }
 

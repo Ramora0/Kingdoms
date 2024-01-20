@@ -95,10 +95,6 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     Tile fromTile = tile;
     tile = path.remove(0);
     Tile.move(this, fromTile, tile);
-
-    if (tile.hasBuilding() && tile.getBuilding().getPlayer() != player && count > 0) {
-      tile.destroyBuilding();
-    }
   }
 
   public static void combat(List<Troop> a, List<Troop> b) {

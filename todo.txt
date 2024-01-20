@@ -3,15 +3,13 @@ Group moving troops
 Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
 
-Set order updates occur
 Both move past makes them fight?
 Split troops
 
 UI:
 Need to see whos farms
 See troops moving while not selected
-Resources in build(ing) menu
-More info in build menu
+Production in build menu
 Shows sprite in building
 Building focus shows production
 Next turn doesnt freeze game
@@ -27,3 +25,5 @@ Unique troop ids
 Troop path null exception
 Size independent worlds
 Stack if not moving
+Set order updates occur
+Resources in build(ing) menu
