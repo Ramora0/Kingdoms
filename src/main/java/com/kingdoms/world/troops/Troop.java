@@ -92,9 +92,9 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
       return;
     }
 
-    tile = path.get(0);
-    Tile moveTo = path.remove(0);
-    Tile.move(this, tile, moveTo);
+    Tile fromTile = tile;
+    tile = path.remove(0);
+    Tile.move(this, fromTile, tile);
 
     Troop.combat(tile.getTroops(player), tile.getTroops(World.other(player))); // TODO: Make sure this combat only
                                                                                // happens once! Shouldnt be run by both
