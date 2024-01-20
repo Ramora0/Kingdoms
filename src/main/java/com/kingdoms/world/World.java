@@ -192,10 +192,15 @@ public class World {
     WORLD_SIZE = json.getInt("WORLD_SIZE");
     JSONObject tilesJSON = json.getJSONObject("tiles");
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
+
+    for (int x = 0; x < WORLD_SIZE; x++)
+      for (int y = 0; y < WORLD_SIZE; y++)
+        tiles[x][y] = new Tile();
+
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
         JSONObject tileJSON = tilesJSON.getJSONObject("tile:" + x + "," + y);
-        tiles[x][y] = JSONSerializable.createFromJSON(tileJSON, Tile.class);
+        tiles[x][y].fromJSON(tileJSON);
       }
     }
   }

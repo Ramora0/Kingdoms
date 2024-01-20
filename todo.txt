@@ -25,3 +25,4 @@ Hold shift to build multiple buildings
 Costs in building screen
 Movement doesnt combine if theyre both moving
 Unique troop ids
+Troop path null exception
