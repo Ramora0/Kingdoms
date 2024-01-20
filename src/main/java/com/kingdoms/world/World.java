@@ -25,10 +25,9 @@ public class World {
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        float height = MathUtils.noise(x * 0.4f, y * 0.5f) - 0.5f;
-        // height -= Math.pow(MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) -
-        // 5, 3) / 125;
-        height += 0.5f - MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) / 10;
+        double height = 7 * (MathUtils.noise(x * 0.25f, y * 0.25f) - 0.5) - 1;
+        double scaledDist = MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) / (WORLD_SIZE / 2);
+        height -= 5 * (Math.pow(scaledDist, 3) - 0.5);
         tiles[x][y] = new Tile(x, y, height < 0);
       }
     }
@@ -37,14 +36,14 @@ public class World {
     other = new Player("clientPlayer", Colors.color(255, 0, 0));
 
     for (int x = WORLD_SIZE / 2; x < WORLD_SIZE; x++) {
-      if (World.tiles[x + 1][WORLD_SIZE / 2].isLand())
+      if (x + 1 < WORLD_SIZE && World.tiles[x + 1][WORLD_SIZE / 2].isLand())
         continue;
       tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], me));
       break;
     }
 
     for (int x = WORLD_SIZE / 2 - 1; x >= 0; x--) {
-      if (World.tiles[x - 1][WORLD_SIZE / 2].isLand())
+      if (x - 1 >= 0 && World.tiles[x - 1][WORLD_SIZE / 2].isLand())
         continue;
       tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], other));
       break;
