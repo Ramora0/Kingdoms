@@ -6,7 +6,6 @@ Tiles shoudl be seperate classes
 Set order updates occur
 Both move past makes them fight?
 Split troops
-Stack if not moving
 
 UI:
 Need to see whos farms
@@ -26,3 +25,5 @@ Costs in building screen
 Movement doesnt combine if theyre both moving
 Unique troop ids
 Troop path null exception
+Size independent worlds
+Stack if not moving

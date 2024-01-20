@@ -1,5 +1,7 @@
 package com.kingdoms.world;
 
+import java.util.function.Consumer;
+
 import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
@@ -86,16 +88,10 @@ public class World {
   }
 
   public static void nextTurn() {
-    for (int x = 0; x < WORLD_SIZE; x++) {
-      for (int y = 0; y < WORLD_SIZE; y++) {
-        tiles[x][y].nextTurn();
-      }
-    }
-    for (int x = 0; x < WORLD_SIZE; x++) {
-      for (int y = 0; y < WORLD_SIZE; y++) {
-        tiles[x][y].unupdate();
-      }
-    }
+    updateTile((tile) -> tile.updateBuildings());
+    updateTile((tile) -> tile.updateTroops());
+    updateTile((tile) -> tile.checkCombat());
+    updateTile((tile) -> tile.unupdate());
 
     Player victor = checkForWin();
     if (victor != null) {
@@ -103,6 +99,14 @@ public class World {
         UI.changeScene(new EndScene(true));
       } else {
         UI.changeScene(new EndScene(false));
+      }
+    }
+  }
+
+  public static void updateTile(Consumer<Tile> onTile) {
+    for (int x = 0; x < WORLD_SIZE; x++) {
+      for (int y = 0; y < WORLD_SIZE; y++) {
+        onTile.accept(tiles[x][y]);
       }
     }
   }
