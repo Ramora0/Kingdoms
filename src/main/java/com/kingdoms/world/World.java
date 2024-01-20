@@ -27,9 +27,9 @@ public class World {
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        double height = 7 * (MathUtils.noise(x * 0.25f, y * 0.25f) - 0.5) - 1;
+        double height = MathUtils.noise(x * 0.25f, y * 0.25f);
         double scaledDist = MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) / (WORLD_SIZE / 2);
-        height -= 5 * (Math.pow(scaledDist, 3) - 0.5);
+        height -= scaledDist;
         tiles[x][y] = new Tile(x, y, height < 0);
       }
     }

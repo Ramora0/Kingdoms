@@ -45,7 +45,11 @@ public class SetTroopPathInstruction extends Instruction {
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
 
-    TroopType troopType = TroopType.valueOf(json.getJSONObject("troop").getString("type"));
+    String troopTypeString = json.getJSONObject("troop").getString("type");
+    if (troopTypeString == null)
+      throw new IllegalArgumentException(
+          "Troop type cannot be null for troop " + json.getJSONObject("troop").toString());
+    TroopType troopType = TroopType.valueOf(troopTypeString);
     troop = JSONReferenceSerializable.getFromJSON(json.getJSONObject("troop"), troopType.clazz);
 
     path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);

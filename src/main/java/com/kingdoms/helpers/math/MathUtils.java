@@ -1,5 +1,7 @@
 package com.kingdoms.helpers.math;
 
+import java.util.List;
+
 import com.kingdoms.Kingdoms;
 
 public class MathUtils {
@@ -9,6 +11,10 @@ public class MathUtils {
 
   public static int random(int[] values) {
     return values[(int) (Math.random() * values.length)];
+  }
+
+  public static <T> T random(List<T> values) {
+    return values.get((int) (Math.random() * values.size()));
   }
 
   public static boolean chance(double chance) {

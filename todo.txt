@@ -2,9 +2,12 @@ Backburner:
 Group moving troops
 Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
+World size greater than 50 by having the world display scale down as you zoom out
 
 Both move past makes them fight?
 Split troops
+Change building vs combat order
+Fix building collision
 
 UI:
 Need to see whos farms
@@ -15,6 +18,7 @@ Building focus shows production
 Next turn doesnt freeze game
 Phillips houses reset (nerd)
 Notification for not enough resources
+Close button above resources building screen
 
 Done
 Dont zoom in on top left

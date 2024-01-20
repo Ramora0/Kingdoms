@@ -14,6 +14,10 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
     return id;
   }
 
+  public boolean isServer() {
+    return id.equals("serverPlayer");
+  }
+
   int troops = 0;
 
   public String newTroopID() {
