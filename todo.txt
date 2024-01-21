@@ -10,12 +10,12 @@ Fix building collision
 
 UI:
 Need to see whos farms (test)
+Phillips houses reset (nerd)
 See troops moving while not selected
 Production in build menu
 Shows sprite in building
 Building focus shows production
 Next turn doesnt freeze game
-Phillips houses reset (nerd)
 Notification for not enough resources
 Close button above resources building screen
 

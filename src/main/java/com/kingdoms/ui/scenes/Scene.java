@@ -1,6 +1,7 @@
 package com.kingdoms.ui.scenes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.kingdoms.helpers.events.EventBus;
@@ -19,8 +20,14 @@ public abstract class Scene {
 
   public void display(PApplet canvas) {
     canvas.strokeWeight(1);
-    for (int i = elements.size() - 1; i >= 0; i--) {
-      elements.get(i).display(canvas);
+    Iterator<UIElement> iterator = elements.iterator();
+    while (iterator.hasNext()) {
+      UIElement element = iterator.next();
+      if (element.shouldDie()) {
+        iterator.remove();
+      } else {
+        element.display(canvas);
+      }
     }
   }
 

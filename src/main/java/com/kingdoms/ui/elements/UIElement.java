@@ -206,6 +206,10 @@ public abstract class UIElement {
     return x >= getX() && x <= getX() + width.get() && y >= getY() && y <= getY() + height.get();
   }
 
+  public boolean shouldDie() {
+    return false;
+  }
+
   public abstract void display(PApplet canvas);
 
   public void kill() {

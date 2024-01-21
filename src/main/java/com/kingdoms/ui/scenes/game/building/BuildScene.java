@@ -7,6 +7,7 @@ import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.Keys;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.elements.UINotification;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
@@ -58,6 +59,8 @@ public class BuildScene extends WorldDisplayScene {
       // System.out.println("Tile: " + World.toJSON());
       if (!Keys.keyPressed[Keys.SHIFT])
         UI.changeScene(new GameScene());
+    } else {
+      addElement(new UINotification("Cannot build here!", canvas.mouseX, canvas.mouseY));
     }
   }
 }
