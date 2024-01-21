@@ -1,21 +1,23 @@
 package com.kingdoms.world.buildings;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-
 import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.ui.images.ImageManager;
 import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
+import com.kingdoms.world.World;
 import com.kingdoms.world.tiles.Tile;
 
-import processing.core.PImage;
 import processing.data.JSONObject;
 
 public class Farm extends Building {
+  boolean hasHouse = true;
+
   public Farm(Tile tile, Player player) {
     super(BuildingType.FARM, tile, player);
+    if (World.hasAdjacentTile(tile.getX(), tile.getY(),
+        (other) -> other.hasBuilding() && other.getBuilding().getType() == BuildingType.FARM
+            && other.getBuilding().getPlayer() == player))
+      hasHouse = MathUtils.chance(0.7);
   }
 
   @Deprecated
@@ -24,10 +26,9 @@ public class Farm extends Building {
   }
 
   public void initSprite() {
-    List<Supplier<PImage>> images = new ArrayList<>();
-    images.add(() -> ImageManager.getImage("images/buildings/farm1.png"));
-    images.add(() -> ImageManager.getTeamImage("images/buildings/farm0.png", player.getColor()));
-    sprite = new Sprite(MathUtils.random(images).get());
+    sprite = new Sprite(hasHouse
+        ? ImageManager.getTeamImage("images/buildings/farmHouse.png", player.getColor())
+        : ImageManager.getImage("images/buildings/farm.png"));
   }
 
   @Override
@@ -37,11 +38,14 @@ public class Farm extends Building {
 
   @Override
   public JSONObject toJSON() {
-    return super.mainToJSON();
+    JSONObject json = super.mainToJSON();
+    json.setBoolean("hasHouse", hasHouse);
+    return json;
   }
 
   @Override
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
+    hasHouse = json.getBoolean("hasHouse");
   }
 }

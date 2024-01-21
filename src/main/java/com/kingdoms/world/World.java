@@ -27,7 +27,7 @@ public class World {
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        double height = MathUtils.noise(x * 0.25f, y * 0.25f);
+        double height = MathUtils.noise(x * 0.2f, y * 0.2f);
         double scaledDist = MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) / (WORLD_SIZE / 2);
         height -= scaledDist;
         tiles[x][y] = new Tile(x, y, height < 0);
@@ -88,8 +88,8 @@ public class World {
   }
 
   public static void nextTurn() {
-    updateTile((tile) -> tile.updateBuildings());
     updateTile((tile) -> tile.updateTroops());
+    updateTile((tile) -> tile.updateBuildings());
     updateTile((tile) -> tile.checkCombat());
     updateTile((tile) -> tile.unupdate());
 

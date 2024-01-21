@@ -6,11 +6,10 @@ World size greater than 50 by having the world display scale down as you zoom ou
 
 Both move past makes them fight?
 Split troops
-Change building vs combat order
 Fix building collision
 
 UI:
-Need to see whos farms
+Need to see whos farms (test)
 See troops moving while not selected
 Production in build menu
 Shows sprite in building
@@ -31,3 +30,4 @@ Size independent worlds
 Stack if not moving
 Set order updates occur
 Resources in build(ing) menu
+Change building vs combat order

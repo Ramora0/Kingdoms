@@ -9,7 +9,7 @@ import processing.data.JSONObject;
  * BuildInstruction represents an instruction sent to World to build a building
  */
 public class BuildInstruction extends Instruction {
-  BuildOption option;
+  BuildOption option; // TODO: Should include a reference to a building instead of just a command
 
   public Player player;
   public int x, y; // TODO: Change to tile and store as a tile reference
