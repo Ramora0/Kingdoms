@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kingdoms.helpers.StringManager;
-import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIContainer;
@@ -12,14 +11,15 @@ import com.kingdoms.ui.elements.UIGroup;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.Scene;
 import com.kingdoms.ui.scenes.game.GameScene;
+import com.kingdoms.world.buildings.BuildingType;
 
 public class BuildOptionsScene extends Scene {
   public BuildOptionsScene() {
     super();
 
-    BuildOption[] options = BuildOption.values();
+    BuildingType[] options = BuildingType.values();
     List<UIGroup> buttons = new ArrayList<>();
-    for (BuildOption option : options) {
+    for (BuildingType option : options) {
       UIButton button = (UIButton) new UIButton(StringManager.enumToString(option), 10, 10, 30,
           () -> UI.changeScene(new BuildScene(option))).setTopLeft();
       UIText text = (UIText) new UIText("Cost: " + option.getCost(), 10, 30, 30).rightOf(button, 10);

@@ -3,6 +3,7 @@ Group moving troops
 Dynamic button 4 ready 4 next turn
 Tiles shoudl be seperate classes
 World size greater than 50 by having the world display scale down as you zoom out
+Move buildingtype functionality to individual buildings
 
 Both move past makes them fight?
 Split troops
@@ -10,11 +11,10 @@ Fix building collision
 
 UI:
 Need to see whos farms (test)
-Phillips houses reset (nerd)
 See troops moving while not selected
 Production in build menu
-Shows sprite in building
 Building focus shows production
+Shows sprite in building
 
 Done
 Dont zoom in on top left
@@ -30,3 +30,4 @@ Resources in build(ing) menu
 Next turn doesnt freeze game
 Change building vs combat order
 Close button above resources building screen
+Phillips houses reset (nerd)

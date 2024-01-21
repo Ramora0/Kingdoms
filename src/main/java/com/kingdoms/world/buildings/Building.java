@@ -12,18 +12,6 @@ import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public abstract class Building extends Updateable implements JSONSerializable {
-  public enum BuildingType {
-    CITY(City.class),
-    FARM(Farm.class),
-    TRAINING_CAMP(TrainingCamp.class),;
-
-    public final Class<? extends Building> clazz;
-
-    BuildingType(Class<? extends Building> buildingClass) {
-      this.clazz = buildingClass;
-    }
-  }
-
   BuildingType type;
 
   public BuildingType getType() {

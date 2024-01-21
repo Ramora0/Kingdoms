@@ -2,7 +2,7 @@ package com.kingdoms.world;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
-import com.kingdoms.world.buildings.Building.BuildingType;
+import com.kingdoms.world.buildings.BuildingType;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.data.JSONObject;

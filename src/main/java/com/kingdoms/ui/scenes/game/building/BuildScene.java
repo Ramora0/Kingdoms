@@ -3,7 +3,6 @@ package com.kingdoms.ui.scenes.game.building;
 import com.kingdoms.helpers.canvas.Constants;
 import com.kingdoms.helpers.events.EventBus.Subscribe;
 import com.kingdoms.network.instructions.BuildInstruction;
-import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.Keys;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
@@ -13,14 +12,15 @@ import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.GameScene;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.World;
+import com.kingdoms.world.buildings.BuildingType;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 
 public class BuildScene extends WorldDisplayScene {
-  BuildOption option;
+  BuildingType option;
 
-  public BuildScene(BuildOption option) {
+  public BuildScene(BuildingType option) {
     super();
     this.option = option;
     String buildingName = option.toString().substring(0, 1).toUpperCase()
