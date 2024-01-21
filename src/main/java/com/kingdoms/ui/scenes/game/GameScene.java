@@ -29,7 +29,7 @@ public class GameScene extends WorldDisplayScene {
     addResourceDisplay(this);
   }
 
-  public static void addResourceDisplay(Scene scene) {
+  public static UIContainer addResourceDisplay(Scene scene) {
     UIText resources = (UIText) new UIText(() -> "Resources: " + World.me.getResources(), 1190, 10, 30)
         .setRight().setTop();
     UIText otherResources = (UIText) new UIText(() -> "Other: " + World.other.getResources(), 1190, 50, 30)
@@ -37,6 +37,8 @@ public class GameScene extends WorldDisplayScene {
     UIContainer resourcesContainer = new UIContainer(3, resources, otherResources);
 
     scene.addElement(resourcesContainer);
+
+    return resourcesContainer;
   }
 
   @Subscribe

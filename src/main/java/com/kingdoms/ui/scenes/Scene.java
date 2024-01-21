@@ -1,7 +1,6 @@
 package com.kingdoms.ui.scenes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.kingdoms.helpers.events.EventBus;
@@ -20,18 +19,26 @@ public abstract class Scene {
 
   public void display(PApplet canvas) {
     canvas.strokeWeight(1);
-    Iterator<UIElement> iterator = elements.iterator();
-    while (iterator.hasNext()) {
-      UIElement element = iterator.next();
+    for (int i = 0; i < elements.size(); i++) {
+      UIElement element = elements.get(i);
+      element.display(canvas);
       if (element.shouldDie()) {
-        iterator.remove();
-      } else {
-        element.display(canvas);
+        element.kill();
+        // This could be an issue because it is removing more than one element, however
+        // since the elements of a container are generally after the container itself,
+        // this shouldn't be a problem
+        removeElement(element);
+        i--;
       }
     }
   }
 
   public void addElement(UIElement element) {
+    if (element instanceof UIContainer) {
+      addElement((UIContainer) element);
+      return;
+    }
+
     elements.add(element);
   }
 
@@ -41,6 +48,11 @@ public abstract class Scene {
   }
 
   public void removeElement(UIElement element) {
+    if (element instanceof UIContainer) {
+      removeElement((UIContainer) element);
+      return;
+    }
+
     element.kill();
     elements.remove(element);
   }

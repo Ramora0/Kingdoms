@@ -27,7 +27,6 @@ public class UIGroup extends UIElement {
   }
 
   public void padding(float padding) {
-
     x = () -> {
       float minX = Float.MAX_VALUE;
       for (UIElement element : children) {

@@ -20,6 +20,6 @@ public class UINotification extends UIContainer {
 
   @Override
   public boolean shouldDie() {
-    return System.currentTimeMillis() - startTime > 10000;
+    return System.currentTimeMillis() - startTime > 3000;
   }
 }

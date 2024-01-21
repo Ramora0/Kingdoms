@@ -7,6 +7,7 @@ import com.kingdoms.helpers.StringManager;
 import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIGroup;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.Scene;
@@ -31,12 +32,12 @@ public class BuildOptionsScene extends Scene {
 
     UIGroup buildButtons = new UIGroup(buttons);
 
+    UIContainer resourceDisplay = GameScene.addResourceDisplay(this);
+
     UIButton close = (UIButton) new UIButton("X", 1190, 10, 50, () -> UI.changeScene(new GameScene()))
-        .setTop().setRight();
+        .setTop().rightOf(resourceDisplay, 10);
 
     addElement(close);
     addElement(buildButtons);
-
-    GameScene.addResourceDisplay(this);
   }
 }

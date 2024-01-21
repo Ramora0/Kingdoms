@@ -15,8 +15,6 @@ See troops moving while not selected
 Production in build menu
 Shows sprite in building
 Building focus shows production
-Next turn doesnt freeze game
-Notification for not enough resources
 Close button above resources building screen
 
 Done
@@ -30,4 +28,5 @@ Size independent worlds
 Stack if not moving
 Set order updates occur
 Resources in build(ing) menu
+Next turn doesnt freeze game
 Change building vs combat order
