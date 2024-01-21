@@ -7,6 +7,7 @@ import com.kingdoms.network.instructions.BuildOption;
 import com.kingdoms.ui.Keys;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
+import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UINotification;
 import com.kingdoms.ui.elements.UIText;
 import com.kingdoms.ui.scenes.game.GameScene;
@@ -25,10 +26,12 @@ public class BuildScene extends WorldDisplayScene {
     String buildingName = option.toString().substring(0, 1).toUpperCase()
         + option.toString().substring(1).toLowerCase();
     addElement(new UIText("Building: " + buildingName, 10, 10, 30).setTopLeft());
-    addElement(
-        new UIButton("X", Constants.width - 10, 10, 30, () -> UI.changeScene(new GameScene())).setTop().setRight());
 
-    GameScene.addResourceDisplay(this);
+    UIContainer resourceDisplay = GameScene.addResourceDisplay(this);
+
+    addElement(
+        new UIButton("X", Constants.width - 10, 10, 30, () -> UI.changeScene(new GameScene())).setTop()
+            .leftOf(resourceDisplay, 10));
   }
 
   public void display(PApplet canvas) {

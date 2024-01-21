@@ -34,8 +34,8 @@ public class BuildOptionsScene extends Scene {
 
     UIContainer resourceDisplay = GameScene.addResourceDisplay(this);
 
-    UIButton close = (UIButton) new UIButton("X", 1190, 10, 50, () -> UI.changeScene(new GameScene()))
-        .setTop().rightOf(resourceDisplay, 10);
+    UIButton close = (UIButton) new UIButton("X", 1190, 10, 30, () -> UI.changeScene(new GameScene()))
+        .setTop().leftOf(resourceDisplay, 10);
 
     addElement(close);
     addElement(buildButtons);

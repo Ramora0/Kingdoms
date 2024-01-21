@@ -15,7 +15,6 @@ See troops moving while not selected
 Production in build menu
 Shows sprite in building
 Building focus shows production
-Close button above resources building screen
 
 Done
 Dont zoom in on top left
@@ -30,3 +29,4 @@ Set order updates occur
 Resources in build(ing) menu
 Next turn doesnt freeze game
 Change building vs combat order
+Close button above resources building screen
