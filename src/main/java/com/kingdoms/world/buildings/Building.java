@@ -2,16 +2,15 @@ package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
-import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Updateable;
+import com.kingdoms.world.WorldElement;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public abstract class Building extends Updateable implements JSONSerializable {
+public abstract class Building extends WorldElement implements JSONSerializable {
   BuildingType type;
 
   public BuildingType getType() {
@@ -30,8 +29,6 @@ public abstract class Building extends Updateable implements JSONSerializable {
     this.tile = tile;
   }
 
-  Sprite sprite;
-
   public Building(BuildingType type, Tile tile, Player player) {
     this.type = type;
     this.tile = tile;
@@ -43,12 +40,8 @@ public abstract class Building extends Updateable implements JSONSerializable {
     this.type = type;
   }
 
-  public abstract void initSprite();
-
   public void display(PApplet canvas) {
-    if (sprite == null)
-      initSprite();
-    sprite.display(canvas, WorldDisplayScene.worldDisplayX(tile.getX()), WorldDisplayScene.worldDisplayY(tile.getY()));
+    super.display(canvas, WorldDisplayScene.worldDisplayX(tile.getX()), WorldDisplayScene.worldDisplayY(tile.getY()));
   }
 
   // JSON METHODS \\

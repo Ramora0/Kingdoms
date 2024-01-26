@@ -5,15 +5,16 @@ import java.util.List;
 
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
+import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
-import com.kingdoms.world.Updateable;
+import com.kingdoms.world.WorldElement;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public abstract class Troop extends Updateable implements JSONSerializable, JSONReferenceSerializable<Troop> {
+public abstract class Troop extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Troop> {
   public enum TroopType {
     SOLDIER(Soldier.class);
 
@@ -128,6 +129,12 @@ public abstract class Troop extends Updateable implements JSONSerializable, JSON
     }
 
     System.out.println("Finished combat between troops: " + a + " and " + b);
+  }
+
+  // TODO: Fix this at some point
+  @Override
+  public Sprite getSprite() {
+    throw new UnsupportedOperationException("Shouldn't be displaying troops like this");
   }
 
   public void display(PApplet canvas) {

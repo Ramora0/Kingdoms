@@ -1,6 +1,7 @@
 package com.kingdoms.world.buildings;
 
-import com.kingdoms.ui.images.ColorSprite;
+import com.kingdoms.ui.images.ColorImage;
+import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.tiles.Tile;
 
@@ -16,8 +17,8 @@ public class City extends Building {
     super(BuildingType.CITY);
   }
 
-  public void initSprite() {
-    sprite = new ColorSprite(player.getColor());
+  public Sprite getSprite() {
+    return new Sprite(new ColorImage(player.getColor()));
   }
 
   @Override

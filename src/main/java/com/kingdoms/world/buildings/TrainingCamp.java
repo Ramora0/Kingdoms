@@ -1,7 +1,8 @@
 package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.canvas.Colors;
-import com.kingdoms.ui.images.ColorSprite;
+import com.kingdoms.ui.images.ColorImage;
+import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Soldier;
@@ -19,9 +20,8 @@ public class TrainingCamp extends Building {
     super(BuildingType.TRAINING_CAMP);
   }
 
-  public void initSprite() {
-    // sprite = new Sprite(ImageCache.getImage("images/farm1"));
-    sprite = new ColorSprite(Colors.color(150));
+  public Sprite getSprite() {
+    return new Sprite(new ColorImage(Colors.color(150)));
   }
 
   @Override

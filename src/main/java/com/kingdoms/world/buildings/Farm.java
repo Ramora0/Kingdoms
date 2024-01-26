@@ -1,6 +1,7 @@
 package com.kingdoms.world.buildings;
 
 import com.kingdoms.helpers.math.MathUtils;
+import com.kingdoms.ui.images.Image;
 import com.kingdoms.ui.images.ImageManager;
 import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.world.Player;
@@ -25,10 +26,10 @@ public class Farm extends Building {
     super(BuildingType.FARM);
   }
 
-  public void initSprite() {
-    sprite = new Sprite(hasHouse
+  public Sprite getSprite() {
+    return new Sprite(new Image(hasHouse
         ? ImageManager.getTeamImage("images/buildings/farmHouse.png", player.getColor())
-        : ImageManager.getImage("images/buildings/farm.png"));
+        : ImageManager.getImage("images/buildings/farm.png")));
   }
 
   @Override

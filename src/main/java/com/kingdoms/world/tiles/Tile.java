@@ -9,18 +9,21 @@ import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
-import com.kingdoms.ui.images.ColorSprite;
+import com.kingdoms.ui.images.BorderImage;
+import com.kingdoms.ui.images.ColorImage;
 import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.World;
+import com.kingdoms.world.WorldElement;
 import com.kingdoms.world.buildings.Building;
 import com.kingdoms.world.troops.Troop;
 
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
+//TODO: Please seperate this out into classes based on biome!!!
+public class Tile extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Tile> {
   public static final int TILE_WIDTH = 16;
 
   List<Troop> troops;
@@ -65,8 +68,6 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
     return !isWater;
   }
 
-  Sprite sprite;
-
   Building building;
 
   public Building getBuilding() {
@@ -100,6 +101,11 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
   }
 
   // GAMEPLAY \\
+
+  @Override
+  public void doUpdate() {
+    throw new UnsupportedOperationException("This isn't how 'tile' should be updated");
+  }
 
   public static void move(Troop troop, Tile from, Tile to) {
     from.troops.remove(troop);
@@ -145,11 +151,15 @@ public class Tile implements JSONSerializable, JSONReferenceSerializable<Tile> {
 
   // UI \\
 
+  public Sprite getSprite() {
+    return new Sprite(new ColorImage(isWater ? Colors.color(100, 150, 255) : Colors.color(22, 178, 56)),
+        // TODO: Create a custome TilePredicate class that automatically returns false
+        // if the tile is null
+        new BorderImage(x, y, (tile) -> tile == null || this.isWater == tile.isWater, Colors.color(227, 208, 114)));
+  }
+
   public void display(PApplet canvas) {
-    if (sprite == null) {
-      sprite = new ColorSprite(isWater ? Colors.color(100, 150, 255) : Colors.color(50, 255, 50));
-    }
-    sprite.display(canvas, WorldDisplayScene.worldDisplayX(x), WorldDisplayScene.worldDisplayY(y));
+    super.display(canvas, WorldDisplayScene.worldDisplayX(x), WorldDisplayScene.worldDisplayY(y));
 
     if (hasBuilding()) {
       building.display(canvas);

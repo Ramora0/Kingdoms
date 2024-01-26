@@ -2,11 +2,11 @@ package com.kingdoms.ui.images;
 
 import processing.core.PApplet;
 
-public class ColorSprite extends Sprite {
+public class ColorImage extends Image {
   int color;
 
-  public ColorSprite(int color) {
-    super(null);
+  public ColorImage(int color) {
+    super(null); // TODO: Please use a PGraphics
     this.color = color;
   }
 

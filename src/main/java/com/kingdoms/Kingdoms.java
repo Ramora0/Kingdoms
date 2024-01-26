@@ -32,7 +32,7 @@ public class Kingdoms extends PApplet {
 
     // TODO: Have this reference a testing variable so I can turn that off
     World.generateWorld(50);
-    World.tiles[10][10].build(new Farm(World.tiles[10][10], World.me));
+    World.tiles[25][25].build(new Farm(World.tiles[25][25], World.me));
     World.me.addResources(-1000);
     // World.tiles[10][10].addTroops(new Soldier(World.tiles[10][10], World.me,
     // 10));
