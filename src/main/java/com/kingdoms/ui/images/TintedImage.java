@@ -3,10 +3,10 @@ package com.kingdoms.ui.images;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class ColoredImage extends Image {
+public class TintedImage extends Image {
   int color;
 
-  public ColoredImage(PImage image, int color) {
+  public TintedImage(PImage image, int color) {
     super(image);
     this.color = color;
   }

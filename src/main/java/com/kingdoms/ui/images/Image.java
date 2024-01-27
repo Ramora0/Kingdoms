@@ -4,18 +4,25 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Image {
-  PImage image;
+  Image image;
 
   public Image(PImage image) {
+    this.image = new RawImage(image);
+  }
+
+  public Image(Image image) {
     this.image = image;
   }
 
+  public Image() {
+    this.image = null;
+  }
+
   public void display(PApplet canvas, float x, float y) {
-    canvas.image(image, x, y);
+    image.display(canvas, x, y);
   }
 
   public boolean isUseless() {
-    return false; // TODO: This should return true if image is null, but ColorImage uses null
-                  // Image :(
+    return image == null;
   }
 }

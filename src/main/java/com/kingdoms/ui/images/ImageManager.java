@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kingdoms.Kingdoms;
 import com.kingdoms.helpers.canvas.Colors;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 
 public class ImageManager {
@@ -18,6 +19,23 @@ public class ImageManager {
 
     PImage image = loadImage(path);
     cache.put(path, image);
+    return image;
+  }
+
+  public static PImage getColorImage(int color, int width, int height) {
+    String cacheKey = Integer.toHexString(color) + ":" + width + ":" + height;
+
+    if (cache.containsKey(cacheKey)) {
+      return cache.get(cacheKey);
+    }
+
+    PGraphics image = Kingdoms.canvas.createGraphics(width, height);
+    image.beginDraw();
+    image.background(color);
+    image.endDraw();
+
+    cache.put(cacheKey, image);
+
     return image;
   }
 

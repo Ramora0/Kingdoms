@@ -24,6 +24,7 @@ import processing.data.JSONObject;
 
 //TODO: Please seperate this out into classes based on biome!!!
 public class Tile extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Tile> {
+  /** Display width of a tile in pixels */
   public static final int TILE_WIDTH = 16;
 
   List<Troop> troops;

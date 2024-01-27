@@ -1,19 +1,13 @@
 package com.kingdoms.ui.images;
 
-import processing.core.PApplet;
+import com.kingdoms.world.tiles.Tile;
 
 public class ColorImage extends Image {
-  int color;
-
-  public ColorImage(int color) {
-    super(null); // TODO: Please use a PGraphics
-    this.color = color;
+  public ColorImage(int color, int width, int height) {
+    super(ImageManager.getColorImage(color, width, height));
   }
 
-  @Override
-  public void display(PApplet canvas, float x, float y) {
-    canvas.noStroke();
-    canvas.fill(color);
-    canvas.rect(x, y, 16, 16);
+  public ColorImage(int color) {
+    this(color, Tile.TILE_WIDTH, Tile.TILE_WIDTH);
   }
 }

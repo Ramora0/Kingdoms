@@ -23,7 +23,8 @@ public class Sprite {
   }
 
   public void display(PApplet canvas, float x, float y) {
-    for (Image image : images)
+    for (Image image : images) {
       image.display(canvas, x, y);
+    }
   }
 }

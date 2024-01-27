@@ -5,23 +5,14 @@ import java.util.function.Predicate;
 import com.kingdoms.world.World;
 import com.kingdoms.world.tiles.Tile;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class BorderImage extends Image {
-  int color;
-
   public BorderImage(int x, int y, Predicate<Tile> neighbor, int color) {
-    super(null);
-    image = getBorder(neighbor.test(World.getTile(x + 1, y)), neighbor.test(World.getTile(x, y - 1)),
+    super();
+    PImage borderImage = getBorder(neighbor.test(World.getTile(x + 1, y)), neighbor.test(World.getTile(x, y - 1)),
         neighbor.test(World.getTile(x - 1, y)), neighbor.test(World.getTile(x, y + 1)));
-    this.color = color;
-  }
-
-  public void display(PApplet canvas, float x, float y) {
-    canvas.tint(color);
-    super.display(canvas, x, y);
-    canvas.noTint();
+    image = borderImage == null ? null : new TintedImage(borderImage, color);
   }
 
   /**
