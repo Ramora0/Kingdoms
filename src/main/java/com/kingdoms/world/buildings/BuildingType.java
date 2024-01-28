@@ -6,13 +6,14 @@ import com.kingdoms.world.tiles.Tile;
 
 /** BuildOption represents a kind of building to build */
 public enum BuildingType {
+  // TODO: Just move this stuff to the actual classes
   CITY(City.class, 500) {
     @Override
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = CITY.getTileIfAllowed(player, x, y);
       if (tile == null)
         return false;
-      return tile.isLand();
+      return !tile.isWater();
     }
 
     @Override
@@ -28,7 +29,7 @@ public enum BuildingType {
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = FARM.getTileIfAllowed(player, x, y);
 
-      if (tile == null || !tile.isLand())
+      if (tile == null || tile.isWater())
         return false;
 
       return World.hasAdjacentTile(x, y, (t) -> {
@@ -50,7 +51,7 @@ public enum BuildingType {
     public boolean canBuildAt(Player player, int x, int y) {
       Tile tile = TRAINING_CAMP.getTileIfAllowed(player, x, y);
 
-      if (tile == null || !tile.isLand())
+      if (tile == null || tile.isWater())
         return false;
 
       return World.hasAdjacentTile(x, y, (t) -> {

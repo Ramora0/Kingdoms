@@ -10,8 +10,9 @@ import processing.core.PImage;
 public class BorderImage extends Image {
   public BorderImage(int x, int y, Predicate<Tile> neighbor, int color) {
     super();
-    PImage borderImage = getBorder(neighbor.test(World.getTile(x + 1, y)), neighbor.test(World.getTile(x, y - 1)),
-        neighbor.test(World.getTile(x - 1, y)), neighbor.test(World.getTile(x, y + 1)));
+    Predicate<Tile> nTest = (tile) -> tile == null || neighbor.test(tile);
+    PImage borderImage = getBorder(nTest.test(World.getTile(x + 1, y)), nTest.test(World.getTile(x, y - 1)),
+        nTest.test(World.getTile(x - 1, y)), nTest.test(World.getTile(x, y + 1)));
     image = borderImage == null ? null : new TintedImage(borderImage, color);
   }
 

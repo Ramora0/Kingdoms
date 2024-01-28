@@ -3,14 +3,11 @@ package com.kingdoms.world.tiles;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIContainer;
 import com.kingdoms.ui.elements.UIText;
-import com.kingdoms.ui.images.BorderImage;
-import com.kingdoms.ui.images.ColorImage;
 import com.kingdoms.ui.images.Sprite;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;
@@ -22,8 +19,23 @@ import com.kingdoms.world.troops.Troop;
 import processing.core.PApplet;
 import processing.data.JSONObject;
 
-//TODO: Please seperate this out into classes based on biome!!!
-public class Tile extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Tile> {
+public abstract class Tile extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Tile> {
+  public enum Biome {
+    SHALLOW_WATER(ShallowWater.class), PLAINS(Plains.class);
+
+    public final Class<? extends Tile> clazz;
+
+    Biome(Class<? extends Tile> tileClass) {
+      this.clazz = tileClass;
+    }
+  }
+
+  Biome biome;
+
+  public Biome getBiome() {
+    return biome;
+  }
+
   /** Display width of a tile in pixels */
   public static final int TILE_WIDTH = 16;
 
@@ -65,8 +77,8 @@ public class Tile extends WorldElement implements JSONSerializable, JSONReferenc
 
   boolean isWater;
 
-  public boolean isLand() {
-    return !isWater;
+  public boolean isWater() {
+    return isWater;
   }
 
   Building building;
@@ -140,6 +152,7 @@ public class Tile extends WorldElement implements JSONSerializable, JSONReferenc
     }
   }
 
+  @Override
   public void unupdate() {
     if (hasBuilding()) {
       building.unupdate();
@@ -152,12 +165,7 @@ public class Tile extends WorldElement implements JSONSerializable, JSONReferenc
 
   // UI \\
 
-  public Sprite getSprite() {
-    return new Sprite(new ColorImage(isWater ? Colors.color(100, 150, 255) : Colors.color(22, 178, 56)),
-        // TODO: Create a custome TilePredicate class that automatically returns false
-        // if the tile is null
-        new BorderImage(x, y, (tile) -> tile == null || this.isWater == tile.isWater, Colors.color(227, 208, 114)));
-  }
+  public abstract Sprite getSprite();
 
   public void display(PApplet canvas) {
     super.display(canvas, WorldDisplayScene.worldDisplayX(x), WorldDisplayScene.worldDisplayY(y));
@@ -202,9 +210,15 @@ public class Tile extends WorldElement implements JSONSerializable, JSONReferenc
 
   // JSON FUNCTIONS \\
 
+  public static Tile createFromJSON(JSONObject json) {
+    Biome biome = Biome.valueOf(json.getString("type"));
+    return JSONSerializable.createFromJSON(json, biome.clazz);
+  }
+
   @Override
   public JSONObject toJSON() {
     JSONObject json = new JSONObject();
+    json.setString("biome", biome.toString());
     json.setInt("x", x);
     json.setInt("y", y);
     json.setBoolean("isWater", isWater);
@@ -218,6 +232,7 @@ public class Tile extends WorldElement implements JSONSerializable, JSONReferenc
 
   @Override
   public void fromJSON(JSONObject json) {
+    biome = Biome.valueOf(json.getString("biome"));
     x = json.getInt("x");
     y = json.getInt("y");
     isWater = json.getBoolean("isWater");

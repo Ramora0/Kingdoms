@@ -13,6 +13,8 @@ import com.kingdoms.network.instructions.SetTroopPathInstruction;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.menu.EndScene;
 import com.kingdoms.world.buildings.City;
+import com.kingdoms.world.tiles.Plains;
+import com.kingdoms.world.tiles.ShallowWater;
 import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PApplet;
@@ -30,7 +32,7 @@ public class World {
         double height = MathUtils.noise(x * 0.2f, y * 0.2f);
         double scaledDist = MathUtils.distance(x, y, WORLD_SIZE / 2, WORLD_SIZE / 2) / (WORLD_SIZE / 2);
         height -= scaledDist;
-        tiles[x][y] = new Tile(x, y, height < 0);
+        tiles[x][y] = height < 0 ? new ShallowWater(x, y) : new Plains(x, y);
       }
     }
 
@@ -38,14 +40,14 @@ public class World {
     other = new Player("clientPlayer", Colors.color(255, 0, 0));
 
     for (int x = WORLD_SIZE / 2; x < WORLD_SIZE; x++) {
-      if (x + 1 < WORLD_SIZE && World.tiles[x + 1][WORLD_SIZE / 2].isLand())
+      if (x >= WORLD_SIZE || !World.tiles[x + 1][WORLD_SIZE / 2].isWater())
         continue;
       tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], me));
       break;
     }
 
     for (int x = WORLD_SIZE / 2 - 1; x >= 0; x--) {
-      if (x - 1 >= 0 && World.tiles[x - 1][WORLD_SIZE / 2].isLand())
+      if (x < 0 || !World.tiles[x - 1][WORLD_SIZE / 2].isWater())
         continue;
       tiles[x][WORLD_SIZE / 2].build(new City(tiles[x][WORLD_SIZE / 2], other));
       break;
@@ -192,14 +194,9 @@ public class World {
     JSONObject tilesJSON = json.getJSONObject("tiles");
     tiles = new Tile[WORLD_SIZE][WORLD_SIZE];
 
-    for (int x = 0; x < WORLD_SIZE; x++)
-      for (int y = 0; y < WORLD_SIZE; y++)
-        tiles[x][y] = new Tile();
-
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        JSONObject tileJSON = tilesJSON.getJSONObject("tile:" + x + "," + y);
-        tiles[x][y].fromJSON(tileJSON);
+        tiles[x][y] = Tile.createFromJSON(tilesJSON);
       }
     }
   }

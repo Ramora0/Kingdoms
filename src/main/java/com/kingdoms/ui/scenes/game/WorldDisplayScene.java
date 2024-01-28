@@ -1,6 +1,7 @@
 package com.kingdoms.ui.scenes.game;
 
 import com.kingdoms.Kingdoms;
+import com.kingdoms.helpers.canvas.Colors;
 import com.kingdoms.helpers.math.Vector;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.Scene;
@@ -18,7 +19,7 @@ public abstract class WorldDisplayScene extends Scene {
   public static float scale = 4;
 
   public void display(PApplet canvas) {
-    canvas.background(100, 150, 255);
+    canvas.background(Colors.SHALLOW_WATER);
 
     World.display(canvas);
     Shaders.setOffset(offset.toPVector());

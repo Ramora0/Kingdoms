@@ -15,7 +15,7 @@ import processing.core.PApplet;
 import processing.data.JSONObject;
 
 public abstract class Troop extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Troop> {
-  public enum TroopType {
+  public enum TroopType { // TODO: Shouldn't this just be a reference to a troop class?
     SOLDIER(Soldier.class);
 
     public final Class<? extends Troop> clazz;
