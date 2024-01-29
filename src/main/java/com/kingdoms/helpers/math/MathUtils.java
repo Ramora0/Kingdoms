@@ -5,6 +5,10 @@ import java.util.List;
 import com.kingdoms.Kingdoms;
 
 public class MathUtils {
+  public static double signedPow(double a, double b) {
+    return Math.pow(Math.abs(a), b) * (a > 0 ? 1 : -1);
+  }
+
   public static <T> T random(T[] values) {
     return values[(int) (Math.random() * values.length)];
   }
@@ -22,7 +26,11 @@ public class MathUtils {
   }
 
   public static float noise(float x, float y) {
-    return Kingdoms.canvas.noise((float) x, (float) y);
+    return Kingdoms.canvas.noise(x, y);
+  }
+
+  public static float noise(float x, float y, float z) {
+    return Kingdoms.canvas.noise(x, y, z);
   }
 
   public static double distance(double x1, double y1, double x2, double y2) {

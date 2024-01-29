@@ -21,7 +21,8 @@ import processing.data.JSONObject;
 
 public abstract class Tile extends WorldElement implements JSONSerializable, JSONReferenceSerializable<Tile> {
   public enum Biome {
-    SHALLOW_WATER(ShallowWater.class), PLAINS(Plains.class);
+    DEEP_WATER(DeepWater.class), SHALLOW_WATER(ShallowWater.class),
+    PLAINS(Plains.class), FOREST(Forest.class);
 
     public final Class<? extends Tile> clazz;
 
@@ -95,9 +96,10 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
     building = null;
   }
 
-  public Tile(int x, int y, boolean isWater) {
+  public Tile(int x, int y, Biome biome, boolean isWater) {
     this.x = x;
     this.y = y;
+    this.biome = biome;
     this.isWater = isWater;
 
     troops = new ArrayList<Troop>();

@@ -5,6 +5,7 @@ import com.kingdoms.helpers.canvas.Constants;
 import com.kingdoms.helpers.events.EventBus;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.GameScene;
+import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.ui.shaders.Shaders;
 import com.kingdoms.world.World;
 
@@ -36,6 +37,12 @@ public class Kingdoms extends PApplet {
     // World.tiles[10][10].addTroops(new Soldier(World.tiles[10][10], World.me,
     // 10));
     UI.changeScene(new GameScene());
+
+    EventBus.subscribe("keyPressed", "main", (Object o) -> {
+      if (key == 'p')
+        System.out.println(WorldDisplayScene.getHighlightedTile(canvas).getX() + ", " + WorldDisplayScene
+            .getHighlightedTile(canvas).getX());
+    });
   }
 
   public void draw() {

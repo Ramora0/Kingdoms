@@ -19,7 +19,7 @@ public abstract class WorldDisplayScene extends Scene {
   public static float scale = 4;
 
   public void display(PApplet canvas) {
-    canvas.background(Colors.SHALLOW_WATER);
+    canvas.background(Colors.DEEP_WATER);
 
     World.display(canvas);
     Shaders.setOffset(offset.toPVector());

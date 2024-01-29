@@ -7,7 +7,7 @@ import com.kingdoms.ui.images.Sprite;
 
 public class ShallowWater extends Tile {
   public ShallowWater(int x, int y) {
-    super(x, y, true);
+    super(x, y, Biome.SHALLOW_WATER, true);
   }
 
   @Override
