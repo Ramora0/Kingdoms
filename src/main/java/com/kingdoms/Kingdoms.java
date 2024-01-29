@@ -18,6 +18,7 @@ public class Kingdoms extends PApplet {
   public void settings() {
     GLProfile.initSingleton();
     size(1200, 800, P2D);
+    smooth(2);
   }
 
   public void setup() {

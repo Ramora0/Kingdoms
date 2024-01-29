@@ -22,6 +22,11 @@ public class Sprite {
       images.add(image);
   }
 
+  public void addImages(Image... images) {
+    for (Image image : images)
+      addImage(image);
+  }
+
   public void display(PApplet canvas, float x, float y) {
     for (Image image : images) {
       image.display(canvas, x, y);

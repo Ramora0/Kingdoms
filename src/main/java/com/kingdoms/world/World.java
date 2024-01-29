@@ -52,7 +52,7 @@ public class World {
         else if (height < 0)
           tiles[x][y] = new ShallowWater(x, y);
         else {
-          if (life < 0.63)
+          if (life < 0.5)
             tiles[x][y] = new Plains(x, y);
           else
             tiles[x][y] = new Forest(x, y);
