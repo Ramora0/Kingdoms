@@ -12,6 +12,9 @@ public class Forest extends Tile {
   public Forest(int x, int y) {
     super(x, y, Biome.FOREST, false);
   }
+  
+  @Deprecated
+  public Forest() {}
 
   @Override
   public Sprite getSprite() {

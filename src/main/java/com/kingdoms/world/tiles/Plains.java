@@ -12,6 +12,9 @@ public class Plains extends Tile {
   public Plains(int x, int y) {
     super(x, y, Biome.PLAINS, false);
   }
+  
+  @Deprecated
+  public Plains() {}
 
   @Override
   public Sprite getSprite() {

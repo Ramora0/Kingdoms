@@ -9,6 +9,9 @@ public class ShallowWater extends Tile {
   public ShallowWater(int x, int y) {
     super(x, y, Biome.SHALLOW_WATER, true);
   }
+  
+  @Deprecated
+  public ShallowWater() {}
 
   @Override
   public Sprite getSprite() {

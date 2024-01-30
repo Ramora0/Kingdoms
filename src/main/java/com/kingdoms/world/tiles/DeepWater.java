@@ -9,6 +9,9 @@ public class DeepWater extends Tile {
   public DeepWater(int x, int y) {
     super(x, y, Biome.DEEP_WATER, true);
   }
+  
+  @Deprecated
+  public DeepWater() {}
 
   @Override
   public Sprite getSprite() {
