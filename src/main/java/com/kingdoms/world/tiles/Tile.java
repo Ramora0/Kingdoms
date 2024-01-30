@@ -213,7 +213,8 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
   // JSON FUNCTIONS \\
 
   public static Tile createFromJSON(JSONObject json) {
-    System.out.println("Tile json: " + json.toString());
+    if(json.getString("biome") == null)
+      System.out.println("Tile json: " + json.toString());
     Biome biome = Biome.valueOf(json.getString("biome"));
     return JSONSerializable.createFromJSON(json, biome.clazz);
   }
