@@ -1,7 +1,6 @@
 Backburner:
 Group moving troops
 Dynamic button 4 ready 4 next turn
-Tiles shoudl be seperate classes
 World size greater than 50 by having the world display scale down as you zoom out
 Move buildingtype functionality to individual buildings
 
@@ -31,3 +30,4 @@ Next turn doesnt freeze game
 Change building vs combat order
 Close button above resources building screen
 Phillips houses reset (nerd)
+Tiles shoudl be seperate classes
