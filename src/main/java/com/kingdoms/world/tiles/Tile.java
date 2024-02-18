@@ -174,7 +174,6 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
 
     if (hasBuilding()) {
       building.display(canvas);
-      System.out.println(building.getClass().getSimpleName() + " at " + x + ", " + y);
     }
 
     for (Troop troop : troops) {
