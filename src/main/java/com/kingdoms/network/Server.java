@@ -30,7 +30,7 @@ public class Server extends Network {
 
   @Override
   public void initializeWorld() {
-    World.generateWorld(20); // Generate world
+    World.generateWorld(50); // Generate world
 
     sendWorldData();
 
