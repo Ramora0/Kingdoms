@@ -17,7 +17,9 @@ import com.kingdoms.world.World;
 public class Client extends Network {
   List<Instruction> instructions = new ArrayList<Instruction>();
 
-  public Client(String ip) {
+  static final String ip = "192.168.1.47";
+
+  public Client() {
     try {
       socket = new Socket(ip, Network.port);
 
