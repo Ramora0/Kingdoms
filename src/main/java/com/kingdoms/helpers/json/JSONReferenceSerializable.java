@@ -25,6 +25,7 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
       T instance = clazz.getDeclaredConstructor().newInstance();
       return (T) instance.fromReferenceJSON(json);
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+      System.out.println("Exception trying to instantiate " + clazz.getName() + " from JSON.");
       e.printStackTrace();
       return null;
     } catch (NoSuchMethodException e) {
