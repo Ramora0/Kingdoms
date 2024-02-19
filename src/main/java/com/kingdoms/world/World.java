@@ -258,7 +258,7 @@ public class World {
     }
 
     if (json.hasKey("victor")) {
-      Player victor = JSONReferenceSerializable.getFromJSON(json.getJSONObject("victor"), Player.class);
+      Player victor = Player.fromReferenceJSON(json.getJSONObject("victor"));
       UI.changeScene(new EndScene(victor == me));
       return;
     }
@@ -269,7 +269,7 @@ public class World {
 
     for (int x = 0; x < WORLD_SIZE; x++) {
       for (int y = 0; y < WORLD_SIZE; y++) {
-        tiles[x][y] = Tile.createFromJSON(tilesJSON.getJSONObject("tile:"+x+","+y));
+        tiles[x][y] = Tile.createFromJSON(tilesJSON.getJSONObject("tile:" + x + "," + y));
       }
     }
   }

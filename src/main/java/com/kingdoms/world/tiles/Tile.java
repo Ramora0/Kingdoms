@@ -214,7 +214,7 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
 
   public static Tile createFromJSON(JSONObject json) {
     if (json.getString("biome") == null)
-      System.out.println("Tile json: " + json.toString());
+      throw new IllegalArgumentException("Invalid JSON: Missing 'biome' field");
     Biome biome = Biome.valueOf(json.getString("biome"));
     return JSONSerializable.createFromJSON(json, biome.clazz);
   }
@@ -261,8 +261,7 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
     return json;
   }
 
-  @Override
-  public Tile fromReferenceJSON(JSONObject json) {
+  public static Tile fromReferenceJSON(JSONObject json) {
     int x = json.getInt("x"), y = json.getInt("y");
     return World.tiles[x][y];
   }

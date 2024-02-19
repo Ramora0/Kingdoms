@@ -50,7 +50,7 @@ public class BuildInstruction extends Instruction {
   public void fromJSON(JSONObject json) {
     super.mainFromJSON(json);
     option = BuildingType.valueOf(json.getString("option"));
-    player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
+    player = Player.fromReferenceJSON(json.getJSONObject("player"));
     x = json.getInt("x");
     y = json.getInt("y");
   }

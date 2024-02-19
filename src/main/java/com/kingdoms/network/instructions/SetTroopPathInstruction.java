@@ -49,9 +49,8 @@ public class SetTroopPathInstruction extends Instruction {
     if (troopTypeString == null)
       throw new IllegalArgumentException(
           "Troop type cannot be null for troop " + json.getJSONObject("troop").toString());
-    TroopType troopType = TroopType.valueOf(troopTypeString);
-    troop = JSONReferenceSerializable.getFromJSON(json.getJSONObject("troop"), troopType.clazz);
+    troop = Troop.fromReferenceJSON(json.getJSONObject("troop"));
 
-    path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
+    path = JSONReferenceSerializable.fromReferenceJSONArray(json.getJSONArray("path"), Tile.class);
   }
 }

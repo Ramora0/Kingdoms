@@ -87,8 +87,7 @@ public class Player implements JSONSerializable, JSONReferenceSerializable<Playe
     return json;
   }
 
-  @Override
-  public Player fromReferenceJSON(JSONObject json) {
+  public static Player fromReferenceJSON(JSONObject json) {
     return World.getPlayer(json.getString("id"));
   }
 }

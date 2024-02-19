@@ -3,6 +3,7 @@ package com.kingdoms;
 import com.jogamp.opengl.GLProfile;
 import com.kingdoms.helpers.canvas.Constants;
 import com.kingdoms.helpers.events.EventBus;
+import com.kingdoms.helpers.json.JSONEnforcer;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.ui.shaders.Shaders;
@@ -21,6 +22,8 @@ public class Kingdoms extends PApplet {
 
   public void setup() {
     Kingdoms.canvas = this;
+
+    JSONEnforcer.enforce();
 
     Constants.setDimensions(width, height);
 

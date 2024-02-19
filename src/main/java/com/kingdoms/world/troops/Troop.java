@@ -165,9 +165,9 @@ public abstract class Troop extends WorldElement implements JSONSerializable, JS
   public void mainFromJSON(JSONObject json) {
     type = TroopType.valueOf(json.getString("type"));
     count = json.getInt("count");
-    player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
-    tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
-    path = JSONReferenceSerializable.getFromJSONArray(json.getJSONArray("path"), Tile.class);
+    player = Player.fromReferenceJSON(json.getJSONObject("player"));
+    tile = Tile.fromReferenceJSON(json.getJSONObject("tile"));
+    path = JSONReferenceSerializable.fromReferenceJSONArray(json.getJSONArray("path"), Tile.class);
     id = json.getString("id");
     if (path.contains(null)) {
       throw new IllegalArgumentException("Path contains a null tile on loading from JSON " + json.getJSONArray("path"));
@@ -181,16 +181,17 @@ public abstract class Troop extends WorldElement implements JSONSerializable, JS
     return json;
   }
 
-  public Troop fromReferenceJSON(JSONObject json) {
+  public static Troop fromReferenceJSON(JSONObject json) {
     String id = json.getString("id");
-    List<Troop> troops = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class).getTroops();
+    List<Troop> troops = Tile.fromReferenceJSON(json.getJSONObject("tile")).getTroops();
     for (Troop troop : troops) {
       if (troop.getID().equals(id)) {
         return troop;
       }
     }
     throw new RuntimeException(
-        "Troop of type " + type.toString() + " not found on tile " + json.getJSONObject("tile").toString() + "!");
+        "Troop of type " + json.getString("type") + " not found on tile " + json.getJSONObject("tile").toString()
+            + "!");
   }
 
   @Override

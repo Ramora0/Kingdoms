@@ -56,8 +56,8 @@ public abstract class Building extends WorldElement implements JSONSerializable 
 
   public void mainFromJSON(JSONObject json) {
     type = BuildingType.valueOf(json.getString("type"));
-    player = JSONReferenceSerializable.getFromJSON(json.getJSONObject("player"), Player.class);
-    tile = JSONReferenceSerializable.getFromJSON(json.getJSONObject("tile"), Tile.class);
+    player = Player.fromReferenceJSON(json.getJSONObject("player"));
+    tile = Tile.fromReferenceJSON(json.getJSONObject("tile"));
   }
 
   public static Building createFromJSON(JSONObject json) {

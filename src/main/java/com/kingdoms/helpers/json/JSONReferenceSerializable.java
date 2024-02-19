@@ -1,6 +1,7 @@
 package com.kingdoms.helpers.json;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,6 @@ import processing.data.JSONObject;
 public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T>> {
   public JSONObject toReferenceJSON();
 
-  public T fromReferenceJSON(JSONObject json);
-
   static JSONArray toJSONArray(List<? extends JSONReferenceSerializable<?>> array) {
     JSONArray jsonArray = new JSONArray();
     for (JSONReferenceSerializable<?> element : array) {
@@ -20,11 +19,14 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
     return jsonArray;
   }
 
-  static <T extends JSONReferenceSerializable<?>> T getFromJSON(JSONObject json, Class<T> clazz) {
+  static <T extends JSONReferenceSerializable<?>> T fromReferenceJSON(JSONObject json, Class<T> clazz) {
     try {
-      T instance = clazz.getDeclaredConstructor().newInstance();
-      return (T) instance.fromReferenceJSON(json);
-    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+      Method method = clazz.getDeclaredMethod("fromReferenceJSON", JSONObject.class);
+      if (!java.lang.reflect.Modifier.isStatic(method.getModifiers())) {
+        throw new NoSuchMethodException("The method fromReferenceJSON in class " + clazz.getName() + " is not static");
+      }
+      return (T) method.invoke(null, json);
+    } catch (IllegalAccessException | InvocationTargetException e) {
       System.out.println("Exception trying to instantiate " + clazz.getName() + " from JSON.");
       e.printStackTrace();
       return null;
@@ -35,10 +37,10 @@ public interface JSONReferenceSerializable<T extends JSONReferenceSerializable<T
     }
   }
 
-  static <T extends JSONReferenceSerializable<T>> List<T> getFromJSONArray(JSONArray json, Class<T> clazz) {
+  static <T extends JSONReferenceSerializable<T>> List<T> fromReferenceJSONArray(JSONArray json, Class<T> clazz) {
     List<T> list = new ArrayList<>();
     for (int i = 0; i < json.size(); i++) {
-      list.add(getFromJSON(json.getJSONObject(i), clazz));
+      list.add(fromReferenceJSON(json.getJSONObject(i), clazz));
     }
     return list;
   }
