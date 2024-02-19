@@ -10,6 +10,22 @@ public class Colors {
   public static final int BEACH = color(227, 208, 114);
   public static final int CLIFF = color(89);
 
+  public static int[] getRGB(int color) {
+    return new int[] { red(color), green(color), blue(color) };
+  }
+
+  public static int red(int color) {
+    return color >> 16 & 0xFF;
+  }
+
+  public static int green(int color) {
+    return color >> 8 & 0xFF;
+  }
+
+  public static int blue(int color) {
+    return color & 0xFF;
+  }
+
   public static int color(int r, int g, int b) {
     return Kingdoms.canvas.color(r, g, b);
   }

@@ -131,8 +131,6 @@ public class World {
     if (instruction instanceof BuildInstruction) {
       BuildInstruction buildInstruction = (BuildInstruction) instruction;
 
-      System.out.println("Building for player: " + buildInstruction.player.getID());
-
       if (buildInstruction.canBuild()) {
         buildInstruction.build();
       } else {

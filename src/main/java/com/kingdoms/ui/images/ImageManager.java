@@ -46,7 +46,7 @@ public class ImageManager {
       return cache.get(cacheKey);
     }
 
-    PImage image = getImage(path);
+    PImage image = getImage(path).copy();
 
     int purple = Colors.color(255, 0, 255);
     int darkPurple = Colors.color(200, 0, 200);
