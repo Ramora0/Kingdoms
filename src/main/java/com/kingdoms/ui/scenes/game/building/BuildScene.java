@@ -45,7 +45,7 @@ public class BuildScene extends WorldDisplayScene {
     canvas.pushStyle();
     canvas.stroke(World.me.getColor());
     canvas.strokeWeight(3);
-    if (!option.canBuildAt(World.me, tile.getX(), tile.getY()))
+    if (!option.canBuildAt(World.me, tile))
       canvas.noFill();
     else
       canvas.fill(World.me.getColor(), 100);
@@ -57,8 +57,9 @@ public class BuildScene extends WorldDisplayScene {
   public void mousePressed(PApplet canvas) {
     int x = (int) WorldDisplayScene.coordX(canvas.mouseX);
     int y = (int) WorldDisplayScene.coordY(canvas.mouseY);
-    if (option.canBuildAt(World.me, x, y)) {
-      World.receiveInstruction(new BuildInstruction(option, World.me, x, y));
+    Tile tile = World.getTile(x, y);
+    if (tile != null && option.canBuildAt(World.me, tile)) {
+      World.receiveInstruction(new BuildInstruction(option, World.me, tile));
       // System.out.println("Tile: " + World.toJSON());
       if (!Keys.keyPressed[Keys.SHIFT])
         UI.changeScene(new GameScene());

@@ -11,7 +11,8 @@ import java.util.List;
 import processing.data.JSONObject;
 
 public class JSONEnforcer { // TODO: Check classes implementing JSONSerializable have a no-argument
-                            // constructor
+                            // constructor, and ones that directly implement it have a static
+                            // creatFromJSON()
   public static void enforce() throws RuntimeException {
     List<Class<? extends JSONReferenceSerializable<?>>> classesImplementingInterface = getClassesImplementingInterface(
         JSONReferenceSerializable.class);

@@ -1,8 +1,8 @@
 package com.kingdoms.network.instructions;
 
-import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.world.Player;
 import com.kingdoms.world.buildings.BuildingType;
+import com.kingdoms.world.tiles.Tile;
 
 import processing.data.JSONObject;
 
@@ -13,15 +13,15 @@ public class BuildInstruction extends Instruction {
   BuildingType option; // TODO: Should include a reference to a building instead of just a command
 
   public Player player;
-  public int x, y; // TODO: Change to tile and store as a tile reference
+  // public int x, y; // TODO: Change to tile and store as a tile reference
+  public Tile tile;
 
-  public BuildInstruction(BuildingType option, Player player, int x, int y) {
+  public BuildInstruction(BuildingType option, Player player, Tile tile) {
     super(InstructionType.BUILD);
     this.option = option;
 
     this.player = player;
-    this.x = x;
-    this.y = y;
+    this.tile = tile;
   }
 
   @Deprecated
@@ -29,11 +29,11 @@ public class BuildInstruction extends Instruction {
   }
 
   public boolean canBuild() {
-    return option.canBuildAt(player, x, y);
+    return option.canBuildAt(player, tile);
   }
 
   public void build() {
-    option.buildAt(player, x, y);
+    option.buildAt(player, tile);
   }
 
   @Override
@@ -41,8 +41,7 @@ public class BuildInstruction extends Instruction {
     JSONObject json = super.mainToJSON();
     json.setString("option", option.toString());
     json.setJSONObject("player", player.toReferenceJSON());
-    json.setInt("x", x);
-    json.setInt("y", y);
+    json.setJSONObject("tile", tile.toReferenceJSON());
     return json;
   }
 
@@ -51,7 +50,6 @@ public class BuildInstruction extends Instruction {
     super.mainFromJSON(json);
     option = BuildingType.valueOf(json.getString("option"));
     player = Player.fromReferenceJSON(json.getJSONObject("player"));
-    x = json.getInt("x");
-    y = json.getInt("y");
+    tile = Tile.fromReferenceJSON(json.getJSONObject("tile"));
   }
 }

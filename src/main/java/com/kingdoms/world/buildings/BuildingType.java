@@ -9,30 +9,23 @@ public enum BuildingType {
   // TODO: Just move this stuff to the actual classes
   CITY(City.class, 500) {
     @Override
-    public boolean canBuildAt(Player player, int x, int y) {
-      Tile tile = CITY.getTileIfAllowed(player, x, y);
-      if (tile == null)
-        return false;
+    public boolean canBuildAt(Player player, Tile tile) {
       return !tile.isWater();
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void buildAt(Player player, int x, int y) {
-      CITY.preBuild(player, x, y);
-      Tile tile = World.tiles[x][y];
+    public void buildAt(Player player, Tile tile) {
       tile.build(new City(tile, player));
     }
   },
   FARM(Farm.class, 300) {
     @Override
-    public boolean canBuildAt(Player player, int x, int y) {
-      Tile tile = FARM.getTileIfAllowed(player, x, y);
-
-      if (tile == null || tile.isWater())
+    public boolean canBuildAt(Player player, Tile tile) {
+      if (tile.isWater())
         return false;
 
-      return World.hasAdjacentTile(x, y, (t) -> {
+      return World.hasAdjacentTile(tile.getX(), tile.getY(), (t) -> {
         Building building = t.getBuilding();
         return building != null && building.getPlayer() == player;
       });
@@ -40,21 +33,18 @@ public enum BuildingType {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void buildAt(Player player, int x, int y) {
-      FARM.preBuild(player, x, y);
-      Tile tile = World.tiles[x][y];
+    public void buildAt(Player player, Tile tile) {
+      FARM.preBuild(player, tile);
       tile.build(new Farm(tile, player));
     }
   },
   TRAINING_CAMP(TrainingCamp.class, 500) {
     @Override
-    public boolean canBuildAt(Player player, int x, int y) {
-      Tile tile = TRAINING_CAMP.getTileIfAllowed(player, x, y);
-
-      if (tile == null || tile.isWater())
+    public boolean canBuildAt(Player player, Tile tile) {
+      if (tile.isWater())
         return false;
 
-      return World.hasAdjacentTile(x, y, (t) -> {
+      return World.hasAdjacentTile(tile.getX(), tile.getY(), (t) -> {
         Building building = t.getBuilding();
         return building != null && building.getPlayer() == player;
       });
@@ -62,9 +52,8 @@ public enum BuildingType {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void buildAt(Player player, int x, int y) {
-      TRAINING_CAMP.preBuild(player, x, y);
-      Tile tile = World.tiles[x][y];
+    public void buildAt(Player player, Tile tile) {
+      TRAINING_CAMP.preBuild(player, tile);
       tile.build(new TrainingCamp(tile, player));
     }
   };
@@ -82,22 +71,11 @@ public enum BuildingType {
     this.cost = cost;
   }
 
-  public abstract boolean canBuildAt(Player player, int x, int y);
+  public abstract boolean canBuildAt(Player player, Tile tile);
 
-  /** Only used by enums for common checks */
-  private Tile getTileIfAllowed(Player player, int x, int y) {
-    if (player.getResources() < cost)
-      return null;
+  public abstract void buildAt(Player player, Tile tile);
 
-    Tile tile = World.getTile(x, y);
-    if (tile == null || tile.hasBuilding())
-      return null;
-    return tile;
-  }
-
-  public abstract void buildAt(Player player, int x, int y);
-
-  private void preBuild(Player player, int x, int y) {
+  private void preBuild(Player player, Tile tile) {
     player.addResources(-cost);
   }
 };
