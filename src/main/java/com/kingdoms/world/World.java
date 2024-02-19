@@ -4,7 +4,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import com.kingdoms.helpers.canvas.Colors;
-import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.helpers.math.MathUtils;
 import com.kingdoms.network.Network;
@@ -131,6 +130,8 @@ public class World {
 
     if (instruction instanceof BuildInstruction) {
       BuildInstruction buildInstruction = (BuildInstruction) instruction;
+
+      System.out.println("Building for player: " + buildInstruction.player.getID());
 
       if (buildInstruction.canBuild()) {
         buildInstruction.build();

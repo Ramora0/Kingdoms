@@ -33,6 +33,7 @@ public class BuildInstruction extends Instruction {
   }
 
   public void build() {
+    System.out.println("Building for: " + player.getID());
     option.buildAt(player, tile);
   }
 

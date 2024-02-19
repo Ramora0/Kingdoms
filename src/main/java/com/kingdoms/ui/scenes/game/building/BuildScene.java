@@ -60,7 +60,6 @@ public class BuildScene extends WorldDisplayScene {
     Tile tile = World.getTile(x, y);
     if (tile != null && option.canBuildAt(World.me, tile)) {
       World.receiveInstruction(new BuildInstruction(option, World.me, tile));
-      // System.out.println("Tile: " + World.toJSON());
       if (!Keys.keyPressed[Keys.SHIFT])
         UI.changeScene(new GameScene());
     } else {
