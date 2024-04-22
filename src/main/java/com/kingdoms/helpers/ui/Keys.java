@@ -1,4 +1,4 @@
-package com.kingdoms.ui;
+package com.kingdoms.helpers.ui;
 
 import processing.core.PApplet;
 

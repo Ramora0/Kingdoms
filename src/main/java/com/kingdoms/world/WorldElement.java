@@ -4,6 +4,11 @@ import com.kingdoms.ui.images.Sprite;
 
 import processing.core.PApplet;
 
+/**
+ * Represents anything in the world with a sprite and update method; includes
+ * buildings, troops, tiles, etc.
+ * 
+ */
 public abstract class WorldElement {
   Sprite sprite;
   boolean updated;
@@ -16,13 +21,13 @@ public abstract class WorldElement {
     sprite.display(canvas, x, y);
   }
 
-  public abstract void doUpdate();
+  protected abstract void _update();
 
   public void update() {
     if (updated) {
       return;
     }
-    doUpdate();
+    _update();
     updated = true;
   }
 

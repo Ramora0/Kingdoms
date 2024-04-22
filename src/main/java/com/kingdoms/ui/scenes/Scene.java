@@ -9,6 +9,9 @@ import com.kingdoms.ui.elements.UIElement;
 
 import processing.core.PApplet;
 
+/**
+ * Represents a scene, which is a collection of UIElements to display
+ */
 public abstract class Scene {
   private List<UIElement> elements;
 
@@ -35,21 +38,21 @@ public abstract class Scene {
 
   public void addElement(UIElement element) {
     if (element instanceof UIContainer) {
-      addElement((UIContainer) element);
+      addContainer((UIContainer) element);
       return;
     }
 
     elements.add(element);
   }
 
-  public void addElement(UIContainer container) {
+  public void addContainer(UIContainer container) {
     elements.add(container);
     elements.addAll(container.getChildren());
   }
 
   public void removeElement(UIElement element) {
     if (element instanceof UIContainer) {
-      removeElement((UIContainer) element);
+      removeContainer((UIContainer) element);
       return;
     }
 
@@ -57,10 +60,11 @@ public abstract class Scene {
     elements.remove(element);
   }
 
-  public void removeElement(UIContainer element) {
+  public void removeContainer(UIContainer element) {
     element.kill();
     elements.remove(element);
     for (UIElement child : element.getChildren()) {
+      child.kill(); // this should probs be here
       elements.remove(child);
     }
   }

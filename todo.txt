@@ -9,13 +9,13 @@ Split troops
 Fix building collision
 
 UI:
-Need to see whos farms (test)
 See troops moving while not selected
 Production in build menu
 Building focus shows production
-Shows sprite in building
+Shows sprite while trying to build
 
 Done
+Need to see whos farms (test)
 Dont zoom in on top left
 Hold shift to build multiple buildings
 Costs in building screen

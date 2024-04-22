@@ -3,6 +3,9 @@ package com.kingdoms.ui.images;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * Represents an image with a tinted color.
+ */
 public class TintedImage extends Image {
   int color;
 

@@ -75,7 +75,7 @@ public abstract class Troop extends WorldElement implements JSONSerializable, JS
     this.player = player;
     this.count = count;
     path = new ArrayList<>();
-    id = player.newTroopID();
+    id = player.createTroopID();
   }
 
   @Deprecated
@@ -87,7 +87,7 @@ public abstract class Troop extends WorldElement implements JSONSerializable, JS
   }
 
   @Override
-  public void doUpdate() {
+  public void _update() {
     if (path.isEmpty()) {
       return;
     }

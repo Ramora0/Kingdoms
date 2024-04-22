@@ -5,6 +5,9 @@ import java.util.List;
 
 import processing.core.PApplet;
 
+/**
+ * Represents a group of UI elements. It's a UI element itself.
+ */
 public class UIGroup extends UIElement {
   List<UIElement> children;
 

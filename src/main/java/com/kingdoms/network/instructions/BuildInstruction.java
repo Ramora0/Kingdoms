@@ -13,7 +13,6 @@ public class BuildInstruction extends Instruction {
   BuildingType option; // TODO: Should include a reference to a building instead of just a command
 
   public Player player;
-  // public int x, y; // TODO: Change to tile and store as a tile reference
   public Tile tile;
 
   public BuildInstruction(BuildingType option, Player player, Tile tile) {

@@ -70,7 +70,7 @@ public abstract class WorldDisplayScene extends Scene {
   }
 
   /**
-   * Converst raw world coordinate into tile scaled, pre shader display coordinate
+   * Converts raw world coordinate into tile scaled, pre shader display coordinate
    */
   public static float worldDisplayX(double x) {
     return (float) (x * Tile.TILE_WIDTH);

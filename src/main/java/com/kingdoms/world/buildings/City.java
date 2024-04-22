@@ -22,7 +22,7 @@ public class City extends Building {
   }
 
   @Override
-  public void doUpdate() {
+  public void _update() {
   }
 
   @Override

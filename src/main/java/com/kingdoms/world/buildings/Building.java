@@ -1,6 +1,5 @@
 package com.kingdoms.world.buildings;
 
-import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 import com.kingdoms.world.Player;

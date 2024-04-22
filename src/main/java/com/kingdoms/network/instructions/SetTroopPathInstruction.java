@@ -6,7 +6,6 @@ import com.kingdoms.helpers.json.JSONReferenceSerializable;
 import com.kingdoms.helpers.json.JSONSerializable;
 import com.kingdoms.world.tiles.Tile;
 import com.kingdoms.world.troops.Troop;
-import com.kingdoms.world.troops.Troop.TroopType;
 
 import processing.data.JSONObject;
 

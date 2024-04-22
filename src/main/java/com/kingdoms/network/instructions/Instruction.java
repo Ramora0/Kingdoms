@@ -4,6 +4,10 @@ import com.kingdoms.helpers.json.JSONSerializable;
 
 import processing.data.JSONObject;
 
+/**
+ * Represents a command to be sent to the server to execute the player's
+ * actions.
+ */
 public abstract class Instruction implements JSONSerializable {
   public enum InstructionType {
     BUILD(BuildInstruction.class),

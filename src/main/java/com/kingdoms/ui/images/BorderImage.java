@@ -7,6 +7,9 @@ import com.kingdoms.world.tiles.Tile;
 
 import processing.core.PImage;
 
+/**
+ * Represents an image of a border
+ */
 public class BorderImage extends Image {
   public BorderImage(int x, int y, Predicate<Tile> neighbor, int color) {
     super();

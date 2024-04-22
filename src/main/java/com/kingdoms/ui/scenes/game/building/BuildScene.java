@@ -2,8 +2,8 @@ package com.kingdoms.ui.scenes.game.building;
 
 import com.kingdoms.helpers.canvas.Constants;
 import com.kingdoms.helpers.events.EventBus.Subscribe;
+import com.kingdoms.helpers.ui.Keys;
 import com.kingdoms.network.instructions.BuildInstruction;
-import com.kingdoms.ui.Keys;
 import com.kingdoms.ui.UI;
 import com.kingdoms.ui.elements.UIButton;
 import com.kingdoms.ui.elements.UIContainer;
@@ -63,7 +63,7 @@ public class BuildScene extends WorldDisplayScene {
       if (!Keys.keyPressed[Keys.SHIFT])
         UI.changeScene(new GameScene());
     } else {
-      addElement(new UINotification("Cannot build here!", canvas.mouseX, canvas.mouseY));
+      addContainer(new UINotification("Cannot build here!", canvas.mouseX, canvas.mouseY));
     }
   }
 }

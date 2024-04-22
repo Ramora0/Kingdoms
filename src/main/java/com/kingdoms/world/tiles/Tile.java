@@ -118,7 +118,7 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
   // GAMEPLAY \\
 
   @Override
-  public void doUpdate() {
+  public void _update() {
     throw new UnsupportedOperationException("This isn't how 'tile' should be updated");
   }
 
@@ -191,13 +191,13 @@ public abstract class Tile extends WorldElement implements JSONSerializable, JSO
         () -> WorldDisplayScene.displayX(x + 0.5), () -> WorldDisplayScene.displayY(y), 20);
     container = new UIContainer(0, buildingText);
 
-    UI.currentScene.addElement(container);
+    UI.currentScene.addContainer(container);
   }
 
   public void removeUI() {
     if (container == null)
       return;
-    UI.currentScene.removeElement(container);
+    UI.currentScene.removeContainer(container);
     container = null;
   }
 

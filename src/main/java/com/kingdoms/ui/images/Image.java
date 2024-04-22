@@ -3,6 +3,10 @@ package com.kingdoms.ui.images;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * Represents an image that can be displayed on the screen. Recursively
+ * storing images to allow for transformations
+ */
 public class Image {
   Image image;
 
@@ -22,6 +26,9 @@ public class Image {
     image.display(canvas, x, y);
   }
 
+  /**
+   * Returns whether the image is null, i.e. empty borders
+   */
   public boolean isUseless() {
     return image == null;
   }

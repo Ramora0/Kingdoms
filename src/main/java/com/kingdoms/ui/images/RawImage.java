@@ -3,6 +3,9 @@ package com.kingdoms.ui.images;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * Represents a raw image file. Extends Image.
+ */
 public class RawImage extends Image {
   PImage rawImage;
 

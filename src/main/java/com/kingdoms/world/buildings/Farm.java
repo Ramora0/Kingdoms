@@ -33,7 +33,7 @@ public class Farm extends Building {
   }
 
   @Override
-  public void doUpdate() {
+  public void _update() {
     player.addResources(100);
   }
 

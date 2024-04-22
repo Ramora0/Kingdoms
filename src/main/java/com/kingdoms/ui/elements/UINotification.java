@@ -1,6 +1,6 @@
 package com.kingdoms.ui.elements;
 
-import com.kingdoms.helpers.StaticSupplier;
+import com.kingdoms.helpers.ui.StableSupplier;
 
 public class UINotification extends UIContainer {
   final float upPixels = 100f / 1000;
@@ -13,7 +13,7 @@ public class UINotification extends UIContainer {
 
     startTime = System.currentTimeMillis();
     ogY = y;
-    UIText text = new UIText(notification, new StaticSupplier<Float>(x),
+    UIText text = new UIText(notification, new StableSupplier<Float>(x),
         () -> ogY + (startTime - System.currentTimeMillis()) * upPixels, 20);
     children.add(text);
   }

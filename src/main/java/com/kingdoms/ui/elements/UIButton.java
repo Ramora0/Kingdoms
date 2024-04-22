@@ -22,12 +22,13 @@ public class UIButton extends UIText {
   public void display(PApplet canvas) {
     float x = getX(), y = getY();
 
+    // Displays the bo around the text; bigger if mouse is in
     canvas.stroke(0);
     if (onClick == null) {
       canvas.fill(230);
       canvas.rect(x, y, width.get(), height.get(), 10);
     } else {
-      if (isInBounds(canvas.mouseX, canvas.mouseY)) {
+      if (isIn(canvas.mouseX, canvas.mouseY)) {
         float mouseIncrease = 3f;
         canvas.fill(230);
         canvas.rect(x - mouseIncrease, y - mouseIncrease, width.get() + mouseIncrease * 2,
@@ -43,7 +44,7 @@ public class UIButton extends UIText {
 
   @Subscribe
   public void mousePressed(PApplet canvas) {
-    if (isInBounds(canvas.mouseX, canvas.mouseY) && onClick != null) {
+    if (isIn(canvas.mouseX, canvas.mouseY) && onClick != null) {
       onClick.run();
     }
   }

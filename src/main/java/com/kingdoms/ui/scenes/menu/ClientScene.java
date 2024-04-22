@@ -26,6 +26,6 @@ public class ClientScene extends Scene {
     }
     this.client = new Client();
     Network.setNetwork(client);
-    Network.network.initializeWorld();
+    Network.network.initializeWorld(); // In this case, waits for the world to be sent
   }
 }

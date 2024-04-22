@@ -2,6 +2,9 @@ package com.kingdoms.ui.elements;
 
 import processing.core.PApplet;
 
+/**
+ * Represents a group of UI elements with a box around them.
+ */
 public class UIContainer extends UIGroup {
   float padding;
 

@@ -2,7 +2,7 @@ package com.kingdoms.ui.elements;
 
 import java.util.function.Supplier;
 
-import com.kingdoms.helpers.StaticSupplier;
+import com.kingdoms.helpers.ui.StableSupplier;
 
 import processing.core.PApplet;
 
@@ -13,25 +13,25 @@ public class UIText extends UIElement { // TODO: Really should have a box around
   Supplier<String> text;
 
   public UIText(String text, float x, float y, float size) {
-    super(new StaticSupplier<>(x), new StaticSupplier<>(y));
-    this.text = new StaticSupplier<>(text);
+    super(new StableSupplier<>(x), new StableSupplier<>(y));
+    this.text = new StableSupplier<>(text);
     this.size = size;
 
     setDimensions(text, size);
   }
 
   public UIText(Supplier<String> text, float x, float y, float size) {
-    super(new StaticSupplier<>(x), new StaticSupplier<>(y));
+    super(new StableSupplier<>(x), new StableSupplier<>(y));
     this.text = text;
     this.size = size;
 
     this.width = () -> getWidth(text.get(), size, padding);
-    this.height = new StaticSupplier<Float>(getHeight(size, padding));
+    this.height = new StableSupplier<Float>(getHeight(size, padding));
   }
 
   public UIText(String text, Supplier<Float> x, Supplier<Float> y, float size) {
     super(x, y);
-    this.text = new StaticSupplier<>(text);
+    this.text = new StableSupplier<>(text);
     this.size = size;
 
     setDimensions(text, size);

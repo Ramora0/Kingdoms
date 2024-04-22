@@ -36,7 +36,7 @@ public class GameScene extends WorldDisplayScene {
         .setRight().below(resources, 0);
     UIContainer resourcesContainer = new UIContainer(3, resources, otherResources);
 
-    scene.addElement(resourcesContainer);
+    scene.addContainer(resourcesContainer);
 
     return resourcesContainer;
   }

@@ -3,11 +3,14 @@ package com.kingdoms.ui.elements;
 import java.util.function.Supplier;
 
 import com.kingdoms.Kingdoms;
-import com.kingdoms.helpers.StaticSupplier;
 import com.kingdoms.helpers.events.EventBus;
+import com.kingdoms.helpers.ui.StableSupplier;
 
 import processing.core.PApplet;
 
+/**
+ * Represents an element of UI. Includes x, y, width, and height managers.
+ */
 public abstract class UIElement {
   public enum XAlignment {
     LEFT, CENTER, RIGHT
@@ -36,11 +39,11 @@ public abstract class UIElement {
   }
 
   public void setX(float x) {
-    this.x = new StaticSupplier<Float>(x);
+    this.x = new StableSupplier<Float>(x);
   }
 
   public boolean staticX() {
-    return x instanceof StaticSupplier;
+    return x instanceof StableSupplier;
   }
 
   public float getY() {
@@ -56,11 +59,11 @@ public abstract class UIElement {
   }
 
   public void setY(float y) {
-    this.y = new StaticSupplier<Float>(y);
+    this.y = new StableSupplier<Float>(y);
   }
 
   public boolean staticY() {
-    return y instanceof StaticSupplier;
+    return y instanceof StableSupplier;
   }
 
   Supplier<Float> width, height;
@@ -70,7 +73,7 @@ public abstract class UIElement {
   }
 
   public void setWidth(float width) {
-    this.width = new StaticSupplier<Float>(width);
+    this.width = new StableSupplier<Float>(width);
   }
 
   public float getHeight() {
@@ -78,14 +81,14 @@ public abstract class UIElement {
   }
 
   public void setHeight(float height) {
-    this.height = new StaticSupplier<Float>(height);
+    this.height = new StableSupplier<Float>(height);
   }
 
   public void setBounds(float x, float y, float width, float height) {
-    this.x = new StaticSupplier<Float>(x);
-    this.y = new StaticSupplier<Float>(y);
-    this.width = new StaticSupplier<Float>(width);
-    this.height = new StaticSupplier<Float>(height);
+    this.x = new StableSupplier<Float>(x);
+    this.y = new StableSupplier<Float>(y);
+    this.width = new StableSupplier<Float>(width);
+    this.height = new StableSupplier<Float>(height);
   }
 
   // When you need to manually calculate x, y, width, and height or they dont
@@ -136,7 +139,7 @@ public abstract class UIElement {
 
   public UIElement below(UIElement element, float margin) {
     if (element.staticY())
-      y = new StaticSupplier<>(element.y.get() + element.getHeight() + margin);
+      y = new StableSupplier<>(element.y.get() + element.getHeight() + margin);
     else
       y = () -> element.y.get() + element.getHeight() + margin;
     setTop();
@@ -145,7 +148,7 @@ public abstract class UIElement {
 
   public UIElement above(UIElement element, float margin) {
     if (element.staticY())
-      y = new StaticSupplier<>(element.y.get() - margin);
+      y = new StableSupplier<>(element.y.get() - margin);
     else
       y = () -> element.y.get() - margin;
     setBottom();
@@ -154,7 +157,7 @@ public abstract class UIElement {
 
   public UIElement rightOf(UIElement element, float margin) {
     if (element.staticX())
-      x = new StaticSupplier<>(element.x.get() + element.getWidth() + margin);
+      x = new StableSupplier<>(element.x.get() + element.getWidth() + margin);
     else
       x = () -> element.x.get() + element.getWidth() + margin;
     setLeft();
@@ -163,7 +166,7 @@ public abstract class UIElement {
 
   public UIElement leftOf(UIElement element, float margin) {
     if (element.staticX())
-      x = new StaticSupplier<>(element.x.get() - margin);
+      x = new StableSupplier<>(element.x.get() - margin);
     else
       x = () -> element.x.get() - margin;
     setRight();
@@ -171,8 +174,8 @@ public abstract class UIElement {
   }
 
   protected void setDimensions(float width, float height, float padding) {
-    this.width = new StaticSupplier<>(width + 2 * padding);
-    this.height = new StaticSupplier<>(height + 2 * padding);
+    this.width = new StableSupplier<>(width + 2 * padding);
+    this.height = new StableSupplier<>(height + 2 * padding);
   }
 
   protected void setDimensions(String text, float size, float padding) {
@@ -202,7 +205,7 @@ public abstract class UIElement {
     return textHeight + 2 * padding;
   }
 
-  public boolean isInBounds(float x, float y) {
+  public boolean isIn(float x, float y) {
     return x >= getX() && x <= getX() + width.get() && y >= getY() && y <= getY() + height.get();
   }
 

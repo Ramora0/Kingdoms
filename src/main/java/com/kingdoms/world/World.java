@@ -125,6 +125,9 @@ public class World {
     return player == me ? other : me;
   }
 
+  /**
+   * Sends the instruction to the other player, and then executes it locally
+   */
   public static void receiveInstruction(Instruction instruction) {
     Network.network.receiveInstruction(instruction);
 

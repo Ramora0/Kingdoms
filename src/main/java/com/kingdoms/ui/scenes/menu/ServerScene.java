@@ -19,7 +19,7 @@ public class ServerScene extends Scene {
     String ip = server.getIP();
     if (ip == null)
       ip = "localhost";
-    addElement(new UIText("IP: " + ip, 600, 400, 40));
+    addElement(new UIText("IP: " + ip, 600, 400, 40)); // TODO: Display port?
   }
 
   boolean once = false;

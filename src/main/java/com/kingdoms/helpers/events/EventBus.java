@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kingdoms.ui.Keys;
+import com.kingdoms.helpers.ui.Keys;
 import com.kingdoms.ui.scenes.game.WorldDisplayScene;
 
 public class EventBus {
